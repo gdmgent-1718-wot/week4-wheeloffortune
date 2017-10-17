@@ -8,6 +8,9 @@ dock = flotilla.Client()
 dial = dock.first(flotilla.Dial)
 number = dock.first(flotilla.Number)
 
+cred = credentials.Certificate('wheeloffortune-18d6d-firebase-adminsdk-vn804-4f020fab3d.json')
+default_app = firebase_admin.initialize_app(cred,{'databaseURL':'https://wheeloffortune-18d6d.firebaseio.com/'})
+
 try:
     while True:
         pos = int(dial.position)
