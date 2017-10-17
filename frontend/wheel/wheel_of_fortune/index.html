@@ -200,6 +200,11 @@
                 else
                 {
                     alert("You have won " + winningSegment.text);
+
+                    let database = firebase.database();
+                    database.ref('value').set({
+                        value: winningSegment.text
+                    });
                 }
             }
         </script>
@@ -216,15 +221,10 @@
                     storageBucket: "",
                     messagingSenderId: "974256373838"
                 };
+
                 firebase.initializeApp(config);
 
-                let database = firebase.database();
 
-                database.ref('colors').set({
-                    red: red,
-                    green: green,
-                    blue : blue
-                });
             </script>
     </body>
 </html>
