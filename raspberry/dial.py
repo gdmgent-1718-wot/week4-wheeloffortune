@@ -7,6 +7,7 @@ import time
 dock = flotilla.Client()
 dial = dock.first(flotilla.Dial)
 number = dock.first(flotilla.Number)
+root = db.reference()
 
 cred = credentials.Certificate('wheeloffortune-18d6d-firebase-adminsdk-vn804-4f020fab3d.json')
 default_app = firebase_admin.initialize_app(cred,{'databaseURL':'https://wheeloffortune-18d6d.firebaseio.com/'})
@@ -15,6 +16,7 @@ try:
     while True:
         pos = int(dial.position)
         print(pos)
+        root.child('value')['value'].set(pos)
         number = pos
         time.sleep(1)
 except KeyboardInterrupt:
