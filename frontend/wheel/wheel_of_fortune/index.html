@@ -66,8 +66,8 @@
                 'animation' :           // Specify the animation to use.
                 {
                     'type'     : 'spinToStop',
-                    'duration' : 8,     // Duration in seconds.
-                    'spins'    : 3,     // Default number of complete spins.
+                    'duration' : 8.8,     // Duration in seconds.
+                    'spins'    : 0,     // Default number of complete spins.
                     'callbackFinished' : 'alertPrize()'
                 }
             });
@@ -126,15 +126,15 @@
                     // to rotate with the duration of the animation the quicker the wheel spins.
                     if (wheelPower == 1)
                     {
-                        theWheel.animation.spins = 3;
+                        theWheel.animation.spins = 2;
                     }
                     else if (wheelPower == 2)
                     {
-                        theWheel.animation.spins = 6;
+                        theWheel.animation.spins = 4;
                     }
                     else if (wheelPower == 3)
                     {
-                        theWheel.animation.spins = 9;
+                        theWheel.animation.spins = 5.333333;
                     }
                     
                     // Disable the spin button so can't click again while wheel is spinning.
@@ -186,7 +186,7 @@
                 }
                 else
                 {
-                    alert("You have won " + winningSegment.text);
+                    alert("Jij zal buizen voor " + winningSegment.text);
 
                     let database = firebase.database();
                     database.ref('value').set({

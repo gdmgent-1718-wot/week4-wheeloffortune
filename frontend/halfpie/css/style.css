@@ -1,0 +1,35 @@
+.ct-pie {
+  height: 50vh;
+  padding-top: 10vh;
+}
+
+.ct-chart-donut {
+  overflow: visible;
+}
+
+#ct-legend {
+  color: white;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+.btn {
+  -webkit-border-radius: 9;
+  -moz-border-radius: 9;
+  border-radius: 9px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 28px;
+  background: #d99c34;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  display: block;
+  margin: 0 auto;
+}
+
+.btn:hover {
+  background: #fc833c;
+  text-decoration: none;
+}
