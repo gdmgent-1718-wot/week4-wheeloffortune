@@ -22,11 +22,16 @@ stopped = False
 
 try:
 	while True:
+		#get values from Firebase and put them in variables
 		posdb = root.child('value').get()
 		picked = posdb['picked']
+		# value should be between 2.5 and 12.5
+		# correct values are 11, 9, 7.5, 5, 3.5
 		value = posdb['value']
+		# print variables
 		print "picked:  " + str(picked) + " value:  " + str(value) + " stopped:  " + str(stopped)
 
+		#if result is picked move to result position and stop spinning
 		if picked:
 			if stopped == False:
 				print "stopping"
