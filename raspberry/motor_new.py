@@ -55,7 +55,7 @@ def hc595_out():
 	GPIO.output(RCLK, GPIO.LOW)
 
 def loop():
-	WhichLeds = LED1	# Change Mode, modes from LED0 to LED3
+	WhichLeds = LED0	# Change Mode, modes from LED0 to LED3
 	sleeptime = 0.1		# Change speed, lower value, faster speed
 	while True:
 		for i in range(0, len(WhichLeds)):
@@ -77,4 +77,4 @@ if __name__ == '__main__': # Program starting from here
 	try:
 		loop()
 	except KeyboardInterrupt:
-		destroy()
+		destroy()  
