@@ -33,3 +33,7 @@ h1, h2 {
   background: #fc833c;
   text-decoration: none;
 }
+
+.ct-series-b .ct-slice-pie {
+  fill: hsl(120, 40%, 60%);
+}
