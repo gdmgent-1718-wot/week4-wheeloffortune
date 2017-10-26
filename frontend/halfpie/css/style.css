@@ -34,6 +34,10 @@ h1, h2 {
   text-decoration: none;
 }
 
-.ct-series-b .ct-slice-pie {
+.selectedColor {
   fill: hsl(120, 40%, 60%);
 }
+
+/*.ct-series-a .ct-slice-pie {*/
+  /*fill: hsl(120, 40%, 60%);*/
+/*}*/

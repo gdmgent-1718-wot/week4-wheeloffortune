@@ -22,17 +22,30 @@
       new Vue({
           el: '#wheelOfFortune',
           data: {
-              prizemoney: '...'
+              prizemoney: '...',
+              styleObject: {
+                  active: true
+              }
           },
           methods: {
               selectRandomPiece() {
+//                  Get a random piece
                   let randomPiece = data.moreInfo[Math.floor(Math.random() * data.moreInfo.length)]
+//                  Update the text below
                   this.prizemoney = data.labels[randomPiece.index]
+                  alert(randomPiece.class)
+//                  Send the selected piece to the database
                   let database = firebase.database()
                   database.ref('value').set({
                       value: randomPiece.dutyCycle,
                       picked: true
                   });
+
+                  //Update CSS selected items
+
+                  let selectedPiece = document.querySelector('.ct-series-a, .ct-slice-pie, path')
+                  console.log(selectedPiece.firstElementChild)
+                  selectedPiece.firstElementChild.setAttribute("style", "fill: #00FFFF; stroke: white; stroke-width: 6px;")
               }
           }
       })
