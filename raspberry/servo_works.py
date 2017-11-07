@@ -1,3 +1,22 @@
+
+"""
+==============================================
+Wheel Of Fortune
+==============================================
+Course:     Web Of Things (WOT)
+Option:     New Media Development
+Department: Graphic and Digital Media
+College:    Artevelde University College Ghent
+----------------------------------------------
+Authors:
+    - Adriaan Glibert
+    - Basiel Smitz
+----------------------------------------------
+Resources:
+    - http://rpi.science.uoit.ca/lab/servo/
+    - https://firebase.google.com/docs/admin/setup
+    - https://i.stack.imgur.com/sVvsB.jpg
+==============================================
 import firebase_admin
 from firebase_admin import  credentials
 from firebase_admin import db
@@ -10,15 +29,16 @@ default_app = firebase_admin.initialize_app(cred,{'databaseURL':'https://wheelof
 
 root = db.reference()
 GPIO.setmode(GPIO.BOARD)
+#Connect the yellow cable to GPIO pin 18
 GPIO.setup(18, GPIO.OUT)
+#Connect the ground to the 7th top pin starting from the left
+#Connect the V5 to the first top pin starting from the left
 
 f = 50
 t = (1 / f)
 
 p = GPIO.PWM(18, f)
 p.start(2.5)
-
-
 try:
 	while True:
 		#get values from Firebase and put them in variables
