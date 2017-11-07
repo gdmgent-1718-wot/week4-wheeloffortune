@@ -6,52 +6,82 @@
   <title>Win up to 100 euro! | By Basiel Smitz & Adriaan Glibert</title>
   <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.0/chartist.min.css'>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/loading.css">
   <link rel="stylesheet" href="css/simple-grid.min.css">
 </head>
 <body>
 
+<!--This is the loading screen-->
+  <div id="loading-wrapper" style="display: none ">
+    <div id="loading-text">SPINNING</div>
+    <div id="loading-content"></div>
+  </div>
+<!--This contains the wheel, button and winningtext-->
     <div id="wheelOfFortune">
       <h1>Press the button and win up to 100 euro!</h1>
-      <button class="btn" v-on:click="selectRandomPiece">LET'S GO</button>
+      <button class="btn" v-on:click="letsGo">LET'S GO</button>
       <div class = 'ct-pie'></div>
-      <h2>You have won <span>{{prizemoney}}</span></h2>
+      <h2 style="display: none; position: relative; bottom: 125px;"id="prize">You have won <span>{{prizemoney}}</span></h2>
     </div>
-
+<!--We added Vue code-->
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script>
       new Vue({
           el: '#wheelOfFortune',
           data: {
-              prizemoney: '...',
-              styleObject: {
-                  active: true
-              }
+              prizemoney: '...'
           },
           methods: {
-              selectRandomPiece() {
-//                  Get a random piece
+//              This method is fired when you press the LETS GO button.
+              letsGo() {
+//              We make sure the winning text is hidden, and let the wheel fadeOut to bring on the loading screen.
+                  $('#prize').hide()
+                  $('#wheelOfFortune').fadeOut()
+                  $('#loading-wrapper').fadeIn()
+//              We reset the styling that shows which piece was selected the previous turn.
+                  $('.ct-series').css({"stroke": "white", "stroke-width": "0px"})
+
+//              Select a totally random piece.
                   let randomPiece = data.moreInfo[Math.floor(Math.random() * data.moreInfo.length)]
-//                  Update the text below
+//              Update the winning text.
                   this.prizemoney = data.labels[randomPiece.index]
-                  alert(randomPiece.class)
-//                  Send the selected piece to the database
+
+//              Update the style of the piece that was selected, but only after 4 seconds.
+                  function updateStyle() {
+                      let classSelectedPiece = randomPiece.class
+                      $(classSelectedPiece).css({"stroke": "white", "stroke-width": "5px"})
+
+                      // Make the loading screen go away and show the wheel and winning text.
+                      $('#loading-wrapper').fadeOut()
+                      $('#wheelOfFortune').fadeIn()
+                      $('#prize').fadeIn()
+                  }
+                  setTimeout(updateStyle, 6000);
+
+//              Initialize firebase database.
                   let database = firebase.database()
+
+//              Send "false" to the database so the wheel starts spinning.
                   database.ref('value').set({
                       value: randomPiece.dutyCycle,
-                      picked: true
+                      picked: false
                   });
 
-                  //Update CSS selected items
-
-                  let selectedPiece = document.querySelector('.ct-series-a, .ct-slice-pie, path')
-                  console.log(selectedPiece.firstElementChild)
-                  selectedPiece.firstElementChild.setAttribute("style", "fill: #00FFFF; stroke: white; stroke-width: 6px;")
+//              Send the randomPiece to the database after 74 seconds and set picked true so it stops spinning.
+                  function sendData(){
+                      database.ref('value').set({
+                          value: randomPiece.dutyCycle,
+                          picked: true
+                      });
+                  }
+                  setTimeout(sendData, 4000);
               }
           }
       })
   </script>
 
 
+    <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.0/chartist.js'></script>
     <script  src="js/index.js"></script>
 
