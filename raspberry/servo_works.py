@@ -21,13 +21,14 @@ Resources:
 import firebase_admin
 from firebase_admin import  credentials
 from firebase_admin import db
+from firebase_admin import storage
 import RPi.GPIO as GPIO
 import time
 
 
 cred = credentials.Certificate('wheeloffortune-18d6d-firebase-adminsdk-vn804-4f020fab3d.json')
-default_app = firebase_admin.initialize_app(cred,{'databaseURL':'https://wheeloffortune-18d6d.firebaseio.com/'})
-
+default_app = firebase_admin.initialize_app(cred,{'databaseURL':'https://wheeloffortune-18d6d.firebaseio.com/','storageBucket': 'gs://wheeloffortune-18d6d.appspot.com'})
+bucket = storage.bucket()
 root = db.reference()
 GPIO.setmode(GPIO.BOARD)
 #Connect the yellow cable to GPIO pin 18
@@ -40,6 +41,7 @@ t = (1 / f)
 
 p = GPIO.PWM(18, f)
 p.start(2.5)
+pictureTaken = false
 try:
 	while True:
 		#get values from Firebase and put them in variables
@@ -54,6 +56,9 @@ try:
 			print "stopping"
 			p.ChangeDutyCycle(value)
 			time.sleep(1)
+			if !pictureTaken
+				#take picture
+				pictureTaken = True
 	
 		else:
 			
