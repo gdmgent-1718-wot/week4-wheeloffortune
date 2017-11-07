@@ -17,36 +17,28 @@ t = (1 / f)
 
 p = GPIO.PWM(18, f)
 p.start(2.5)
-stopped = False
 
 
 try:
 	while True:
+		#get values from Firebase and put them in variables
 		posdb = root.child('value').get()
 		picked = posdb['picked']
+		# value should be between 2.5 and 12.5
+		# correct values are 11, 9, 7.5, 5, 3.5
 		value = posdb['value']
-		print "picked:  " + str(picked) + " value:  " + str(value) + " stopped:  " + str(stopped)
 
+		#if result is picked move to result position and stop spinning
 		if picked:
-			if stopped == False:
-				print "stopping"
-				stopped = True
-				p.ChangeDutyCycle(value)
-				time.sleep(5)
-				p.stop()
-				GPIO.cleanup()
-
-			else:
-				print "stopped"		
+			print "stopping"
+			p.ChangeDutyCycle(value)
+			time.sleep(1)
+	
 		else:
-			if stopped: 
-				print "restarting"
-				stopped = False
-				p.start(2.5)
-			print "busy"
+			
+			print "spinning"
 			p.ChangeDutyCycle(2.5)
 			time.sleep(1)
-
 			p.ChangeDutyCycle(12)
 			time.sleep(1)
 			

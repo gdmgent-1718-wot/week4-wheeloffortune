@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Win up to 100 euro! | By Basiel Smitz & Adriaan Glibert</title>
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.0/chartist.min.css'>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/simple-grid.min.css">
+</head>
+<body>
+
+    <div id="wheelOfFortune">
+      <h1>Press the button and win up to 100 euro!</h1>
+      <button class="btn" v-on:click="selectRandomPiece">LET'S GO</button>
+      <div class = 'ct-pie'></div>
+      <h2>You have won <span>{{prizemoney}}</span></h2>
+    </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script>
+      new Vue({
+          el: '#wheelOfFortune',
+          data: {
+              prizemoney: '...',
+              styleObject: {
+                  active: true
+              }
+          },
+          methods: {
+              selectRandomPiece() {
+//                  Get a random piece
+                  let randomPiece = data.moreInfo[Math.floor(Math.random() * data.moreInfo.length)]
+//                  Update the text below
+                  this.prizemoney = data.labels[randomPiece.index]
+                  alert(randomPiece.class)
+//                  Send the selected piece to the database
+                  let database = firebase.database()
+                  database.ref('value').set({
+                      value: randomPiece.dutyCycle,
+                      picked: true
+                  });
+
+                  //Update CSS selected items
+
+                  let selectedPiece = document.querySelector('.ct-series-a, .ct-slice-pie, path')
+                  console.log(selectedPiece.firstElementChild)
+                  selectedPiece.firstElementChild.setAttribute("style", "fill: #00FFFF; stroke: white; stroke-width: 6px;")
+              }
+          }
+      })
+  </script>
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.0/chartist.js'></script>
+    <script  src="js/index.js"></script>
+
+    <!--Laad Firebase-->
+    <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAu-Z4xVVJvw5V9gilhQc0ykrfrjRhXtRI",
+            authDomain: "wheeloffortune-18d6d.firebaseapp.com",
+            databaseURL: "https://wheeloffortune-18d6d.firebaseio.com",
+            projectId: "wheeloffortune-18d6d",
+            storageBucket: "",
+            messagingSenderId: "974256373838"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+</body>
+</html>
