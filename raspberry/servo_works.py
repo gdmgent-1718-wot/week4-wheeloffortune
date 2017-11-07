@@ -17,6 +17,7 @@ Resources:
     - https://firebase.google.com/docs/admin/setup
     - https://i.stack.imgur.com/sVvsB.jpg
 ==============================================
+"""
 import firebase_admin
 from firebase_admin import  credentials
 from firebase_admin import db
