@@ -18,12 +18,30 @@
   </div>
 <!--This contains the wheel, button and winningtext-->
     <div id="wheelOfFortune">
-      <h1>Press the button and win up to 100 euro!</h1>
-      <button class="btn" v-on:click="letsGo">LET'S GO</button>
-      <div class = 'ct-pie'></div>
-      <h2 style="display: none; position: relative; bottom: 125px;"id="prize">You have won <span>{{prizemoney}}</span></h2>
+      <div>
+        <h1>Press the button and win up to 100 euro!</h1>
+        <button class="btn" v-on:click="letsGo">LET'S GO</button>
+        <div class = 'ct-pie'></div>
+        <h2 style="display: none; position: relative; bottom: 125px;"id="prize">You have won <span>{{prizemoney}}</span><br>
+          Scroll down to see proof!
+        </h2>
+      </div>
+      <div>
+        <h2>Wat heb je gewonnnen? Hier een foto van jouw prijs.</h2>
+        <img id="myimg" src="">
+        {{winningImage}}
+        <h2>Vorige resultaten:</h2>
+
+        <img src="http://painepublishing.com/wp-content/uploads/2015/08/charlie-sheen-winning.png">
+
+        <img src="http://painepublishing.com/wp-content/uploads/2015/08/charlie-sheen-winning.png">
+        <img src="http://painepublishing.com/wp-content/uploads/2015/08/charlie-sheen-winning.png">
+        <img src="http://painepublishing.com/wp-content/uploads/2015/08/charlie-sheen-winning.png">
+
+        <img src="http://painepublishing.com/wp-content/uploads/2015/08/charlie-sheen-winning.png">
 
 
+      </div>
     </div>
 <!--We added Vue code-->
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -31,7 +49,9 @@
       new Vue({
           el: '#wheelOfFortune',
           data: {
-              prizemoney: '...'
+              prizemoney: '...',
+              previousPictures: [],
+              winningImage: 'test'
           },
           methods: {
 //              This method is fired when you press the LETS GO button.
@@ -62,18 +82,56 @@
 
 //              Initialize firebase database.
                   let database = firebase.database()
+                  let storage = firebase.storage();
+                  let storageRef = storage.ref('images');
+                  self = this;
+                  storageRef.on('value', function(snapshot) {
+                      value = snapshot.val();
+                      self.winningImage = value.latest;
+                  });
+                  console.log(this.winningImage)
+                  // Create a reference to the file we want to download
+                  var winningRef = storageRef.child('alain.jpg');
+
+                  // Get the download URL
+                  winningRef.getDownloadURL().then(function(url) {
+                      let img = document.getElementById('myimg');
+                      img.src = url;
+                  }).catch(function(error) {
+
+                      // A full list of error codes is available at
+                      // https://firebase.google.com/docs/storage/web/handle-errors
+                      switch (error.code) {
+                          case 'storage/object_not_found':
+                              // File doesn't exist
+                              break;
+
+                          case 'storage/unauthorized':
+                              // User doesn't have permission to access the object
+                              break;
+
+                          case 'storage/canceled':
+                              // User canceled the upload
+                              break;
+                          case 'storage/unknown':
+                              // Unknown error occurred, inspect the server response
+                              break;
+                      }
+                  });
 
 //              Send "false" to the database so the wheel starts spinning.
                   database.ref('value').set({
                       value: randomPiece.dutyCycle,
-                      picked: false
+                      picked: false,
+                      picturetaken: false
                   });
 
-//              Send the randomPiece to the database after 74 seconds and set picked true so it stops spinning.
+//              Send the randomPiece to the database after 4 seconds and set picked true so it stops spinning.
                   function sendData(){
                       database.ref('value').set({
                           value: randomPiece.dutyCycle,
-                          picked: true
+                          picked: true,
+                          picturetaken: false
                       });
                   }
                   setTimeout(sendData, 4000);
@@ -96,9 +154,10 @@
             authDomain: "wheeloffortune-18d6d.firebaseapp.com",
             databaseURL: "https://wheeloffortune-18d6d.firebaseio.com",
             projectId: "wheeloffortune-18d6d",
-            storageBucket: "",
+            storageBucket: "gs://wheeloffortune-18d6d.appspot.com/",
             messagingSenderId: "974256373838"
         };
+
         firebase.initializeApp(config);
     </script>
 

@@ -38,6 +38,10 @@ h1, h2 {
   fill: hsl(120, 40%, 60%);
 }
 
+img {
+  margin: 0 auto;
+  display: block;
+}
 /*.ct-series-a .ct-slice-pie {*/
   /*fill: hsl(120, 40%, 60%);*/
 /*}*/
