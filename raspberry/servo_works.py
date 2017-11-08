@@ -40,6 +40,7 @@ t = (1 / f)
 
 p = GPIO.PWM(18, f)
 p.start(2.5)
+pictureTaken = false
 try:
 	while True:
 		#get values from Firebase and put them in variables
@@ -54,6 +55,9 @@ try:
 			print "stopping"
 			p.ChangeDutyCycle(value)
 			time.sleep(1)
+			if !pictureTaken
+				#take picture
+				pictureTaken = True
 	
 		else:
 			
