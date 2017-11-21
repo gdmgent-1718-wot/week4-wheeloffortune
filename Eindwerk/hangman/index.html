@@ -7,32 +7,196 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" crossorigin="anonymous">
+    <link href="css/open-iconic-bootstrap.css" rel="stylesheet">
 </head>
 <body>
 
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded pt-3 pb-3">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">Wheel of Fortune</a>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup navbar-right">
+        <a class="navbar-brand" href="#">
+            <img src="img/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            <span class="ml-3">Wheel of Fortune</span>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#">Features</a>
-                <a class="nav-item nav-link" href="#">Pricing</a>
-                <a class="nav-item nav-link disabled" href="#">Disabled</a>
+                <a class="nav-item nav-link active" href="#">Login <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">About</a>
+                <a class="nav-item nav-link" href="#">Contact</a>
             </div>
         </div>
     </nav>
-    <main class="container">
-        <h1>Hello, world!</h1>
+
+    <main class="container mt-5" id="app">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="input-group">
+                <input :type="showText ? 'text' : 'password'" @keyup.enter="chooseWord" class="form-control" placeholder="Voeg een woord toe.." aria-label="Voeg een woord toe.." v-model="word">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button" @click="chooseWord">
+                        +
+                    </button>
+                 </span>
+            </div>
+            <div class="pb-3 pt-3 text-primary">{{message}}</div>
+            <div class="pt-5">
+                <h2 class="text-center"></h2>
+            </div>
+            <div class="pb-5">
+                <ul class='result pb-5 pl-0'>
+                    <li class="list-inline-item" v-for='letter in wordLetters'>
+                        <h1>{{ isGuessedLetter(letter) ? letter : '&nbsp;_' }}</h1>
+                    </li>
+                </ul>
+                <button type="button" class="btn btn-secondary col-3" :disabled='single.checked || tries == 0 || userWon()' @click='handleLetterClick(single)' v-for='single in alphabet'>{{ single.letter }}</button>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-lg col-12 mb-5" @click.prevent='initializeGame()'>Opnieuw spelen</button>
+            <!--<span :class="{ 'won' : userWon(), 'lost' : !userWon() }">{{ triesOrMessage }}</span>-->
+          <span v-if='tries == 0'>
+            Het woord dat we naar zochten was: {{ randomWord }}
+          </span>
+        </div>
     </main>
+
     <footer>
 
     </footer>
 
 
 <script src="js/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="js/vue.js" crossorigin="anonymous"></script>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            showText: false,
+            message: 'Raad een letter uit het woord, als u het juist heeft mag u nog eens draaien aan het rad én mag u nogmaals een letter raden.',
+            word: '',
+            randomWord: '',
+            compareWord: '',
+            wordLetters: [],
+            lettersUsed: [],
+            tries: 1,
+            initialTries: 1,
+            alphabet: [
+                { letter: "A", checked: false },
+                { letter: "B", checked: false },
+                { letter: "C", checked: false },
+                { letter: "D", checked: false },
+                { letter: "E", checked: false },
+                { letter: "F", checked: false },
+                { letter: "G", checked: false },
+                { letter: "H", checked: false },
+                { letter: "I", checked: false },
+                { letter: "J", checked: false },
+                { letter: "K", checked: false },
+                { letter: "L", checked: false },
+                { letter: "M", checked: false },
+                { letter: "N", checked: false },
+                { letter: "O", checked: false },
+                { letter: "P", checked: false },
+                { letter: "Q", checked: false },
+                { letter: "R", checked: false },
+                { letter: "S", checked: false },
+                { letter: "T", checked: false },
+                { letter: "U", checked: false },
+                { letter: "V", checked: false },
+                { letter: "W", checked: false },
+                { letter: "X", checked: false },
+                { letter: "Y", checked: false },
+                { letter: "Z", checked: false }
+            ]
+        },
+//        computed: {
+//        triesOrMessage() {
+//                if(this.userWon()) {
+//                    return 'Je hebt een letter juist geraden, draai nog eens aan het wiel!';
+//                } else if(this.tries == 0) {
+//                    return 'Niet juist geraden, het is aan de volgende';
+//                } else {
+//                    return this.tries;
+//                }
+//            }
+//        },
+        methods: {
+            toggleVisibility () {
+                this.showText = !this.showText
+                if(this.message != 'Hide the word')
+                    this.message = 'Hide the word'
+                else
+                    this.message = 'See the word'
+            },
+
+            initializeGame() {
+                this.tries = this.initialTries;
+                this.randomWord = '';
+                this.compareWord = '';
+                this.wordLetters = [];
+                this.lettersUsed = [];
+                this.resetCheckedLetters();
+                this.chooseWord();
+                //this.splitWordIntoLetters();
+            },
+
+            chooseWord () {
+                this.randomWord = this.word;
+                this.splitWordIntoLetters();
+            },
+
+            splitWordIntoLetters() {
+                for(var i = 0; i < this.randomWord.length; i++) {
+                    this.wordLetters.push(this.randomWord.charAt(i));
+                }
+            },
+            resetCheckedLetters() {
+                this.alphabet.filter((single) => {
+                    single.checked = false;
+                });
+            },
+            handleLetterClick(single) {
+                single.checked = true;
+                this.lettersUsed.push(single.letter.toLowerCase());
+
+                if(!this.wordHasLetter(single.letter.toLowerCase())) {
+//                    if(this.tries > 0) {
+//                        this.tries--
+//                    }
+                    this.message = 'Helaas, niet juist geraden, het is aan de volgende...'
+
+                }
+
+                this.compareWords();
+            },
+            isGuessedLetter(letter) {
+                return this.lettersUsed.indexOf(letter.toLowerCase()) > -1;
+            },
+            wordHasLetter(letter) {
+                return this.wordLetters.indexOf(letter.toLowerCase()) > -1;
+            },
+            compareWords() {
+                this.compareWord = '';
+                this.wordLetters.forEach((letter) => {
+                    if(this.lettersUsed.indexOf(letter) > -1) {
+                        this.compareWord += letter;
+                        this.message = 'Je hebt een letter juist geraden, draai nog eens aan het wiel!'
+                    }
+                    else
+                        this.message = 'Helaas, niet juist geraden, het is aan de volgende...'
+                });
+            },
+            userWon() {
+                return this.randomWord == this.compareWord;
+                }
+            },
+            mounted() {
+                this.initializeGame();
+            }
+    })
+</script>
+
 </body>
 </html>
