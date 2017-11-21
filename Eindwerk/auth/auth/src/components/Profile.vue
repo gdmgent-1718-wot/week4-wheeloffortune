@@ -13,8 +13,8 @@
         name: 'Profile',
         data() {
             return {
-                msg: 'Welcome',
-                email: '',
+                msg: 'Welcome ',
+                displayName: '',
                 password: '',
                 errorCode: '',
                 errorMessage: '',
@@ -30,9 +30,12 @@
         methods: {
 
             getUserData: function () {
+                self = this;
                 firebase.auth().onAuthStateChanged(function (user) {
                     if (user) {
-                        console.log(user);
+                        console.log(user.displayName);
+                        self.displayName = user.displayName;
+                        self.msg = 'Welcome ' + self.displayName;
                     } else {
                         // User is signed out.
                         // ...
@@ -56,7 +59,7 @@
             self = this
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
-                    console.log(user);
+                    self.getUserData()
                 } else {
                     self.$router.push({name: 'Login'});
                 }
