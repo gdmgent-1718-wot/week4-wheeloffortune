@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" crossorigin="anonymous">
+    <link href="css/open-iconic-bootstrap.css" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded pt-3 pb-3">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <img src="img/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            <span class="ml-3">Wheel of Fortune</span>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">Login <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">About</a>
+                <a class="nav-item nav-link" href="#">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-5" id="app">
+        <div class="col-lg-6 offset-lg-3">
+            <h3 class="pt-3 pb-5">Voeg een woord toe..</h3>
+            <div class="input-group">
+                <input type="text" @keyup.enter="addWordToArray" class="form-control" placeholder="Voeg een woord toe dat de spelers moeten raden.." aria-label="Voeg een woord toe.." v-model="inputWord">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button" @click="addWordToArray">
+                        +
+                    </button>
+                 </span>
+            </div>
+            <h4 class="pt-5 pb-5">Te raden woorden:</h4>
+            <button class="col xs12 pb-2 btn btn-secondary"  type="button" @click="pushDataToFirebase(arrayOfWords)" @click="makeButtonGreen" :class="{'btn-danger': isGreen}">
+                Vergeet niet op te slaan
+            </button>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Woord</th>
+                    <th>Acties</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="word in arrayOfWords" :key="word.id">
+                    <td>{{ word }}</td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-danger" @click="removeWordFromArray(word)">X</button> </td>
+                </tr>
+                </tbody>
+            </table>
+            <button class="col xs12 pb-2 btn btn-secondary"  type="button" @click="pushDataToFirebase(arrayOfWords)" @click="makeButtonGreen" :class="{'btn-danger': isGreen, 'btn-succes': isRed}">
+                Vergeet niet op te slaan
+            </button>
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCRDbOBN_g2rlAqy8NBSRmjfvrPMswf4EE",
+        authDomain: "wheeloffortune2-c0e4a.firebaseapp.com",
+        databaseURL: "https://wheeloffortune2-c0e4a.firebaseio.com",
+        projectId: "wheeloffortune2-c0e4a",
+        storageBucket: "wheeloffortune2-c0e4a.appspot.com",
+        messagingSenderId: "131456329052"
+    };
+    firebase.initializeApp(config);
+</script>
+<script src="js/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="js/vue.js" crossorigin="anonymous"></script>
+
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            inputWord: '',
+            arrayOfWords: [],
+            id: null,
+            isGreen: false,
+            isRed: false
+            },
+        mounted () {
+            this.loginForDevelopment(),
+            this.getDataFromFirebase()
+        },
+        methods: {
+            loginForDevelopment () {
+                firebase.auth().signInWithEmailAndPassword('adriaan@gmail.com', 'test123').catch(function(error) {
+                    self.errorCode = error.code;
+                    self.errorMessage = error.message;
+                })
+            },
+            addWordToArray () {
+                this.arrayOfWords.push(this.inputWord)
+                this.inputWord = ''
+                this.isGreen = true
+            },
+            removeWordFromArray (word) {
+                this.arrayOfWords.splice(this.arrayOfWords.indexOf(word), 1)
+            },
+            pushDataToFirebase (words) {
+                let database = firebase.database()
+                database.ref('words').set({
+                    values: words
+                });
+            },
+            getDataFromFirebase () {
+                self = this
+                let database = firebase.database()
+                let databaseRef = database.ref('words');
+                console.log(databaseRef)
+                databaseRef.on('value', function(snapshot) {
+                    self.arrayOfWords = snapshot.val().values
+                });
+            },
+            makeButtonGreen () {
+                isActive = false
+                isRed = true
+            }
+        }
+    }
+    )
+</script>
+
+</body>
+</html>
