@@ -32,17 +32,7 @@
             getUserData: function () {
                 firebase.auth().onAuthStateChanged(function (user) {
                     if (user) {
-                        // User is signed in.
-                        localStorage.setItem("displayName", user.displayName);
-                        localStorage.setItem("userEmail", user.email);
-                        localStorage.setItem("emailVerified", user.emailVerified);
-                        localStorage.setItem("userPhotoURL", user.photoURL);
-                        localStorage.setItem("userAnonymous", user.isAnonymous);
-                        localStorage.setItem("uid", user.uid);
-                        localStorage.setItem("userProviderData", user.providerData);
-                        localStorage.setItem("userLoggedIn", true);
-                        // ...
-                        console.log(localStorage.getItem('uid'));
+                        console.log(user);
                     } else {
                         // User is signed out.
                         // ...
