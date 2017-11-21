@@ -53,9 +53,14 @@
 
         }
         , mounted: function () {
-            if (!this.user) {
-                this.$router.push({name: 'Login'});
-            }
+            self = this
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    console.log(user);
+                } else {
+                    self.$router.push({name: 'Login'});
+                }
+            });
         }
     }
 </script>
