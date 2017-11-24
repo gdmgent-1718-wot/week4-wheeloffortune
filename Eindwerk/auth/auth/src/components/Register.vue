@@ -3,13 +3,13 @@
         <h1>{{ msg }}</h1>
         <form>
             <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input v-model="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                <label for="emailid">Email address</label>
+                <input v-model="email" type="email" class="form-control" id="emailid" aria-describedby="emailHelp" placeholder="Enter email">
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input v-model="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label for="passwordid">Password</label>
+                <input v-model="password" type="password" class="form-control" id="passwordid" placeholder="Password">
             </div>
             <button  v-on:click="register" type="submit" class="btn btn-primary">Submit</button>
             <router-link :to="{ name: 'Login' }">Login</router-link>
@@ -49,7 +49,7 @@
                   if (user) {
                       console.log('registered')
                       self.message = "successfully registered"
-                      self.$router.push({name: 'Profile'});
+                      self.$router.push({name: 'Completion'});
                   } else {
                       // No user is signed in.
                   }
