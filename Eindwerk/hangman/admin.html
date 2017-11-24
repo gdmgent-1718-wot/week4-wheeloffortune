@@ -39,9 +39,9 @@
                     </button>
                  </span>
             </div>
-            <h4 class="pt-5 pb-5">Te raden woorden:</h4>
-            <button class="col xs12 pb-2 btn btn-secondary"  type="button" @click="pushDataToFirebase(arrayOfWords)" @click="makeButtonGreen" :class="{'btn-danger': isGreen}">
-                Vergeet niet op te slaan
+            <h4 class="pt-5 pb-2">Te raden woorden:</h4>
+            <button class="col xs12 mb-2 btn btn-secondary"  type="button" @click="pushDataToFirebase(arrayOfWords)" @click="makeButtonGreen" :class="{'btn-danger': isRed, 'btn-success': isGreen}">
+                {{ buttonText }}
             </button>
             <table class="table">
                 <thead>
@@ -58,8 +58,8 @@
                 </tr>
                 </tbody>
             </table>
-            <button class="col xs12 pb-2 btn btn-secondary"  type="button" @click="pushDataToFirebase(arrayOfWords)" @click="makeButtonGreen" :class="{'btn-danger': isGreen, 'btn-succes': isRed}">
-                Vergeet niet op te slaan
+            <button class="col xs12 mb-5 btn btn-secondary"  type="button" @click="pushDataToFirebase(arrayOfWords)" :class="{'btn-danger': isRed, 'btn-success': isGreen}">
+                {{ buttonText }}
             </button>
         </div>
     </main>
@@ -94,7 +94,8 @@
             arrayOfWords: [],
             id: null,
             isGreen: false,
-            isRed: false
+            isRed: false,
+            buttonText: 'Vergeet niet op te slaan!'
             },
         mounted () {
             this.loginForDevelopment(),
@@ -110,16 +111,18 @@
             addWordToArray () {
                 this.arrayOfWords.push(this.inputWord)
                 this.inputWord = ''
-                this.isGreen = true
+                this.makeButtonRed()
             },
             removeWordFromArray (word) {
                 this.arrayOfWords.splice(this.arrayOfWords.indexOf(word), 1)
+                this.makeButtonRed()
             },
             pushDataToFirebase (words) {
                 let database = firebase.database()
                 database.ref('words').set({
                     values: words
                 });
+                this.makeButtonGreen()
             },
             getDataFromFirebase () {
                 self = this
@@ -131,9 +134,16 @@
                 });
             },
             makeButtonGreen () {
-                isActive = false
-                isRed = true
+                this.isRed = false
+                this.isGreen = true
+                this.buttonText = 'Wijzigingen opgeslagen!'
+            },
+            makeButtonRed () {
+                this.isGreen = false
+                this.isRed = true
+                this.buttonText = 'Klik hier om wijzigingen op te slaan!'
             }
+
         }
     }
     )
