@@ -40,7 +40,7 @@
                  </span>
             </div>
             <h4 class="pt-5 pb-2">Te raden woorden:</h4>
-            <button class="col xs12 mb-2 btn btn-secondary"  type="button" @click="pushDataToFirebase(arrayOfWords)" @click="makeButtonGreen" :class="{'btn-danger': isRed, 'btn-success': isGreen}">
+            <button class="col-md-6 col-sm-12 mb-2 btn btn-secondary"  type="button" @click="pushDataToFirebase(arrayOfWords)" @click="makeButtonGreen" :class="{'btn-danger': isRed, 'btn-success': isGreen}">
                 {{ buttonText }}
             </button>
             <table class="table">
@@ -58,7 +58,7 @@
                 </tr>
                 </tbody>
             </table>
-            <button class="col xs12 mb-5 btn btn-secondary"  type="button" @click="pushDataToFirebase(arrayOfWords)" :class="{'btn-danger': isRed, 'btn-success': isGreen}">
+            <button class="col-md-6 col-sm-12 mb-5 btn btn-secondary"  type="button" @click="pushDataToFirebase(arrayOfWords)" :class="{'btn-danger': isRed, 'btn-success': isGreen}">
                 {{ buttonText }}
             </button>
         </div>
@@ -109,7 +109,7 @@
                 })
             },
             addWordToArray () {
-                this.arrayOfWords.push(this.inputWord)
+                this.arrayOfWords.unshift(this.inputWord)
                 this.inputWord = ''
                 this.makeButtonRed()
             },
