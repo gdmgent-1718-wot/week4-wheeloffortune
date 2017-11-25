@@ -30,21 +30,22 @@
 
     <main class="container mt-5" id="app">
         <div class="col-lg-6 offset-lg-3">
-            <div class="pb-3 pt-3 text-gray-dark">
+            <div class="pb-2 pt-3 text-gray-dark">
                 Raad een letter uit het woord, als u het <span class="text-success font-weight-bold">juist</span> heeft mag u <span class="text-success font-weight-bold">nog eens draaien</span> aan het rad én mag u nogmaals een letter raden.
                 Indien je <span class="text-danger font-weight-bold">fout</span> hebt geraden is het aan de <span class="text-danger font-weight-bold">andere speler</span>.
             </div>
-            <div class="pb-3 pt-3 text-primary">{{message}}</div>
-            <div class="pt-5">
+            <div class="pb-3 pt-2 text-primary">{{message}}</div>
+            <div class="pt-3">
                 <h2 class="text-center"></h2>
             </div>
             <div class="pb-5">
                 <h1 class="text-warning">{{ loading }}</h1>
-                <ul class='result pb-5 pl-0'>
+                <ul class='result p1-2 pl-0'>
                     <li class="list-inline-item mr-1" v-for='letter in wordLetters'>
-                        <h1 class="text-warning">{{ isGuessedLetter(letter) ? letter : '█' }}</h1>
+                        <h1 class="text-success">{{ isGuessedLetter(letter) ? letter : '█' }}</h1>
                     </li>
                 </ul>
+                <p class="pb-3">{{ randomWordCategory }}</p>
                 <button type="button" class="btn btn-secondary col-1" :disabled='single.checked || tries == 0 || showWord()' @click='handleLetterClick(single)' v-for='single in alphabet'>{{ single.letter }}</button>
             </div>
 
@@ -87,6 +88,7 @@
             loading: 'Willekeurig woord kiezen...',
             words: [],
             randomWord: '',
+            randomWordCategory: '',
             compareWord: '',
             wordLetters: [],
             lettersUsed: [],
@@ -118,13 +120,16 @@
                 { letter: "W", checked: false },
                 { letter: "X", checked: false },
                 { letter: "Y", checked: false },
-                { letter: "Z", checked: false }
+                { letter: "Z", checked: false },
+                { letter: "-", checked: false },
+                { letter: " ", checked: false }
             ]
         },
         methods: {
             initializeGame() {
                 this.tries = this.initialTries;
                 this.randomWord = '';
+                this.randomWordCategory = '';
                 this.compareWord = '';
                 this.wordLetters = [];
                 this.lettersUsed = [];
@@ -134,7 +139,9 @@
             },
 
             getRandomWord() {
-                this.randomWord = _.sample(this.words);
+                let randomNumber = Math.floor(Math.random() * this.words.length);
+                this.randomWord = this.words[randomNumber][0];
+                this.randomWordCategory = 'Categorie is: ' + this.words[randomNumber][1];
             },
 
             getDataFromFirebase () {
@@ -143,13 +150,14 @@
                 let databaseRef = database.ref('words');
                 databaseRef.on('value', function(snapshot) {
                     self.words = snapshot.val().values
+                    console.log(self.words)
                     self.loading = 'Welk woord zoeken we?'
                     self.initializeGame()
                 });
             },
 
             splitWordIntoLetters() {
-                console.log(this.words)
+//                console.log(this.words)
                 console.log(this.randomWord)
                 for(var i = 0; i < this.randomWord.length; i++) {
                     this.wordLetters.push(this.randomWord.charAt(i));
