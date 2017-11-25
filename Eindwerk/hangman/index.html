@@ -30,17 +30,22 @@
 
     <main class="container mt-5" id="app">
         <div class="col-lg-6 offset-lg-3">
+            <div class="pb-3 pt-3 text-gray-dark">
+                Raad een letter uit het woord, als u het <span class="text-success font-weight-bold">juist</span> heeft mag u <span class="text-success font-weight-bold">nog eens draaien</span> aan het rad én mag u nogmaals een letter raden.
+                Indien je <span class="text-danger font-weight-bold">fout</span> hebt geraden is het aan de <span class="text-danger font-weight-bold">andere speler</span>.
+            </div>
             <div class="pb-3 pt-3 text-primary">{{message}}</div>
             <div class="pt-5">
                 <h2 class="text-center"></h2>
             </div>
             <div class="pb-5">
+                <h1 class="text-warning">{{ loading }}</h1>
                 <ul class='result pb-5 pl-0'>
-                    <li class="list-inline-item" v-for='letter in wordLetters'>
-                        <h1>{{ isGuessedLetter(letter) ? letter : '&nbsp;_' }}</h1>
+                    <li class="list-inline-item mr-1" v-for='letter in wordLetters'>
+                        <h1 class="text-warning">{{ isGuessedLetter(letter) ? letter : '█' }}</h1>
                     </li>
                 </ul>
-                <button type="button" class="btn btn-secondary col-1" :disabled='single.checked || tries == 0 || userWon()' @click='handleLetterClick(single)' v-for='single in alphabet'>{{ single.letter }}</button>
+                <button type="button" class="btn btn-secondary col-1" :disabled='single.checked || tries == 0 || showWord()' @click='handleLetterClick(single)' v-for='single in alphabet'>{{ single.letter }}</button>
             </div>
 
             <button type="button" class="btn btn-primary btn-lg col-12 mb-5" @click.prevent='initializeGame()'>Opnieuw spelen</button>
@@ -78,8 +83,8 @@
         el: '#app',
         data: {
             showText: false,
-            message: 'Raad een letter uit het woord, als u het juist heeft mag u nog eens draaien aan het rad én mag u nogmaals een letter raden.',
-            loaded: false,
+            message: '',
+            loading: 'Willekeurig woord kiezen...',
             words: [],
             randomWord: '',
             compareWord: '',
@@ -116,28 +121,6 @@
                 { letter: "Z", checked: false }
             ]
         },
-//        computed: {
-//        triesOrMessage() {
-//                if(this.userWon()) {
-//                    return 'Je hebt een letter juist geraden, draai nog eens aan het wiel!';
-//                } else if(this.tries == 0) {
-//                    return 'Niet juist geraden, het is aan de volgende';
-//                } else {
-//                    return this.tries;
-//                }
-//            }
-//        },
-//        created: {
-//            getDataFromFirebase () {
-//                self = this;
-//                let database = firebase.database()
-//                let databaseRef = database.ref('words');
-//                console.log(databaseRef)
-//                databaseRef.on('value', function(snapshot) {
-//                    self.words = snapshot.val().values
-//                });
-//            },
-//        },
         methods: {
             initializeGame() {
                 this.tries = this.initialTries;
@@ -160,6 +143,7 @@
                 let databaseRef = database.ref('words');
                 databaseRef.on('value', function(snapshot) {
                     self.words = snapshot.val().values
+                    self.loading = 'Welk woord zoeken we?'
                     self.initializeGame()
                 });
             },
@@ -179,35 +163,20 @@
             handleLetterClick(single) {
                 single.checked = true;
                 this.lettersUsed.push(single.letter.toLowerCase());
-
-                if(!this.wordHasLetter(single.letter.toLowerCase())) {
-                    if(this.tries > 0) {
-                        this.tries--
-                    }
-                    this.message = 'Helaas, niet juist geraden, het is aan de volgende...'
-
-                }
-
                 this.compareWords();
             },
             isGuessedLetter(letter) {
                 return this.lettersUsed.indexOf(letter.toLowerCase()) > -1;
-            },
-            wordHasLetter(letter) {
-                return this.wordLetters.indexOf(letter.toLowerCase()) > -1;
             },
             compareWords() {
                 this.compareWord = '';
                 this.wordLetters.forEach((letter) => {
                     if(this.lettersUsed.indexOf(letter) > -1) {
                         this.compareWord += letter;
-                        this.message = 'Je hebt een letter juist geraden, draai nog eens aan het wiel!'
                     }
-                    else
-                        this.message = 'Helaas, niet juist geraden, het is aan de volgende...'
                 });
             },
-            userWon() {
+            showWord() {
                 return this.randomWord == this.compareWord;
                 }
             },
