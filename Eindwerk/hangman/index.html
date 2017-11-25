@@ -30,14 +30,6 @@
 
     <main class="container mt-5" id="app">
         <div class="col-lg-6 offset-lg-3">
-            <div class="input-group">
-                <input :type="showText ? 'text' : 'password'" @keyup.enter="chooseWord" class="form-control" placeholder="Voeg een woord toe.." aria-label="Voeg een woord toe.." v-model="word">
-                <span class="input-group-btn">
-                    <button class="btn btn-secondary" type="button" @click="chooseWord">
-                        +
-                    </button>
-                 </span>
-            </div>
             <div class="pb-3 pt-3 text-primary">{{message}}</div>
             <div class="pt-5">
                 <h2 class="text-center"></h2>
@@ -48,11 +40,10 @@
                         <h1>{{ isGuessedLetter(letter) ? letter : '&nbsp;_' }}</h1>
                     </li>
                 </ul>
-                <button type="button" class="btn btn-secondary col-3" :disabled='single.checked || tries == 0 || userWon()' @click='handleLetterClick(single)' v-for='single in alphabet'>{{ single.letter }}</button>
+                <button type="button" class="btn btn-secondary col-1" :disabled='single.checked || tries == 0 || userWon()' @click='handleLetterClick(single)' v-for='single in alphabet'>{{ single.letter }}</button>
             </div>
 
             <button type="button" class="btn btn-primary btn-lg col-12 mb-5" @click.prevent='initializeGame()'>Opnieuw spelen</button>
-            <!--<span :class="{ 'won' : userWon(), 'lost' : !userWon() }">{{ triesOrMessage }}</span>-->
           <span v-if='tries == 0'>
             Het woord dat we naar zochten was: {{ randomWord }}
           </span>
@@ -63,11 +54,24 @@
 
     </footer>
 
-
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCRDbOBN_g2rlAqy8NBSRmjfvrPMswf4EE",
+        authDomain: "wheeloffortune2-c0e4a.firebaseapp.com",
+        databaseURL: "https://wheeloffortune2-c0e4a.firebaseio.com",
+        projectId: "wheeloffortune2-c0e4a",
+        storageBucket: "wheeloffortune2-c0e4a.appspot.com",
+        messagingSenderId: "131456329052"
+    };
+    firebase.initializeApp(config);
+</script>
 <script src="js/jquery.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script src="js/vue.js" crossorigin="anonymous"></script>
+<script src="js/lodash.js" crossorigin="anonymous"></script>
 
 <script>
     var app = new Vue({
@@ -75,13 +79,14 @@
         data: {
             showText: false,
             message: 'Raad een letter uit het woord, als u het juist heeft mag u nog eens draaien aan het rad én mag u nogmaals een letter raden.',
-            word: '',
+            loaded: false,
+            words: [],
             randomWord: '',
             compareWord: '',
             wordLetters: [],
             lettersUsed: [],
-            tries: 1,
-            initialTries: 1,
+            tries: 6,
+            initialTries: 6,
             alphabet: [
                 { letter: "A", checked: false },
                 { letter: "B", checked: false },
@@ -122,15 +127,18 @@
 //                }
 //            }
 //        },
+//        created: {
+//            getDataFromFirebase () {
+//                self = this;
+//                let database = firebase.database()
+//                let databaseRef = database.ref('words');
+//                console.log(databaseRef)
+//                databaseRef.on('value', function(snapshot) {
+//                    self.words = snapshot.val().values
+//                });
+//            },
+//        },
         methods: {
-            toggleVisibility () {
-                this.showText = !this.showText
-                if(this.message != 'Hide the word')
-                    this.message = 'Hide the word'
-                else
-                    this.message = 'See the word'
-            },
-
             initializeGame() {
                 this.tries = this.initialTries;
                 this.randomWord = '';
@@ -138,16 +146,27 @@
                 this.wordLetters = [];
                 this.lettersUsed = [];
                 this.resetCheckedLetters();
-                this.chooseWord();
-                //this.splitWordIntoLetters();
-            },
-
-            chooseWord () {
-                this.randomWord = this.word;
+                this.getRandomWord();
                 this.splitWordIntoLetters();
             },
 
+            getRandomWord() {
+                this.randomWord = _.sample(this.words);
+            },
+
+            getDataFromFirebase () {
+                self = this
+                let database = firebase.database()
+                let databaseRef = database.ref('words');
+                databaseRef.on('value', function(snapshot) {
+                    self.words = snapshot.val().values
+                    self.initializeGame()
+                });
+            },
+
             splitWordIntoLetters() {
+                console.log(this.words)
+                console.log(this.randomWord)
                 for(var i = 0; i < this.randomWord.length; i++) {
                     this.wordLetters.push(this.randomWord.charAt(i));
                 }
@@ -162,9 +181,9 @@
                 this.lettersUsed.push(single.letter.toLowerCase());
 
                 if(!this.wordHasLetter(single.letter.toLowerCase())) {
-//                    if(this.tries > 0) {
-//                        this.tries--
-//                    }
+                    if(this.tries > 0) {
+                        this.tries--
+                    }
                     this.message = 'Helaas, niet juist geraden, het is aan de volgende...'
 
                 }
@@ -193,7 +212,7 @@
                 }
             },
             mounted() {
-                this.initializeGame();
+                this.getDataFromFirebase();
             }
     })
 </script>
