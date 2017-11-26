@@ -34,7 +34,7 @@
                 Raad een letter uit een zin, woord of gezegde, als u het <span class="text-success font-weight-bold">juist</span> heeft mag u <span class="text-success font-weight-bold">nog eens draaien</span> aan het rad én mag u nogmaals een letter raden.
                 Indien je <span class="text-danger font-weight-bold">fout</span> hebt geraden is het aan de <span class="text-danger font-weight-bold">andere speler</span>.
             </div>
-            <div class="pb-3 pt-2 text-primary">{{message}}</div>
+            <h4 class="pb-3 pt-2 font-weight-bold" :style="{ color: messageColor }">{{message}}</h4>
             <div class="pt-3">
                 <h2 class="text-center"></h2>
             </div>
@@ -42,12 +42,12 @@
                 <h1 class="text-warning">{{ loading }}</h1>
                 <ul class='result pt-2 pl-0'>
                     <li class="list-inline-item mr-1" v-for='letter in wordLetters'>
-                        <h1 v-if="letter == ' ' " class="text-info">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>
-                        <h1 v-else class="text-primary">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>
+                        <h1 v-if="letter == ' ' " class="text-muted">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>
+                        <h1 v-else class="text-warning">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>
                     </li>
                 </ul>
-                <p class="pb-1 text-primary font-weight-bold">{{ randomWordCategory }}</p>
-                <p class="pb-1 text-info">De lichtblauwe vakjes zijn spaties.</p>
+                <h5 class="pb-1 text-warning font-weight-bold">{{ randomWordCategory }}</h5>
+                <p class="pb-1 text-muted">De grijze vakjes zijn spaties.</p>
                 <button type="button" class="btn btn-secondary col-1" :disabled='single.checked || tries == 0 || showWord()' @click='handleLetterClick(single)' v-for='single in alphabet'>
                     {{ single.letter }}
                 </button>
@@ -89,6 +89,7 @@
         data: {
             showText: false,
             message: '',
+            messageColor: 'red',
             loading: 'Willekeurig een zin, woord of gezegde kiezen...',
             words: [],
             randomWord: '',
@@ -179,10 +180,14 @@
                 console.log(single.letter)
                 console.log(this.wordLetters)
 
-                if (this.wordLetters.includes(single.letter) || this.wordLetters.includes(single.letter.toLowerCase()))
+                if (this.wordLetters.includes(single.letter) || this.wordLetters.includes(single.letter.toLowerCase())){
+                    this.messageColor = '#5cb85c'
                     this.message = 'Je hebt juist geraden en mag nog eens draaien aan het rad.'
-                else
-                   this.message = 'Helaas, deze letter zochten we niet, het is aan de volgende...'
+                }
+                else{
+                    this.messageColor = '#d9534f'
+                    this.message = 'Helaas, deze letter zochten we niet, het is aan de volgende...'
+                }
             },
             isGuessedLetter(letter) {
                 return this.lettersUsed.indexOf(letter.toLowerCase()) > -1;
