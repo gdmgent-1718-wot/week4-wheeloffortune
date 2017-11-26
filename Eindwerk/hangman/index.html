@@ -43,7 +43,7 @@
                 <ul class='result p1-2 pl-0'>
                     <li class="list-inline-item mr-1" v-for='letter in wordLetters'>
                         <h1 v-if="letter == ' ' " class="text-primary">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>
-                        <h1 v-else="letter == ' ' " class="text-success">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>
+                        <h1 v-else class="text-success">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>
                     </li>
                 </ul>
                 <p class="pb-3">{{ randomWordCategory }}</p>
@@ -96,7 +96,7 @@
             tries: 6,
             initialTries: 6,
             alphabet: [
-                { letter: "A", checked: false },
+                { letter: "A", checked: true },
                 { letter: "B", checked: false },
                 { letter: "C", checked: false },
                 { letter: "D", checked: false },
