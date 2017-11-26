@@ -100,27 +100,27 @@
             tries: 6,
             initialTries: 6,
             alphabet: [
-                { letter: "A", checked: true },
+                { letter: "A", checked: false },
                 { letter: "B", checked: false },
                 { letter: "C", checked: false },
                 { letter: "D", checked: false },
-                { letter: "E", checked: true },
+                { letter: "E", checked: false },
                 { letter: "F", checked: false },
                 { letter: "G", checked: false },
                 { letter: "H", checked: false },
-                { letter: "I", checked: true },
+                { letter: "I", checked: false },
                 { letter: "J", checked: false },
                 { letter: "K", checked: false },
                 { letter: "L", checked: false },
                 { letter: "M", checked: false },
                 { letter: "N", checked: false },
-                { letter: "O", checked: true },
+                { letter: "O", checked: false },
                 { letter: "P", checked: false },
                 { letter: "Q", checked: false },
                 { letter: "R", checked: false },
                 { letter: "S", checked: false },
                 { letter: "T", checked: false },
-                { letter: "U", checked: true },
+                { letter: "U", checked: false },
                 { letter: "V", checked: false },
                 { letter: "W", checked: false },
                 { letter: "X", checked: false },
@@ -139,6 +139,7 @@
                 this.lettersUsed = [];
                 this.resetCheckedLetters();
                 this.getRandomWord();
+                this.lockVowels();
                 this.splitWordIntoLetters();
             },
 
@@ -146,6 +147,14 @@
                 let randomNumber = Math.floor(Math.random() * this.words.length);
                 this.randomWord = this.words[randomNumber][0];
                 this.randomWordCategory = 'Categorie is: ' + this.words[randomNumber][1];
+            },
+
+            lockVowels () {
+                this.alphabet[0].checked = true
+                this.alphabet[4].checked = true
+                this.alphabet[8].checked = true
+                this.alphabet[14].checked = true
+                this.alphabet[20].checked = true
             },
 
             getDataFromFirebase () {
