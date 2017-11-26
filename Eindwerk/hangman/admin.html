@@ -30,7 +30,7 @@
 
     <main class="container mt-5" id="app">
         <div class="col-lg-6 offset-lg-3">
-            <h3 class="pt-3 pb-5">Voeg een woord toe..</h3>
+            <h3 class="pt-3 pb-5">Voeg een zin, woord of gezegde toe..</h3>
             <div class="input-group">
                 <input type="text" @keyup.enter="addWordToArray" class="form-control" placeholder="Voeg een woord toe dat de spelers moeten raden.." aria-label="Voeg een woord toe.." v-model="inputWord">
                 <span class="input-group-btn">
@@ -47,16 +47,16 @@
                 </select>
                  <span class="description text-muted"><em>{{ selected.description }}</em></span>
              </div>
-            <h4 class="pt-5 pb-2">Te raden woorden:</h4>
+            <h4 class="pt-5 pb-2">Te raden zinnen, woorden of gezegdes:</h4>
             <button class="col-md-6 col-sm-12 mb-2 btn btn-secondary"  type="button" @click="pushDataToFirebase(arrayOfWords)" @click="makeButtonGreen" :class="{'btn-danger': isRed, 'btn-success': isGreen}">
                 {{ buttonText }}
             </button>
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Woord</th>
+                    <th>Zin, woord of gezegde</th>
                     <th>Categorie</th>
-                    <th>Acties</th>
+                    <th>Delete</th>
                 </tr>
                 </thead>
                 <tbody>

@@ -1,8 +1,9 @@
 # De regels van het spel!
 
 Het spel bestaat uit meerdere rondes, en een finale.
-In de rondes moeten de kandidaten proberen een zin of gezegde te raden,
+In de rondes moeten de kandidaten proberen een zin, woord of gezegde te raden,
 waarvan de categorie (bijvoorbeeld "eten en drinken" of "een gebeurtenis") vooraf gegeven wordt.
+
 Op een speciaal bord wordt met gekleurde vlakken aangegeven hoeveel letters de zin telt, gelijk aan bijvoorbeeld galgje.
 Om beurten mogen de kandidaten aan een rad draaien, waarop verschillende geldbedragen staan.
 Daarna mogen ze een letter raden. Voor elke keer dat de geraden letter in het woord voorkomt,

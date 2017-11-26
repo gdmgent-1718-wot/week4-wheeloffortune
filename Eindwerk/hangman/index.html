@@ -31,7 +31,7 @@
     <main class="container mt-5" id="app">
         <div class="col-lg-6 offset-lg-3">
             <div class="pb-2 pt-3 text-gray-dark">
-                Raad een letter uit het woord, als u het <span class="text-success font-weight-bold">juist</span> heeft mag u <span class="text-success font-weight-bold">nog eens draaien</span> aan het rad én mag u nogmaals een letter raden.
+                Raad een letter uit een zin, woord of gezegde, als u het <span class="text-success font-weight-bold">juist</span> heeft mag u <span class="text-success font-weight-bold">nog eens draaien</span> aan het rad én mag u nogmaals een letter raden.
                 Indien je <span class="text-danger font-weight-bold">fout</span> hebt geraden is het aan de <span class="text-danger font-weight-bold">andere speler</span>.
             </div>
             <div class="pb-3 pt-2 text-primary">{{message}}</div>
@@ -40,19 +40,22 @@
             </div>
             <div class="pb-5">
                 <h1 class="text-warning">{{ loading }}</h1>
-                <ul class='result p1-2 pl-0'>
+                <ul class='result pt-2 pl-0'>
                     <li class="list-inline-item mr-1" v-for='letter in wordLetters'>
-                        <h1 v-if="letter == ' ' " class="text-primary">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>
-                        <h1 v-else class="text-success">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>
+                        <h1 v-if="letter == ' ' " class="text-info">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>
+                        <h1 v-else class="text-primary">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>
                     </li>
                 </ul>
-                <p class="pb-3">{{ randomWordCategory }}</p>
-                <button type="button" class="btn btn-secondary col-1" :disabled='single.checked || tries == 0 || showWord()' @click='handleLetterClick(single)' v-for='single in alphabet'>{{ single.letter }}</button>
+                <p class="pb-1 text-primary font-weight-bold">{{ randomWordCategory }}</p>
+                <p class="pb-1 text-info">De lichtblauwe vakjes zijn spaties.</p>
+                <button type="button" class="btn btn-secondary col-1" :disabled='single.checked || tries == 0 || showWord()' @click='handleLetterClick(single)' v-for='single in alphabet'>
+                    {{ single.letter }}
+                </button>
             </div>
 
             <button type="button" class="btn btn-primary btn-lg col-12 mb-5" @click.prevent='initializeGame()'>Opnieuw spelen</button>
           <span v-if='tries == 0'>
-            Het woord dat we naar zochten was: {{ randomWord }}
+            De zin, het woord of gezegde dat we naar zochten was: {{ randomWord }}
           </span>
         </div>
     </main>
@@ -86,7 +89,7 @@
         data: {
             showText: false,
             message: '',
-            loading: 'Willekeurig woord kiezen...',
+            loading: 'Willekeurig een zin, woord of gezegde kiezen...',
             words: [],
             randomWord: '',
             randomWordCategory: '',
@@ -100,23 +103,23 @@
                 { letter: "B", checked: false },
                 { letter: "C", checked: false },
                 { letter: "D", checked: false },
-                { letter: "E", checked: false },
+                { letter: "E", checked: true },
                 { letter: "F", checked: false },
                 { letter: "G", checked: false },
                 { letter: "H", checked: false },
-                { letter: "I", checked: false },
+                { letter: "I", checked: true },
                 { letter: "J", checked: false },
                 { letter: "K", checked: false },
                 { letter: "L", checked: false },
                 { letter: "M", checked: false },
                 { letter: "N", checked: false },
-                { letter: "O", checked: false },
+                { letter: "O", checked: true },
                 { letter: "P", checked: false },
                 { letter: "Q", checked: false },
                 { letter: "R", checked: false },
                 { letter: "S", checked: false },
                 { letter: "T", checked: false },
-                { letter: "U", checked: false },
+                { letter: "U", checked: true },
                 { letter: "V", checked: false },
                 { letter: "W", checked: false },
                 { letter: "X", checked: false },
@@ -151,7 +154,7 @@
                 databaseRef.on('value', function(snapshot) {
                     self.words = snapshot.val().values
                     console.log(self.words)
-                    self.loading = 'Welk woord zoeken we?'
+                    self.loading = 'We zoeken een zin, woord of gezegde.'
                     self.initializeGame()
                 });
             },
@@ -172,9 +175,16 @@
                 single.checked = true;
                 this.lettersUsed.push(single.letter.toLowerCase());
                 this.compareWords();
+
+                console.log(single.letter)
+                console.log(this.wordLetters)
+
+                if (this.wordLetters.includes(single.letter) || this.wordLetters.includes(single.letter.toLowerCase()))
+                    this.message = 'Je hebt juist geraden en mag nog eens draaien aan het rad.'
+                else
+                   this.message = 'Helaas, deze letter zochten we niet, het is aan de volgende...'
             },
             isGuessedLetter(letter) {
-               console.log(letter)
                 return this.lettersUsed.indexOf(letter.toLowerCase()) > -1;
             },
             compareWords() {
