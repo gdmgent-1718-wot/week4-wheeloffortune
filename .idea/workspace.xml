@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a76f7ab9-29a1-4dc7-9081-2340f2d601c6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/hangman/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Eindwerk/hangman/admin.html" afterPath="$PROJECT_DIR$/Eindwerk/hangman/admin.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Eindwerk/hangman/index.html" afterPath="$PROJECT_DIR$/Eindwerk/hangman/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -43,8 +41,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Eindwerk/hangman/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="586">
-              <caret line="38" column="69" lean-forward="false" selection-start-line="38" selection-start-column="69" selection-end-line="38" selection-end-column="69" />
+            <state relative-caret-position="415">
+              <caret line="257" column="43" lean-forward="false" selection-start-line="257" selection-start-column="43" selection-end-line="257" selection-end-column="43" />
               <folding>
                 <element signature="n#style#0;n#h1#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="e#7479#7905#0" expanded="false" />
@@ -52,7 +50,6 @@
                 <element signature="e#8502#8575#0" expanded="false" />
                 <element signature="e#8613#9060#0" expanded="false" />
                 <element signature="e#9363#9493#0" expanded="false" />
-                <element signature="e#10776#11043#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -96,6 +93,11 @@
         <option value="CSS File" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>alert</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -258,12 +260,12 @@
       <updated>1511779373784</updated>
       <workItem from="1511779375227" duration="58000" />
       <workItem from="1511801298744" duration="153000" />
-      <workItem from="1511869915097" duration="5201000" />
+      <workItem from="1511869915097" duration="7188000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5412000" />
+    <option name="totallyTimeSpent" value="7399000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-16" y="-16" width="3872" height="2116" extended-state="6" />
@@ -376,8 +378,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Eindwerk/hangman/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="38" column="69" lean-forward="false" selection-start-line="38" selection-start-column="69" selection-end-line="38" selection-end-column="69" />
+        <state relative-caret-position="415">
+          <caret line="257" column="43" lean-forward="false" selection-start-line="257" selection-start-column="43" selection-end-line="257" selection-end-column="43" />
           <folding>
             <element signature="n#style#0;n#h1#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="e#7479#7905#0" expanded="false" />
@@ -385,7 +387,6 @@
             <element signature="e#8502#8575#0" expanded="false" />
             <element signature="e#8613#9060#0" expanded="false" />
             <element signature="e#9363#9493#0" expanded="false" />
-            <element signature="e#10776#11043#0" expanded="false" />
           </folding>
         </state>
       </provider>

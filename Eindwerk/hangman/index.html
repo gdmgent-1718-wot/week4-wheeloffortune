@@ -224,6 +224,7 @@
                     this.messageColor = '#d9534f'
                     this.message = 'Helaas, deze letter zochten we niet, het is aan de volgende...'
                 }
+                this.checkIfWon()
             },
 
             countItemInArray (array,value){
@@ -252,10 +253,14 @@
                 return this.randomWord == this.compareWord;
                 },
 
-            didIGuessRight(){
-                console.log(this.walterInput.replace(/\s/g,'').toLowerCase())
-                console.log(this.randomWord.replace(/\s/g,'').toLowerCase())
+            checkIfWon () {
+              if(this.compareWord.length == this.wordLetters.length){
+                  this.messageColor = '#00b84f'
+                  this.message = 'Proficiat! Je hebt gewonnen!!!.'
+              }
+            },
 
+            didIGuessRight(){
                 if(this.walterInput.replace(/\s/g,'').toLowerCase() != '' && this.walterInput.replace(/\s/g,'').toLowerCase() != null){
                    if(this.walterInput.replace(/\s/g,'').toLowerCase() == this.randomWord.replace(/\s/g,'').toLowerCase()){
                        this.walterFeedback = "Proficiat! U heeft het woord juist geraden!"
