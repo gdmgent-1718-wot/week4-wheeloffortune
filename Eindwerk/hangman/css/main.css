@@ -1,0 +1,4 @@
+.btn-secondary:disabled {
+    background-color: #ffe3e3;
+    border-color: #d8442f;
+}
