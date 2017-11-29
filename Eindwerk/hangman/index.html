@@ -8,6 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" crossorigin="anonymous">
     <link href="css/open-iconic-bootstrap.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
 </head>
 <body>
 
@@ -22,8 +23,8 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="#">Login <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#">About</a>
-                <a class="nav-item nav-link" href="#">Contact</a>
+                <a class="nav-item nav-link" href="admin.html">Add words</a>
+                <a class="nav-item nav-link" href="index.html">Play</a>
             </div>
         </div>
     </nav>
@@ -34,8 +35,8 @@
                 <h1 class="text-warning">{{ loading }}</h1>
                 <ul class='result pt-2 pl-0'>
                     <li class="list-inline-item mr-1" v-for='letter in wordLetters'>
-                        <h1 v-if="letter == ' ' " class="text-muted">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>
-                        <h1 v-else class="text-warning">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>
+                        <h1 v-if="letter == ' ' " class="text-muted" style="opacity: 0.2">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>
+                        <h1 v-else class="text-warning text-uppercase">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>
                     </li>
                 </ul>
                 <h5 class="pb-1 text-warning font-weight-bold">{{ randomWordCategory }}</h5>
@@ -48,20 +49,28 @@
             <form>
                 <div class="form-group">
                     <label for="sel1">Koop een klinker (voor 250 euro):</label>
-                    <select class="form-control" id="sel1" v-model="vowel">
+                    <select class="form-control col-12 float-left mb-1" id="sel1" v-model="vowel">
                         <option value="0">A</option>
                         <option value="4">E</option>
                         <option value="8">I</option>
                         <option value="14">O</option>
                         <option value="20">U</option>
                     </select>
+                    <button type="button" class="btn btn-primary btn col-12 mb-5 float-left" @click='unlockVowel'>Bevestig</button>
                 </div>
-                <button type="button" class="btn btn-primary btn-lg col-6 mb-5" @click='unlockVowel'>Bevestig</button>
             </form>
-            <span v-if='tries == 0'>
-            De zin, het woord of gezegde dat we naar zochten was: {{ randomWord }}
-          </span>
-            <div class="pb-2 pt-3 text-gray-dark">
+            <form>
+                <div class="form-group">
+                    <label>Mag ik het zeggen Walter (voor 250)?</label>
+                    <div class="col-12 float-left p-0">
+                        <input type="text" class="form-control mb-1" placeholder="Het woord, de zin of gezegde is.."@keyup.enter="didIGuessRight" v-model="walterInput">
+                    </div>
+                    <button type="button" class="btn btn-primary btn col-12 mb-2 float-left" @click='didIGuessRight'>Ik ga het zeggen Walter!</button>
+                </div>
+                <span v-if='walterFeedback' class="font-weight-bold mb-3">{{ walterFeedback }}</span>
+            </form>
+
+            <div class="pb-2 pt-5 mt-5 text-muted">
                 Raad een letter uit een zin, woord of gezegde, als u het <span class="text-success font-weight-bold">juist</span> heeft mag u <span class="text-success font-weight-bold">nog eens draaien</span> aan het rad én mag u nogmaals een letter raden.
                 Indien je <span class="text-danger font-weight-bold">fout</span> hebt geraden is het aan de <span class="text-danger font-weight-bold">andere speler</span>.
             </div>
@@ -104,6 +113,8 @@
             randomWord: '',
             randomWordCategory: '',
             compareWord: '',
+            walterInput: '',
+            walterFeedback: '',
             wordLetters: [],
             lettersUsed: [],
             tries: 6,
@@ -183,17 +194,18 @@
             },
 
             splitWordIntoLetters() {
-//                console.log(this.words)
                 console.log(this.randomWord)
                 for(var i = 0; i < this.randomWord.length; i++) {
-                    this.wordLetters.push(this.randomWord.charAt(i));
+                    this.wordLetters.push(this.randomWord.toLowerCase().charAt(i));
                 }
             },
+
             resetCheckedLetters() {
                 this.alphabet.filter((single) => {
                     single.checked = false;
                 });
             },
+
             handleLetterClick(single) {
                 single.checked = true;
                 this.lettersUsed.push(single.letter.toLowerCase());
@@ -202,7 +214,9 @@
                 console.log(single.letter)
                 console.log(this.wordLetters)
 
-                if (this.wordLetters.includes(single.letter) || this.wordLetters.includes(single.letter.toLowerCase())){
+                this.countItemInArray(this.wordLetters, single.letter.toLowerCase())
+
+                if (this.wordLetters.includes(single.letter.toLowerCase())){
                     this.messageColor = '#5cb85c'
                     this.message = 'Je hebt juist geraden en mag nog eens draaien aan het rad.'
                 }
@@ -210,10 +224,22 @@
                     this.messageColor = '#d9534f'
                     this.message = 'Helaas, deze letter zochten we niet, het is aan de volgende...'
                 }
+                this.checkIfWon()
             },
+
+            countItemInArray (array,value){
+                let n = 0;
+                for(let i = 0; i < array.length; i++){
+                    if(array[i] == value){n++}
+                }
+                alert('je krijgt ' + n + ' keer het bedrag dat je hebt gedraait')
+                return n;
+            },
+
             isGuessedLetter(letter) {
                 return this.lettersUsed.indexOf(letter.toLowerCase()) > -1;
             },
+
             compareWords() {
                 this.compareWord = '';
                 this.wordLetters.forEach((letter) => {
@@ -222,9 +248,29 @@
                     }
                 });
             },
+
             showWord() {
                 return this.randomWord == this.compareWord;
+                },
+
+            checkIfWon () {
+              if(this.compareWord.length == this.wordLetters.length){
+                  this.messageColor = '#00b84f'
+                  this.message = 'Proficiat! Je hebt gewonnen!!!.'
+              }
+            },
+
+            didIGuessRight(){
+                if(this.walterInput.replace(/\s/g,'').toLowerCase() != '' && this.walterInput.replace(/\s/g,'').toLowerCase() != null){
+                   if(this.walterInput.replace(/\s/g,'').toLowerCase() == this.randomWord.replace(/\s/g,'').toLowerCase()){
+                       this.walterFeedback = "Proficiat! U heeft het woord juist geraden!"
+                   }
+                   else
+                       this.walterFeedback = "Helaas, u heeft het niet juist geraden."
                 }
+                else
+                    this.walterFeedback = "U moet een woord invoeren.."
+            },
             },
             mounted() {
                 this.getDataFromFirebase();
