@@ -57,7 +57,13 @@
 
           });
 
-      }
+      },
+      pushDataToFirebase (user) {
+        let database = firebase.database()
+        database.ref('users').set({
+          values: user
+        });
+      },
 
   }
 }

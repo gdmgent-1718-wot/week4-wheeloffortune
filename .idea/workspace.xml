@@ -2,9 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6447c79-6636-4806-a396-ae336d8bc779" name="Default" comment="">
+<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/week4-wheeloffortune.iml" afterPath="$PROJECT_DIR$/.idea/week4-wheeloffortune.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Lobby.vue" afterPath="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Lobby.vue" />
+=======
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/assets/logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/App.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/assets/scss/main.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Completion.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Game.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Lobby.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Login.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Profile.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Register.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/main.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/router/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/authsocket/server/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/socket/simple test/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/socket/simple test/index.js" />
+    </list>
+=======
+    <list default="true" id="a76f7ab9-29a1-4dc7-9081-2340f2d601c6" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/auth/auth/static/img/Logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Game.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/auth/auth/static/css/bootstrap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/auth/auth/static/css/main.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/auth/auth/static/js/bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/auth/auth/static/js/jquery.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/auth/auth/static/js/lodash.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Eindwerk/auth/auth/static/js/vue.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Eindwerk/auth/auth/index.html" afterPath="$PROJECT_DIR$/Eindwerk/auth/auth/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Eindwerk/auth/auth/src/App.vue" afterPath="$PROJECT_DIR$/Eindwerk/auth/auth/src/App.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Register.vue" afterPath="$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Register.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Eindwerk/auth/auth/src/main.js" afterPath="$PROJECT_DIR$/Eindwerk/auth/auth/src/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Eindwerk/auth/auth/src/router/index.js" afterPath="$PROJECT_DIR$/Eindwerk/auth/auth/src/router/index.js" />
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,6 +54,7 @@
       <file leaf-file-name="Lobby.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Lobby.vue">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="506">
               <caret line="23" column="22" lean-forward="false" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
               <folding />
@@ -30,21 +67,62 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="242">
               <caret line="11" column="25" lean-forward="false" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+=======
+            <state relative-caret-position="-858">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+=======
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="462">
+              <caret line="7" column="27" lean-forward="false" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
+=======
+            <state relative-caret-position="-8514">
+              <caret line="25" column="71" lean-forward="false" selection-start-line="25" selection-start-column="71" selection-end-line="25" selection-end-column="71" />
+>>>>>>> 40ce66098015d8ca3829d2a91e42b4e5624fbe83
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="Game.vue" pinned="false" current-in-tab="false">
+=======
+<<<<<<< HEAD
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/router/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="13" column="19" lean-forward="false" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+              </folding>
+=======
+<<<<<<< HEAD
+      <file leaf-file-name="Game.vue" pinned="false" current-in-tab="true">
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
         <entry file="file://$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Game.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1430">
               <caret line="65" column="38" lean-forward="false" selection-start-line="65" selection-start-column="38" selection-end-line="65" selection-end-column="38" />
               <folding />
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+      <file leaf-file-name="Game.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Game.vue">
+=======
+<<<<<<< HEAD
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/router/index.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -52,11 +130,48 @@
               <caret line="42" column="36" lean-forward="false" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
+<<<<<<< HEAD
+=======
+=======
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Eindwerk/hangman/index.html">
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="547">
+              <caret line="88" column="22" lean-forward="false" selection-start-line="88" selection-start-column="22" selection-end-line="88" selection-end-column="22" />
+              <folding>
+<<<<<<< HEAD
+                <element signature="n#style#0;n#h1#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#main#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="e#2734#2771#0" expanded="true" />
+                <element signature="e#4502#8303#0" expanded="false" />
+                <element signature="e#4527#4867#0" expanded="false" />
+                <element signature="e#5135#5346#0" expanded="false" />
+                <element signature="e#5370#5429#0" expanded="false" />
+                <element signature="e#5461#5822#0" expanded="false" />
+                <element signature="e#6073#6171#0" expanded="false" />
+=======
+                <element signature="n#style#0;n#h1#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#7479#7905#0" expanded="false" />
+                <element signature="e#8215#8472#0" expanded="false" />
+                <element signature="e#8502#8575#0" expanded="false" />
+                <element signature="e#8613#9060#0" expanded="false" />
+                <element signature="e#9363#9493#0" expanded="false" />
+>>>>>>> 40ce66098015d8ca3829d2a91e42b4e5624fbe83
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+      <file leaf-file-name="bootstrap.min.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/static/js/bootstrap.min.js">
+=======
+<<<<<<< HEAD
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
       <file leaf-file-name="Profile.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Profile.vue">
           <provider selected="true" editor-type-id="text-editor">
@@ -65,6 +180,102 @@
               <folding>
                 <element signature="e#231#268#0" expanded="true" />
               </folding>
+<<<<<<< HEAD
+=======
+=======
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Eindwerk/hangman/css/main.css">
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bootstrap.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/static/css/bootstrap.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Register.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Register.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="858">
+              <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="App.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/App.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="129">
+              <caret line="2" column="76" lean-forward="false" selection-start-line="2" selection-start-column="76" selection-end-line="2" selection-end-column="76" />
+              <folding>
+                <element signature="n#nav#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1122">
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#140#162#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Eindwerk/hangman/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="528">
+              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="10" selection-end-column="47" />
+              <folding>
+                <element signature="n#nav#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#main#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#style#0;n#h1#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#script#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#script#7;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="e#7479#7905#0" expanded="false" />
+                <element signature="e#8215#8472#0" expanded="false" />
+                <element signature="e#8502#8575#0" expanded="false" />
+                <element signature="e#8613#9060#0" expanded="false" />
+                <element signature="e#9363#9493#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Login.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Login.vue">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="663">
+              <caret line="26" column="12" lean-forward="true" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
+              <folding>
+                <element signature="e#950#987#0" expanded="true" />
+              </folding>
+=======
+            <state relative-caret-position="198">
+              <caret line="3" column="14" lean-forward="true" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+              <folding />
+>>>>>>> 40ce66098015d8ca3829d2a91e42b4e5624fbe83
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
             </state>
           </provider>
         </entry>
@@ -108,8 +319,25 @@
         <option value="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/router/index.js" />
         <option value="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Profile.vue" />
         <option value="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Game.vue" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Lobby.vue" />
         <option value="$PROJECT_DIR$/.idea/week4-wheeloffortune.iml" />
+=======
+=======
+        <option value="$PROJECT_DIR$/Eindwerk/hangman/css/main.css" />
+        <option value="$PROJECT_DIR$/Eindwerk/hangman/admin.html" />
+        <option value="$PROJECT_DIR$/Eindwerk/hangman/index.html" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Register.vue" />
+        <option value="$PROJECT_DIR$/Eindwerk/auth/auth/index.html" />
+        <option value="$PROJECT_DIR$/Eindwerk/auth/auth/src/App.vue" />
+        <option value="$PROJECT_DIR$/Eindwerk/auth/auth/src/router/index.js" />
+        <option value="$PROJECT_DIR$/Eindwerk/auth/auth/src/main.js" />
+        <option value="$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Game.vue" />
+=======
+>>>>>>> 40ce66098015d8ca3829d2a91e42b4e5624fbe83
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
       </list>
     </option>
   </component>
@@ -126,6 +354,15 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/Eindwerk/auth/auth/node_modules" />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-15" />
+    <option name="width" value="2382" />
+    <option name="height" value="2099" />
+=======
+<<<<<<< HEAD
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/Eindwerk/auth/auth/node_modules" />
     <handled-path value="$PROJECT_DIR$/Eindwerk/authsocket/authsocket/node_modules" />
@@ -146,6 +383,17 @@
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
+<<<<<<< HEAD
+=======
+=======
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-16" />
+    <option name="y" value="-16" />
+    <option name="width" value="3872" />
+    <option name="height" value="2116" />
+>>>>>>> 40ce66098015d8ca3829d2a91e42b4e5624fbe83
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -245,6 +493,155 @@
               <item name="week4-wheeloffortune" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Voorbereiding" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name=".idea" type="2a2b976b:PhpTreeStructureProvider$1" />
+<<<<<<< HEAD
+=======
+=======
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Eindwerk" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Eindwerk" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Eindwerk" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Eindwerk" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Eindwerk" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Eindwerk" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="scss" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Eindwerk" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Eindwerk" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="router" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Eindwerk" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Eindwerk" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Eindwerk" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Eindwerk" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Eindwerk" type="462c0819:PsiDirectoryNode" />
+              <item name="hangman" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Eindwerk" type="462c0819:PsiDirectoryNode" />
+              <item name="hangman" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Eindwerk" type="462c0819:PsiDirectoryNode" />
+              <item name="hangman" type="462c0819:PsiDirectoryNode" />
+              <item name="fonts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Eindwerk" type="462c0819:PsiDirectoryNode" />
+              <item name="hangman" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Eindwerk" type="462c0819:PsiDirectoryNode" />
+              <item name="hangman" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Voorbereiding" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="week4-wheeloffortune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="week4-wheeloffortune" type="462c0819:PsiDirectoryNode" />
+              <item name="Voorbereiding" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+>>>>>>> 40ce66098015d8ca3829d2a91e42b4e5624fbe83
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
             </path>
           </expand>
           <select />
@@ -271,6 +668,13 @@
       <recent name="C:\Users\basie\Code\sites\1718\1718_wot\group\week4-wheeloffortune\Eindwerk\authsocket\server" />
       <recent name="C:\Users\basie\Code\sites\1718\1718_wot\group\week4-wheeloffortune\Eindwerk\socket\vue\socket\src" />
       <recent name="C:\Users\basie\Code\sites\1718\1718_wot\group\week4-wheeloffortune\Eindwerk\socket\vue\socket\build" />
+    </key>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\WOT\Wheel of Fortune\week4-wheeloffortune\Eindwerk\auth\auth\static\img" />
+      <recent name="D:\WOT\Wheel of Fortune\week4-wheeloffortune\Eindwerk\auth\auth\static\css" />
+      <recent name="D:\WOT\Wheel of Fortune\week4-wheeloffortune\Eindwerk\auth\auth\static\js" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -300,16 +704,46 @@
       <updated>1511869972379</updated>
       <workItem from="1511869973569" duration="10769000" />
       <workItem from="1511893327344" duration="2000" />
+<<<<<<< HEAD
       <workItem from="1511893341747" duration="19849000" />
       <workItem from="1512051730479" duration="1467000" />
       <workItem from="1512055812496" duration="12000" />
       <workItem from="1512055851996" duration="80000" />
       <workItem from="1512057962929" duration="76000" />
+=======
+      <workItem from="1511893341747" duration="19600000" />
+=======
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a76f7ab9-29a1-4dc7-9081-2340f2d601c6" name="Default" comment="" />
+      <created>1511779373784</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1511779373784</updated>
+      <workItem from="1511779375227" duration="58000" />
+      <workItem from="1511801298744" duration="153000" />
+<<<<<<< HEAD
+      <workItem from="1511869915097" duration="9467000" />
+      <workItem from="1511887997505" duration="16000" />
+      <workItem from="1511945279676" duration="3998000" />
+=======
+      <workItem from="1511869915097" duration="7188000" />
+>>>>>>> 40ce66098015d8ca3829d2a91e42b4e5624fbe83
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="32255000" />
+=======
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="13692000" />
+=======
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="30371000" />
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
@@ -352,6 +786,39 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
+<<<<<<< HEAD
+=======
+=======
+    <option name="totallyTimeSpent" value="7399000" />
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-16" y="-16" width="3872" height="2116" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="SFDX" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23905014" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Log Manager" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+>>>>>>> 40ce66098015d8ca3829d2a91e42b4e5624fbe83
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -361,7 +828,16 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+<<<<<<< HEAD
       <option name="time" value="6" />
+=======
+      <option name="time" value="1" />
+    </breakpoint-manager>
+=======
+<<<<<<< HEAD
+    <breakpoint-manager>
+      <option name="time" value="5" />
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -550,6 +1026,79 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="14" column="22" lean-forward="false" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+<<<<<<< HEAD
+=======
+=======
+    <breakpoint-manager />
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Eindwerk/hangman/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="10758">
+          <caret line="163" column="0" lean-forward="false" selection-start-line="163" selection-start-column="0" selection-end-line="169" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="8" column="24" lean-forward="false" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Profile.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="9" column="14" lean-forward="false" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+          <folding>
+            <element signature="n#nav#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/hangman/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14784">
+          <caret line="257" column="43" lean-forward="false" selection-start-line="257" selection-start-column="43" selection-end-line="257" selection-end-column="43" />
+          <folding>
+            <element signature="n#nav#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#main#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#h1#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#script#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#script#7;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="e#7479#7905#0" expanded="false" />
+            <element signature="e#8215#8472#0" expanded="false" />
+            <element signature="e#8502#8575#0" expanded="false" />
+            <element signature="e#8613#9060#0" expanded="false" />
+            <element signature="e#9363#9493#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/hangman/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+=======
+        <state relative-caret-position="3564">
+          <caret line="54" column="23" lean-forward="true" selection-start-line="54" selection-start-column="23" selection-end-line="54" selection-end-column="23" />
+>>>>>>> 40ce66098015d8ca3829d2a91e42b4e5624fbe83
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+          <folding />
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
         </state>
       </provider>
     </entry>
@@ -644,28 +1193,167 @@
     <entry file="file://$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Register.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-594">
+<<<<<<< HEAD
+=======
+=======
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2838">
+          <caret line="44" column="33" lean-forward="false" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
+          <folding>
+            <element signature="e#950#987#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Register.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4158">
+          <caret line="63" column="22" lean-forward="false" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/hangman/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10758">
+          <caret line="163" column="0" lean-forward="false" selection-start-line="163" selection-start-column="0" selection-end-line="169" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="8" column="24" lean-forward="false" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Profile.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+>>>>>>> 40ce66098015d8ca3829d2a91e42b4e5624fbe83
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="9" column="14" lean-forward="false" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+          <folding>
+            <element signature="n#nav#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/hangman/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14784">
+          <caret line="257" column="43" lean-forward="false" selection-start-line="257" selection-start-column="43" selection-end-line="257" selection-end-column="43" />
+          <folding>
+            <element signature="n#nav#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#main#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#h1#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#script#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#script#7;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="e#7479#7905#0" expanded="false" />
+            <element signature="e#8215#8472#0" expanded="false" />
+            <element signature="e#8502#8575#0" expanded="false" />
+            <element signature="e#8613#9060#0" expanded="false" />
+            <element signature="e#9363#9493#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/hangman/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+=======
+<<<<<<< HEAD
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
     <entry file="file://$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Login.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+<<<<<<< HEAD
+=======
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+          <folding />
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Completion.vue">
+=======
     <entry file="file://$PROJECT_DIR$/Eindwerk/socket/vue/socket/src/App.vue">
+<<<<<<< HEAD
+=======
+=======
+    <entry file="file://$PROJECT_DIR$/Eindwerk/hangman/admin.html">
+>>>>>>> 40ce66098015d8ca3829d2a91e42b4e5624fbe83
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2838">
+          <caret line="44" column="33" lean-forward="false" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
+          <folding>
+            <element signature="e#950#987#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Register.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4158">
+          <caret line="63" column="22" lean-forward="false" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/hangman/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3564">
+          <caret line="54" column="23" lean-forward="true" selection-start-line="54" selection-start-column="23" selection-end-line="54" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+=======
+<<<<<<< HEAD
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
     <entry file="file://$PROJECT_DIR$/Eindwerk/socket/vue/socket/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="7" selection-end-column="47" />
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Completion.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> 40ce66098015d8ca3829d2a91e42b4e5624fbe83
+          <folding />
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
         </state>
       </provider>
     </entry>
@@ -680,6 +1368,31 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+<<<<<<< HEAD
+=======
+=======
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#950#987#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/hangman/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+        <state relative-caret-position="198">
+          <caret line="3" column="14" lean-forward="true" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+>>>>>>> 40ce66098015d8ca3829d2a91e42b4e5624fbe83
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+          <folding />
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
         </state>
       </provider>
     </entry>
@@ -690,6 +1403,21 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Eindwerk/hangman/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10758">
+          <caret line="163" column="0" lean-forward="false" selection-start-line="163" selection-start-column="0" selection-end-line="169" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Profile.vue">
+=======
+<<<<<<< HEAD
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
     <entry file="file://$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Completion.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-440">
@@ -707,7 +1435,17 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Profile.vue">
+=======
+    <entry file="file://$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Lobby.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-858">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/index.html">
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="4" column="33" lean-forward="true" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
@@ -717,16 +1455,46 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Game.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1430">
           <caret line="65" column="38" lean-forward="false" selection-start-line="65" selection-start-column="38" selection-end-line="65" selection-end-column="38" />
+=======
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Completion.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/static/js/bootstrap.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/static/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+        <state relative-caret-position="-8514">
+          <caret line="25" column="71" lean-forward="false" selection-start-line="25" selection-start-column="71" selection-end-line="25" selection-end-column="71" />
+>>>>>>> 40ce66098015d8ca3829d2a91e42b4e5624fbe83
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Lobby.vue">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="506">
           <caret line="23" column="22" lean-forward="false" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
           <folding />
@@ -737,9 +1505,115 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="11" column="25" lean-forward="false" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+=======
+        <state relative-caret-position="528">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="10" selection-end-column="47" />
+          <folding>
+            <element signature="n#nav#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#main#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#h1#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#script#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#script#7;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="e#7479#7905#0" expanded="false" />
+            <element signature="e#8215#8472#0" expanded="false" />
+            <element signature="e#8502#8575#0" expanded="false" />
+            <element signature="e#8613#9060#0" expanded="false" />
+            <element signature="e#9363#9493#0" expanded="false" />
+>>>>>>> 40ce66098015d8ca3829d2a91e42b4e5624fbe83
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="7" column="27" lean-forward="false" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Eindwerk/authsocket/authsocket/src/components/Game.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1518">
+          <caret line="72" column="25" lean-forward="true" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="25" />
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="13" column="19" lean-forward="false" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#140#162#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="2" column="76" lean-forward="false" selection-start-line="2" selection-start-column="76" selection-end-line="2" selection-end-column="76" />
+          <folding>
+            <element signature="n#nav#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Register.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="858">
+          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="26" column="12" lean-forward="true" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
+          <folding>
+            <element signature="e#950#987#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Eindwerk/auth/auth/src/components/Game.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="547">
+          <caret line="88" column="22" lean-forward="false" selection-start-line="88" selection-start-column="22" selection-end-line="88" selection-end-column="22" />
+          <folding>
+            <element signature="n#style#0;n#h1#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#main#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#2734#2771#0" expanded="true" />
+            <element signature="e#4502#8303#0" expanded="false" />
+            <element signature="e#4527#4867#0" expanded="false" />
+            <element signature="e#5135#5346#0" expanded="false" />
+            <element signature="e#5370#5429#0" expanded="false" />
+            <element signature="e#5461#5822#0" expanded="false" />
+            <element signature="e#6073#6171#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+=======
+=======
+>>>>>>> 40ce66098015d8ca3829d2a91e42b4e5624fbe83
+>>>>>>> 8a2ccea4346ffdc3387d2597ab65852de8b8cdef
+>>>>>>> 666bee4a08c2bb7c7fecefe16817b7d32ee1ddf3
   </component>
 </project>
