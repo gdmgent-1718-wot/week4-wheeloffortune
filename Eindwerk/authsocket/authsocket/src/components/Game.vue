@@ -22,7 +22,9 @@
 </template>
 
 <script>
+    import Vue from 'vue'
     import * as firebase from "firebase";
+    import VueSocketio from 'vue-socket.io';
 
     export default {
         name: 'Game',
@@ -63,7 +65,7 @@
                 });
             },
             getSocketData: function () {
-                this.$options.sockets.chatMessage = (data) => {
+                this.$options.sockets.turnChange = (data) => {
                     console.log(data)
                 }
             },
@@ -77,38 +79,44 @@
                 });
             },
             getGameData: function () {
-                console.log('hallo');
                 self = this;
-                firebase.database().ref('game/players/').on('value', function (snapshot) {
+//                firebase.database().ref('game/players/').on('value', function (snapshot) {
+//                    self.getPlayers(snapshot.val());
+//                    self.connectToSocket();
+//                });
+                firebase.database().ref('game').on('value', function (snapshot) {
+                    console.log(snapshot.val());
                     self.game = snapshot.val();
-                    self.getPlayers();
-                });
+                    self.getPlayers(self.game.players)
+                    self.connectToSocket();
+                })
             },
-            getPlayers: function () {
+            getPlayers: function (players) {
+                console.log(this.game);
                 self = this;
                 self.players=[];
                 self.currentPlayer=[];
-                for (let player of Object.values(self.game)) {
+                for (let player of Object.values(players)) {
 
                     if (player.id === self.user.uid) {
                         self.currentPlayer = player;
                         self.players.push(player)
-                        console.log(self.players);
-                        console.log(self.currentPlayer);
                     }
                     else {
-                        console.log('notfound')
                         if (player.playing) {
                             self.players.push(player);
-                            console.log(self.players);
-                            console.log(self.currentPlayer);
                         }
                     }
                 }
             },
             endTurn: function () {
                 console.log("ending turn");
+                this.$socket.emit('turnChange', {message: "test Message", name: "test name"});
             },
+            connectToSocket: function () {
+                Vue.use(VueSocketio, 'http://localhost:3000/'+ this.game.room);
+                this.clickButton();
+            }
 
         }
         , mounted: function () {
@@ -116,6 +124,11 @@
             this.getUserData();
             this.getGameData();
             this.getSocketData();
+            console.log('getting data')
+            this.$options.sockets.chatMessage= (data) => {
+                console.log(data)
+            }
+
 
         }
     }

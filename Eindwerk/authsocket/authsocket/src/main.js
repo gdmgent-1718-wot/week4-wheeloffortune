@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import * as firebase from "firebase";
-import VueSocketio from 'vue-socket.io';
+// import VueSocketio from 'vue-socket.io';
 
 var config = {
     apiKey: "AIzaSyCRDbOBN_g2rlAqy8NBSRmjfvrPMswf4EE",
@@ -13,7 +13,7 @@ var config = {
     storageBucket: "gs://wheeloffortune2-c0e4a.appspot.com/",
 };
 firebase.initializeApp(config);
-Vue.use(VueSocketio, 'http://localhost:3000/');
+// Vue.use(VueSocketio, 'http://localhost:3000/');
 Vue.config.productionTip = false
 require('../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss')
 /* eslint-disable no-new */
