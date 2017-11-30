@@ -3,7 +3,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 app.get('/', function(req, res){
-    res.send('<marquee>Server is running</marquee>');
+    res.send('<marquee><h1>Server is running</h1></marquee>');
 });
 
 io.on('connection', function(socket){
@@ -11,7 +11,7 @@ io.on('connection', function(socket){
     socket.on('disconnect', function(){
         console.log('user disconnected');
     });
-    socket.on('chatMessage', function(data){
+    socket.on('userInput', function(data){
         io.sockets.emit('chatMessage', data)
         // io.emit('chatMessage', data)
     });

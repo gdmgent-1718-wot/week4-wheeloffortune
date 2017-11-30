@@ -8,9 +8,9 @@
                 <button v-on:click="claimSpot(spot.number)">Claim Spot</button>
             </div>
         </div>
-        <div v-if="occupied && playing" class="occupied">
-            <h1 >The game will start soon waiting for {{spots.length}} more players</h1>
-            <h2>current players:</h2>
+        <div v-if="occupied" class="occupied">
+            <h1 v-if="occupied && playing" >The game will start soon waiting for {{spots.length}} more players</h1>
+            <h2 v-if="occupied">current players:</h2>
             <div v-for="player in occupied" class="card">
                 <h3>{{player.name}}</h3>
             </div>
@@ -55,7 +55,8 @@
             },
             getGameData: function () {
                 self = this;
-                firebase.database().ref('game/').on('value', function(snapshot) {
+                console.log('lalal');
+                firebase.database().ref('game/players').on('value', function(snapshot) {
                     console.log(snapshot.val());
                     self.game = snapshot.val();
                     self.checkSpot();
@@ -73,7 +74,8 @@
                         console.log(self.occupied);
                         if(self.occupied.length === 3 ){
                             console.log('start the game')
-                            self.$router.push({name: 'Game', players: self.occupied});
+                            self.$router.push({ name: 'Game',})
+
 
                         }
                     }else {
@@ -84,8 +86,7 @@
                             console.log(self.occupied);
                             if(self.occupied.length === 3){
                                 console.log('start the game')
-                                self.$router.push({name: 'Game', players: self.occupied});
-
+                                self.$router.push({ name: 'Game', })
                             }
                         }
                     }
@@ -96,12 +97,15 @@
                 self = this;
                 let selector = "player"+(number);
                 console.log(selector);
-                firebase.database().ref('game/'+selector).update({
+                firebase.database().ref('game/players/'+selector).update({
                     id: self.user.uid ,
                     name: self.user.displayName,
                     playing: true,
                 });
-                self.playing = true
+//                firebase.database().ref('game/players/'+selector).on('value', function(snapshot) {
+//                    console.log(snapshot.val());
+//                });
+//                self.playing = true
                 self.checkSpot();
             }
         }
