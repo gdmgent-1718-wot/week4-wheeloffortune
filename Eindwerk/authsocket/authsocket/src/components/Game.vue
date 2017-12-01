@@ -2,12 +2,21 @@
     <div class="container">
         <h1>{{ msg }}</h1>
         <div class="game">
+            <div v-if="currentAnswer">
+                <h5>currentAnswer</h5>
+                <p>player: {{currentAnswer.player}}</p>
+                <p>answer: {{currentAnswer.answer}}</p>
+            </div>
             <div v-if="players && currentPlayer" v-for="player in players" class="players">
                 <div  v-if="player.id == currentPlayer.id" class="currentPlayer">
                     <h3 style="font-weight: bold">{{player.name}}</h3>
                     <div v-if="player.active" class="playing">
-                        <p >Playing</p>
+                        <p>Playing</p>
                         <button v-on:click="endTurn">End Turn</button>
+                        <div class="answer">
+                            <input type="text" name="answer" v-model="answer">
+                            <button v-on:click="sendAnswer">send</button>
+                        </div>
                     </div>
                     <p v-else="!player.active">Waiting</p>
                 </div>
@@ -25,6 +34,8 @@
     import Vue from 'vue'
     import * as firebase from "firebase";
     import VueSocketio from 'vue-socket.io';
+    Vue.use(VueSocketio, 'http://localhost:3000/');
+
 
     export default {
         name: 'Game',
@@ -39,6 +50,7 @@
                 answer: '',
                 players: [],
                 currentPlayer: null,
+                currentAnswer: null,
             }
         },
         sockets: {
@@ -51,11 +63,6 @@
         },
 
         methods: {
-            clickButton: function (val) {
-                self = this;
-                // $socket is socket.io-client instance
-                this.$socket.emit('chatMessage', {message: self.answer, name: self.displayName});
-            },
             getUserData: function () {
                 self = this;
                 firebase.auth().onAuthStateChanged(function (user) {
@@ -65,9 +72,18 @@
                 });
             },
             getSocketData: function () {
-                this.$options.sockets.turnChange = (data) => {
+                self = this;
+                self.$options.sockets.turnChange = (data) => {
                     console.log(data)
                 }
+                self.$options.sockets.answer = (data) => {
+                    self.currentAnswer = data;
+                }
+            },
+            sendAnswer: function () {
+                this.$socket.emit('answer', {player: this.currentPlayer.name, answer: this.answer});
+                this.endTurn();
+                this.answer = null;
             },
             authChange: function () {
                 self = this
@@ -80,15 +96,12 @@
             },
             getGameData: function () {
                 self = this;
-//                firebase.database().ref('game/players/').on('value', function (snapshot) {
-//                    self.getPlayers(snapshot.val());
-//                    self.connectToSocket();
-//                });
+
                 firebase.database().ref('game').on('value', function (snapshot) {
                     console.log(snapshot.val());
                     self.game = snapshot.val();
                     self.getPlayers(self.game.players)
-                    self.connectToSocket();
+//                    self.connectToSocket();
                 })
             },
             getPlayers: function (players) {
@@ -110,26 +123,16 @@
                 }
             },
             endTurn: function () {
-                console.log("ending turn");
-                this.$socket.emit('turnChange', {message: "test Message", name: "test name"});
+                console.log(this.currentPlayer);
+                this.$socket.emit('turnChange', {number: this.currentPlayer.number});
             },
-            connectToSocket: function () {
-                Vue.use(VueSocketio, 'http://localhost:3000/'+ this.game.room);
-                this.clickButton();
-            }
 
-        }
-        , mounted: function () {
+        },
+        mounted: function () {
             this.authChange();
             this.getUserData();
             this.getGameData();
             this.getSocketData();
-            console.log('getting data')
-            this.$options.sockets.chatMessage= (data) => {
-                console.log(data)
-            }
-
-
         }
     }
 </script>
