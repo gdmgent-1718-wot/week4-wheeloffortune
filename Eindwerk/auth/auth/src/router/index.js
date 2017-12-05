@@ -4,14 +4,13 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Completion from '@/components/Completion'
 import Profile from '@/components/Profile'
-import Game from '@/components/Game'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/login',
+      path: '/',
       name: 'Login',
       component: Login
     },
@@ -19,11 +18,6 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
-    },
-    {
-      path: '/game',
-      name: 'Game',
-      component: Game
     },
       {
       path: '/completion',
