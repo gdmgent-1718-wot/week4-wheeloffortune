@@ -8,7 +8,7 @@ import * as firebase from "firebase";
 
 var config = {
     apiKey: "AIzaSyCRDbOBN_g2rlAqy8NBSRmjfvrPMswf4EE",
-    authDomain: "wheeloffortune2-c0e4a.firebaseapp.com",
+    authDomain: "wheeloffyaortune2-c0e4a.firebaseapp.com",
     databaseURL: "https://wheeloffortune2-c0e4a.firebaseio.com/",
     storageBucket: "gs://wheeloffortune2-c0e4a.appspot.com/",
 };
