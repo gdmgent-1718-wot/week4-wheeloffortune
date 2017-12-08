@@ -6,10 +6,15 @@
 
 ``` bash
 # install dependencies
-npm install
+yarn install
 
 # serve with hot reload at localhost:8080
-npm run dev
+yarn dev
+
+#dependencies:
+yarn add firebase --save
+yarn add vue-socket.io --save
+yarn add bootstrap@4.0.0-alpha.6
 
 # build for production with minification
 npm run build
