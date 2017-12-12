@@ -5,7 +5,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand" href="#">
-                <img src="img/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                <img src="static/img/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
                 <span class="ml-3">Wheel of Fortune</span>
             </a>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">

@@ -12,7 +12,7 @@
                 </ul>
 
             </div>
-            <div v-if="currentPlayer.active" class="playing">
+            <div v-if="currentPlayer != null && currentPlayer.active" class="playing">
                 <h5 class="pb-1 text-warning font-weight-bold">{{ randomWordCategory }}</h5>
                 <p class="pb-1 text-muted">De grijze vakjes zijn spaties.</p>
                 <h4 class="pb-3 pt-1 font-weight-bold" :style="{ color: messageColor }">{{message}}</h4>
@@ -50,7 +50,7 @@
                     <span v-if='walterFeedback' class="font-weight-bold mb-3">{{ walterFeedback }}</span>
                 </form>
             </div>
-            <div v-else=""
+            <div v-else=""></div>
 
 
             <div class="pb-2 pt-5 mt-5 text-muted">
@@ -145,7 +145,7 @@
             },
 
             getDataFromFirebase() {
-              self = this
+              let self = this
                 let database = firebase.database()
                 let databaseRef = database.ref('words');
                 databaseRef.on('value', function (snapshot) {
@@ -244,7 +244,7 @@
                     this.walterFeedback = "U moet een woord invoeren.."
             },
             getUserData: function () {
-                self = this;
+                let self = this;
                 firebase.auth().onAuthStateChanged(function (user) {
                     if (user) {
                         self.user = user;
@@ -252,7 +252,7 @@
                 });
             },
             getSocketData: function () {
-                self = this;
+                let self = this;
                 self.$options.sockets.turnChange = (data) => {
                     console.log(data)
                 }
@@ -266,7 +266,7 @@
                 this.answer = null;
             },
             authChange: function () {
-                self = this
+                let self = this
                 firebase.auth().onAuthStateChanged(function (user) {
                     if (user) {
                     } else {
@@ -275,11 +275,12 @@
                 });
             },
             getGameData: function () {
-                self = this;
+                let self = this;
 
                 firebase.database().ref('game').on('value', function (snapshot) {
                     console.log(snapshot.val());
                     self.game = snapshot.val();
+
 
                     self.lettersUsed = Object.values(self.game.lettersUsed)
 
@@ -299,7 +300,7 @@
                 }
             },
             getPlayers: function (players) {
-                self = this;
+                let self = this;
                 self.players = [];
                 self.currentPlayer = [];
                 for (let player of Object.values(players)) {
