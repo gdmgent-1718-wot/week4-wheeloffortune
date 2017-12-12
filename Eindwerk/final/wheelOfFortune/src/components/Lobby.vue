@@ -20,6 +20,8 @@
 
 <script>
     import * as firebase from "firebase";
+    import vuesocket from "vue-socket.io";
+
     export default {
         name: 'Lobby',
         data() {
@@ -74,6 +76,7 @@
                         console.log(self.occupied);
                         if(self.occupied.length === 3 ){
                             console.log('start the game')
+                            this.$socket.emit('startGame')
                             self.$router.push({ name: 'GameFinal',})
 
 
@@ -86,6 +89,7 @@
                             console.log(self.occupied);
                             if(self.occupied.length === 3){
                                 console.log('start the game')
+                                this.$socket.emit('startGame')
                                 self.$router.push({ name: 'GameFinal', })
                             }
                         }

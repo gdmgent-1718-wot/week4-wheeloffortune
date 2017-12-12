@@ -129,16 +129,16 @@
                 this.splitWordIntoLetters();
             },
 
-            asignRandomWordToFirebase () {
-              let randomNumber = Math.floor(Math.random() * this.words.length);
-              let randomWordForFirebase = this.words[randomNumber][0];
-              let randomWordCategoryForFirebase = 'Categorie is: ' + this.words[randomNumber][1];
-              let database = firebase.database()
-              database.ref('game/answer').update({
-                category: randomWordCategoryForFirebase,
-                word: randomWordForFirebase,
-              });
-            },
+//            asignRandomWordToFirebase () {
+//              let randomNumber = Math.floor(Math.random() * this.words.length);
+//              let randomWordForFirebase = this.words[randomNumber][0];
+//              let randomWordCategoryForFirebase = 'Categorie is: ' + this.words[randomNumber][1];
+//              let database = firebase.database()
+//              database.ref('game/answer').update({
+//                category: randomWordCategoryForFirebase,
+//                word: randomWordForFirebase,
+//              });
+//            },
 
             getWord() {
                 this.randomWord = this.game.answer.word;
