@@ -186,7 +186,7 @@
 
                 let database = firebase.database()
                 database.ref('game/alphabeth/').update({
-                  D : true
+                  [letterFromAlpha] : true
                 });
 
                 this.lettersUsed.push(single.letter.toLowerCase());
