@@ -115,16 +115,29 @@
 
         methods: {
             initializeGame() {
+                //this.alphabet = [];
                 this.tries = this.initialTries;
                 this.randomWord = '';
                 this.randomWordCategory = '';
                 this.compareWord = '';
                 this.wordLetters = [];
                 this.lettersUsed = [];
+//                this.asignRandomWordToFirebase();
                 this.getWord();
                 this.resetCheckedLetters();
                 this.lockVowels();
                 this.splitWordIntoLetters();
+            },
+
+            asignRandomWordToFirebase () {
+              let randomNumber = Math.floor(Math.random() * this.words.length);
+              let randomWordForFirebase = this.words[randomNumber][0];
+              let randomWordCategoryForFirebase = 'Categorie is: ' + this.words[randomNumber][1];
+              let database = firebase.database()
+              database.ref('game/answer').update({
+                category: randomWordCategoryForFirebase,
+                word: randomWordForFirebase,
+              });
             },
 
             getWord() {
@@ -145,7 +158,7 @@
             },
 
             getDataFromFirebase() {
-                self = this
+              self = this
                 let database = firebase.database()
                 let databaseRef = database.ref('words');
                 databaseRef.on('value', function (snapshot) {
@@ -169,6 +182,13 @@
 
             handleLetterClick(single) {
                 single.checked = true;
+                let letterFromAlpha = single.letter
+
+                let database = firebase.database()
+                database.ref('game/alphabeth/').update({
+                  D : true
+                });
+
                 this.lettersUsed.push(single.letter.toLowerCase());
                 this.compareWords();
 
@@ -181,6 +201,7 @@
                 else {
                     this.messageColor = '#d9534f'
                     this.message = 'Helaas, deze letter zochten we niet, het is aan de volgende...'
+                    this.endTurn()
                 }
                 this.checkIfWon()
             },
@@ -273,12 +294,14 @@
                 })
             },
             checkArray: function () {
+                this.alphabet = []
                 let values = Object.values(this.game.alphabeth);
                 let keys = Object.keys(this.game.alphabeth);
                 if (values.length === keys.length) {
                     for (let i = 0; i < values.length; i++) {
                         this.alphabet.push({letter: keys[i], checked: values[i]})
                     }
+                    console.log(this.alphabet)
                 }
             },
             getPlayers: function (players) {

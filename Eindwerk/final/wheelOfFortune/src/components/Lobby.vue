@@ -74,7 +74,7 @@
                         console.log(self.occupied);
                         if(self.occupied.length === 3 ){
                             console.log('start the game')
-                            self.$router.push({ name: 'Game',})
+                            self.$router.push({ name: 'GameFinal',})
 
 
                         }
@@ -86,7 +86,7 @@
                             console.log(self.occupied);
                             if(self.occupied.length === 3){
                                 console.log('start the game')
-                                self.$router.push({ name: 'Game', })
+                                self.$router.push({ name: 'GameFinal', })
                             }
                         }
                     }

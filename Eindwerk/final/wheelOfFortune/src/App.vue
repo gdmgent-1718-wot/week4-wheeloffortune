@@ -10,9 +10,9 @@
             </a>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#">Login <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="admin.html">Add words</a>
-                    <a class="nav-item nav-link" href="index.html">Play</a>
+                    <router-link class="nav-item nav-link active" to="login">Login <span class="sr-only">(current)</span></router-link>
+                    <router-link class="nav-item nav-link" to="game">Play</router-link>
+                    <router-link to="profile" class="nav-item nav-link">Profile</router-link>
                 </div>
             </div>
         </nav>
