@@ -20,6 +20,8 @@
 
 <script>
     import * as firebase from "firebase";
+    import vuesocket from "vue-socket.io";
+
     export default {
 
   name: 'Register',

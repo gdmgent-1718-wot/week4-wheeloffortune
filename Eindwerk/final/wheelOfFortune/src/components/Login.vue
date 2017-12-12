@@ -21,6 +21,9 @@
 <script>
     import * as firebase from "firebase";
     import Router from 'vue-router';
+    import vuesocket from "vue-socket.io";
+
+
     export default {
   name: 'Login',
   data () {

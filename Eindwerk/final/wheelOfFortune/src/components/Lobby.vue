@@ -117,7 +117,7 @@
             this.authChange();
             this.getUserData();
             this.getGameData();
-            this.getSocketData();
+            //this.getSocketData();
 
         }
     }
