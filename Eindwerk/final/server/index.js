@@ -1,9 +1,9 @@
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var admin = require("firebase-admin");
+let app = require('express')();
+let http = require('http').Server(app);
+let io = require('socket.io')(http);
+let admin = require("firebase-admin");
 
-var serviceAccount = require("./account/wheeloffortune2-c0e4a-firebase-adminsdk-xx83k-e44ffb01f2.json");
+let serviceAccount = require("./account/wheeloffortune2-c0e4a-firebase-adminsdk-xx83k-e44ffb01f2.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -14,8 +14,8 @@ app.get('/', function (req, res) {
     res.send('<marquee><h1>Server is running</h1></marquee>');
 });
 function getGameData() {
-    var db = admin.database();
-    var ref = db.ref("game");
+    let db = admin.database();
+    let ref = db.ref("game");
     self  = this;
     return ref.on("value", function (snapshot) {
         console.log('hallo');
@@ -32,6 +32,35 @@ function changeActivePlayer(currentPlayer, newPlayer) {
         active: true,
     });
 }
+function checkPlayers() {
+    let players = []
+    admin.database().ref('game').on("value", function(snapshot) {
+        let game = snapshot.val()
+        for (let player of Object.values(game.players)) {
+            console.log(player.playing)
+            if(player.playing){
+                players.push(player);
+                console.log(players.length);
+                if(players.length === 3){
+                    setNewWord();
+                }
+            }
+        }
+    });
+}
+function setNewWord() {
+    admin.database().ref('words/values').on("value", function(snapshot) {
+        let words = snapshot.val();
+        let randomNumber = Math.floor(Math.random() * words.length);
+        let randomWordFromFirebase = words[randomNumber][0];
+        let randomWordCategoryFromFirebase = words[randomNumber][1];
+        admin.database().ref('game/answer/').update({
+            word: randomWordFromFirebase,
+            category: randomWordCategoryFromFirebase,
+        });
+
+    });
+}
 io.on('connection', function (socket) {
     console.log('someone connected');
     socket.on('disconnect', function () {
@@ -39,7 +68,7 @@ io.on('connection', function (socket) {
     });
     socket.on('turnChange', function (data) {
         console.log(data);
-        var num = parseInt(data.number);
+        let num = parseInt(data.number);
         if(num === 3){
             num = 1;
             console.log(num);
@@ -50,12 +79,14 @@ io.on('connection', function (socket) {
             console.log(num);
             io.emit('turnChange', {'number': num})
             changeActivePlayer(data.number, num)
-
         }
     });
     socket.on('answer', function (data) {
         console.log(data);
         io.emit('answer', data)
+    });
+    socket.on('startGame', function () {
+        checkPlayers();
     });
 });
 
