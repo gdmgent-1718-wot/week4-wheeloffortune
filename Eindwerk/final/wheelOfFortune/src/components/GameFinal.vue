@@ -121,24 +121,11 @@
                 this.randomWordCategory = '';
                 this.compareWord = '';
                 this.wordLetters = [];
-                this.lettersUsed = [];
-//                this.asignRandomWordToFirebase();
                 this.getWord();
                 this.resetCheckedLetters();
                 this.lockVowels();
                 this.splitWordIntoLetters();
             },
-
-//            asignRandomWordToFirebase () {
-//              let randomNumber = Math.floor(Math.random() * this.words.length);
-//              let randomWordForFirebase = this.words[randomNumber][0];
-//              let randomWordCategoryForFirebase = 'Categorie is: ' + this.words[randomNumber][1];
-//              let database = firebase.database()
-//              database.ref('game/answer').update({
-//                category: randomWordCategoryForFirebase,
-//                word: randomWordForFirebase,
-//              });
-//            },
 
             getWord() {
                 this.randomWord = this.game.answer.word;
@@ -189,7 +176,11 @@
                   [letterFromAlpha] : true
                 });
 
-                this.lettersUsed.push(single.letter.toLowerCase());
+                let letterClicked = single.letter.toLowerCase()
+                this.lettersUsed.push(letterClicked);
+                database.ref('game/lettersUsed').push(
+                  letterClicked
+                );
                 this.compareWords();
 
                 this.countItemInArray(this.wordLetters, single.letter.toLowerCase())
@@ -289,6 +280,9 @@
                 firebase.database().ref('game').on('value', function (snapshot) {
                     console.log(snapshot.val());
                     self.game = snapshot.val();
+
+                    self.lettersUsed = Object.values(self.game.lettersUsed)
+
                     self.getPlayers(self.game.players)
                     self.checkArray();
                 })
@@ -301,7 +295,7 @@
                     for (let i = 0; i < values.length; i++) {
                         this.alphabet.push({letter: keys[i], checked: values[i]})
                     }
-                    console.log(this.alphabet)
+                    //console.log(this.alphabet)
                 }
             },
             getPlayers: function (players) {
