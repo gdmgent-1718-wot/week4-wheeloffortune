@@ -115,7 +115,6 @@
 
         methods: {
             initializeGame() {
-                //this.alphabet = [];
                 this.tries = this.initialTries;
                 this.randomWord = '';
                 this.randomWordCategory = '';
@@ -281,8 +280,14 @@
                     console.log(snapshot.val());
                     self.game = snapshot.val();
 
-
-                    self.lettersUsed = Object.values(self.game.lettersUsed)
+                    let areLettersUsed = ("lettersUsed" in self.game)
+                  console.log(areLettersUsed)
+                    if (areLettersUsed){
+                      self.lettersUsed = Object.values(self.game.lettersUsed)
+                    }
+                    else {
+                      self.lettersUsed = []
+                    }
 
                     self.getPlayers(self.game.players)
                     self.checkArray();

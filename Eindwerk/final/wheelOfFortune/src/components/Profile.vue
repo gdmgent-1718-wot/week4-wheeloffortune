@@ -33,7 +33,7 @@
         methods: {
 
             getUserData: function () {
-                self = this;
+                let self = this;
                 firebase.auth().onAuthStateChanged(function (user) {
                     if (user) {
                         console.log(user.displayName);
@@ -47,7 +47,7 @@
 
             },
             logout: function () {
-                self = this
+                let self = this
                 firebase.auth().signOut().then(function () {
                     // Sign-out successful.
                     self.$router.push({name: 'Login'});
@@ -59,7 +59,7 @@
 
         }
         , mounted: function () {
-            self = this
+            let self = this
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
                     self.getUserData()

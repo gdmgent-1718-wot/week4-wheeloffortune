@@ -48,6 +48,38 @@ function checkPlayers() {
         }
     });
 }
+
+function resetAlphabeth () {
+    admin.database().ref('game/alphabeth').update({
+        A: true,
+        B: false,
+        C: false,
+        D: false,
+        E: true,
+        F: false,
+        G: false,
+        H: false,
+        I: true,
+        J: false,
+        K: false,
+        L: false,
+        M: false,
+        N: false,
+        O: true,
+        P: false,
+        Q: false,
+        R: false,
+        S: false,
+        T: false,
+        U: true,
+        V: false,
+        W: false,
+        X: false,
+        Y: false,
+        Z: false,
+    });
+}
+
 function setNewWord() {
     admin.database().ref('words/values').on("value", function(snapshot) {
         let words = snapshot.val();
@@ -59,6 +91,7 @@ function setNewWord() {
             category: randomWordCategoryFromFirebase,
         });
 
+        admin.database().ref('game/lettersUsed/').remove();
     });
 }
 io.on('connection', function (socket) {
@@ -87,6 +120,7 @@ io.on('connection', function (socket) {
     });
     socket.on('startGame', function () {
         checkPlayers();
+        resetAlphabeth();
     });
 });
 
