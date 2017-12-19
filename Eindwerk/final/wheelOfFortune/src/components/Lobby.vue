@@ -1,18 +1,18 @@
 <template>
     <div class="container">
-        <h1>{{ msg }}</h1>
+        <h1>{{ msg }}</h1><hr>
         <div class="spots" v-if="spots && !playing">
-            <h1>Available spots:</h1>
-            <div v-for="(spot, index) in spots" class="card">
-                <h1>player {{spot.number}}</h1>
-                <button v-on:click="claimSpot(spot.number)">Claim Spot</button>
-            </div>
+            <h2 class="pb-3">Available spots:</h2>
+            <div v-for="(spot, index) in spots" class="card mb-3">
+                <h3 class="pb-1 pt-3">Player {{spot.number}}</h3>
+                <button class="btn btn-info" v-on:click="claimSpot(spot.number)">Claim spot</button>
+            </div><hr>
         </div>
         <div v-if="occupied" class="occupied">
-            <h1 v-if="occupied && playing" >The game will start soon waiting for {{spots.length}} more players</h1>
-            <h2 v-if="occupied">current players:</h2>
-            <div v-for="player in occupied" class="card">
-                <h3>{{player.name}}</h3>
+            <p class="text-info" v-if="occupied && playing" >The game will start soon waiting for {{spots.length}} more players</p>
+            <h2 v-if="occupied" class="pb-3 pt-1">Current players:</h2>
+            <div v-for="player in occupied" class="card mb-3">
+                <h3 class="pb-1 pt-2">{{player.name}}</h3>
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
         },
         methods: {
             getUserData: function () {
-                self = this;
+                let self = this;
                 firebase.auth().onAuthStateChanged(function (user) {
                     if (user) {
                         self.user = user;
@@ -47,7 +47,7 @@
                 });
             },
             authChange: function () {
-                self = this
+                let self = this
                 firebase.auth().onAuthStateChanged(function(user) {
                     if (user) {
                     } else {
@@ -56,7 +56,7 @@
                 });
             },
             getGameData: function () {
-                self = this;
+                let self = this;
                 console.log('lalal');
                 firebase.database().ref('game/players').on('value', function(snapshot) {
                     console.log(snapshot.val());
@@ -66,7 +66,7 @@
                 });
             },
             checkSpot: function () {
-                self = this
+                let self = this
                 self.spots = [];
                 self.occupied = [];
                 for (let player of Object.values(self.game)) {
@@ -122,21 +122,3 @@
         }
     }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-    h1, h2 {
-        font-weight: normal;
-    }
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-    a {
-        color: #42b983;
-    }
-</style>

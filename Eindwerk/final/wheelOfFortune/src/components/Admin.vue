@@ -7,7 +7,7 @@
                     <button class="btn btn-secondary bg-success" type="button" @click="addWordToArray">
                         +
                     </button>
-                 </span>
+      </span>
     </div>
     <div class="form-group mt-3">
       <select class="form-control mb-3" v-model="selected">
@@ -18,7 +18,7 @@
       <span class="description text-muted"><em>{{ selected.description }}</em></span>
     </div>
     <h4 class="pt-5 pb-2">Te raden zinnen, woorden of gezegdes:</h4>
-    <button class="col-md-6 col-sm-12 mb-2 btn btn-secondary"  type="button" @click="pushDataToFirebase(arrayOfWords)" @click="makeButtonGreen" :class="{'btn-danger': isRed, 'btn-success': isGreen}">
+    <button class="col-md-6 col-sm-12 mb-2 btn btn-secondary"  type="button" @click="pushDataToFirebase(arrayOfWords)" :class="{'btn-danger': isRed, 'btn-success': isGreen}">
       {{ buttonText }}
     </button>
     <table class="table">
@@ -31,8 +31,8 @@
       </thead>
       <tbody>
       <tr v-for="word in arrayOfWords" :key="word.id">
-        <td>{{ word[0] }}</td>
-        <td>{{ word[1] }}</td>
+        <td class="text-left">{{ word[0] }}</td>
+        <td class="text-left">{{ word[1] }}</td>
         <td>
           <button type="button" class="btn btn-sm btn-danger" @click="removeWordFromArray(word)">X</button> </td>
       </tr>
@@ -45,8 +45,11 @@
 </template>
 
 <script>
-    import * as firebase from "firebase";
-    import vuesocket from "vue-socket.io";
+  import Vue from 'vue'
+  import * as firebase from "firebase";
+  import VueSocketio from 'vue-socket.io';
+
+  Vue.use(VueSocketio, 'http://localhost:3000/');
 
     export default {
         name: 'Lobby',
@@ -61,35 +64,10 @@
               buttonText: 'Vergeet niet op te slaan!',
               description: 'Selecteer een categorie',
               selected: '',
-              categories: [
-                {name: 'In & Rond het Huis', description: 'Focusing on things within or close to a household.'},
-                {name: 'Personages', description: 'On television or books, fiction or non-fiction.'},
-                {name: 'Studentenleven', description: 'The category features things or events applicable to college.'},
-                {name: 'Evenementen', description: 'An activity or occurrence of some kind, sometimes with a gerund or participle phrase.'},
-                {name: 'Familie', description: 'The puzzle is the name of two or more famous people who are closely related, or rarely, the name of a well-known family.'},
-                {name: 'Spelletjes & plezier', description: 'The category may encompass any term relating to sports, games (including video games), or other similar recreational activities.'},
-                {name: 'Eten & Drinken', description: 'Most likely to be all-inclusive for items that would not necessarily be found on a restaurant menu.'},
-                {name: 'Man & Vrouw', description: 'The names of two famous people who are married to each other.'},
-                {name: 'Keuken', description: 'Subset of In & Rond het Huis'},
-                {name: 'Monumenten', description: 'Used for specific buildings, monuments, and other structures.'},
-                {name: 'Levende wezens', description: 'The category includes animals, plants, etc.'},
-                {name: 'Quotes', description: 'A movie or TV Quote'},
-                {name: 'Beroepen', description: 'Any occupation'},
-                {name: 'Op de kaart', description: 'Includes cities, countries, and any other specific named geographical feature.'},
-                {name: 'Lyric', description: 'A lyric of a song'},
-                {name: 'Boeken', description: 'The name of a famous book or other literary work.'},
-                {name: 'Wat doe je?', description: 'Activities.'},
-                {name: 'Wat draag je?', description: 'The puzzle can be used for articles of clothing, accessories, makeup, or other items that can be worn.'},
-              ]
+              categories: [],
             }
         },
         methods: {
-          loginForDevelopment () {
-            firebase.auth().signInWithEmailAndPassword('adriaan@gmail.com', 'test123').catch(function(error) {
-              self.errorCode = error.code;
-              self.errorMessage = error.message;
-            })
-          },
           changeDescription () {
             this.description = this.selected.description
           },
@@ -118,13 +96,19 @@
             this.makeButtonGreen()
           },
           getDataFromFirebase () {
-            self = this
+            this.makeButtonGreen();
+            let self = this
             let database = firebase.database()
             let databaseRef = database.ref('words');
-            console.log(databaseRef)
+            let databaseRefCat = database.ref('categories');
+            console.log(databaseRefCat)
             databaseRef.on('value', function(snapshot) {
               self.arrayOfWords = snapshot.val().values
 //                    console.log(self.arrayOfWords)
+            });
+            databaseRefCat.on('value', function(catSnapshot) {
+              self.categories = catSnapshot.val()
+                console.log('teeeeeeeeeeeeeest',self.categories)
             });
           },
           makeButtonGreen () {
@@ -140,7 +124,6 @@
         },
 
         mounted: function () {
-          this.loginForDevelopment(),
           this.getDataFromFirebase()
         }
     }

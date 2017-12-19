@@ -1,8 +1,9 @@
 <template>
     <div class="container">
-        <h1>{{ msg }}</h1>
-        <button v-on:click="logout">logout</button>
-        <router-link :to="{ name: 'Lobby' }">Play the game</router-link>
+        <h1>{{ msg }}</h1><hr>
+      <router-link :to="{ name: 'Lobby' }" class="btn">Play the game</router-link><hr>
+        <button class="btn-primary btn" v-on:click="logout">Logout</button>
+
 
 
 

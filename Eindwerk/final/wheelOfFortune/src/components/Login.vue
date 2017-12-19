@@ -11,7 +11,7 @@
                     <label for="passwordid">Password</label>
                     <input v-model="password" type="password" class="form-control" id="passwordid" placeholder="Password">
                 </div>
-                <button  v-on:click="login" type="submit" class="btn btn-primary">Submit</button>
+                <button  v-on:click="login" type="submit" class="btn btn-primary">Submit</button><hr>
                 <router-link :to="{ name: 'Register' }">Register</router-link>
                 <p>{{errorMessage}}</p>
             </form>
@@ -39,7 +39,7 @@
   },
     methods: {
         login: function () {
-            self = this;
+            let self = this;
             console.log(self.user);
             firebase.auth().signInWithEmailAndPassword(self.email, self.password).catch(function(error) {
                 // Handle Errors here.
