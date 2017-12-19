@@ -7,7 +7,7 @@ import Profile from '@/components/Profile'
 import Lobby from '@/components/Lobby'
 import Game from '@/components/Game'
 import GameFinal from '@/components/GameFinal'
-// import Admin from '@/components/Admin'
+import Admin from '@/components/Admin'
 
 Vue.use(Router)
 
@@ -52,10 +52,10 @@ export default new Router({
             props: { default: true }
 
         },
-        // {
-        //     path: '/admin',
-        //     name: 'Admin',
-        //     component: Admin,
-        // }
+        {
+            path: '/admin',
+            name: 'Admin',
+            component: Admin,
+        }
     ]
 })

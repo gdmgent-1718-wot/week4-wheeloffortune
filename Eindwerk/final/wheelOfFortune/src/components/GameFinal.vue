@@ -25,11 +25,7 @@
                     <div class="form-group">
                         <label for="sel1">Koop een klinker (voor 250 euro):</label>
                         <select class="form-control col-12 float-left mb-1" id="sel1" v-model="vowel">
-                            <option value="0">A</option>
-                            <option value="4">E</option>
-                            <option value="8">I</option>
-                            <option value="14">O</option>
-                            <option value="20">U</option>
+                            <option v-for="klinker in vowels" :value="klinker.id">{{ klinker.letter }}</option>
                         </select>
                         <button type="button" class="btn btn-primary btn col-12 mb-5 float-left" @click='unlockVowel'>
                             Bevestig
@@ -92,6 +88,29 @@
                 loading: 'Willekeurig een zin, woord of gezegde kiezen...',
                 words: [],
                 vowel: '',
+                vowels: [
+                  {
+                    id: 0,
+                    letter: "a"
+                  },
+                  {
+                    id: 4,
+                    letter: "e"
+                  },
+                  {
+                    id: 8,
+                    letter: "i"
+                  },
+                  {
+                    id: 14,
+                    letter: "o"
+                  },
+                  {
+                    id: 20,
+                    letter: "u"
+                  }
+                  ],
+                vowelsUsed: '',
                 randomWord: '',
                 randomWordCategory: '',
                 compareWord: '',
@@ -281,7 +300,7 @@
                     self.game = snapshot.val();
 
                     let areLettersUsed = ("lettersUsed" in self.game)
-                  console.log(areLettersUsed)
+
                     if (areLettersUsed){
                       self.lettersUsed = Object.values(self.game.lettersUsed)
                     }
