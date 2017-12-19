@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <title>Pusher Test</title>
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <script>
 
-</body>
-</html>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('338fc3df23a162fc1144', {
+            cluster: 'eu',
+            encrypted: true
+        });
+
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data) {
+            console.log(data.message);
+        });
+    </script>
+</head>
