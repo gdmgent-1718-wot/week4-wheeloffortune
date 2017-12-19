@@ -12,7 +12,11 @@ p = GPIO.PWM(7, f)
 p.start(2.5)
 try:
     while True:
-        p.ChangeDutyCycle(12)
+        print "spinning"
+			p.ChangeDutyCycle(2.5)
+			time.sleep(1)
+			p.ChangeDutyCycle(12)
+			time.sleep(1)
 except KeyboardInterrupt:
 	p.stop()
 	GPIO.cleanup()
