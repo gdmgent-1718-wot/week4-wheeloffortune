@@ -1,24 +1,17 @@
 import RPi.GPIO as GPIO
 import time
-
-GPIO.setmode(GPIO.BOARD)
-#Connect the yellow cable to GPIO pin 18
-GPIO.setup(18, GPIO.OUT)
-#Connect the ground to the 7th top pin starting from the left
-#Connect the V5 to the first top pin starting from the left
-
-f = 50
-t = (1 / f)
-
-p = GPIO.PWM(7, f)
-p.start(2.5)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(7, GPIO.OUT)
+p = GPIO.PWM(7, 50)
+p.start(7.5)
 try:
-	while True:
-                    print "spinning"
-                    p.ChangeDutyCycle(2.5)
-                    time.sleep(1)
-                    p.ChangeDutyCycle(180)
-                    time.sleep(1)
+        while True:
+                p.ChangeDutyCycle(7.5)
+                time.sleep(1)
+                p.ChangeDutyCycle(12.5)
+                time.sleep(1)
+                p.ChangeDutyCycle(2.5)
+                time.sleep(1)
+
 except KeyboardInterrupt:
-	p.stop()
-	GPIO.cleanup()
+        GPIO.cleanup()
