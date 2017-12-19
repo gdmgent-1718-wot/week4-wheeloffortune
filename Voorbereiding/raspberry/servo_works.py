@@ -41,13 +41,13 @@ t = (1 / f)
 
 p = GPIO.PWM(18, f)
 p.start(2.5)
-pictureTaken = false
+pictureTaken = False
 try:
 	while True:
 		#get values from Firebase and put them in variables
 		# posdb = root.child('value').get()
 		# picked = posdb['picked']
-		picked = false
+		picked = False
 		# value should be between 2.5 and 12.5
 		# correct values are 11, 9, 7.5, 5, 3.5
 		value = 12
