@@ -1,27 +1,23 @@
 import RPi.GPIO as GPIO
 import time
+# servo controller function
 
+def move(pin):
+    GPIO.output(pin, GPIO.HIGH) #Create a 5V pulse for 13ms
+    time.sleep(.0013)
+    GPIO.output(pin, GPIO.LOW) #Wait for 20ms at 0V
+    time.sleep(.02)
+    return
+
+# to use Raspberry Pi board pin numbers
 GPIO.setmode(GPIO.BOARD)
-#Connect the yellow cable to GPIO pin 18
-GPIO.setup(18, GPIO.OUT)
-#Connect the ground to the 7th top pin starting from the left
-#Connect the V5 to the first top pin starting from the left
 
-f = 50
-t = (1 / f)
+# set up GPIO output channel
+GPIO.setup(4, GPIO.OUT)
 
-p = GPIO.PWM(18, f)
-p.start(2.5)
+# move servo 100 times
+for i in range(0,100):
+    print i
+    move(4)
 
-try:
-    while True:
-                print "spinning"
-                p.ChangeDutyCycle(2.5)
-                time.sleep(1)
-                p.ChangeDutyCycle(12)
-                time.sleep(1)
-
-
-except KeyboardInterrupt:
-	p.stop()
-	GPIO.cleanup()
+GPIO.cleanup()
