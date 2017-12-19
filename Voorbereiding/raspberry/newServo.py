@@ -13,11 +13,11 @@ def move(pin):
 GPIO.setmode(GPIO.BOARD)
 
 # set up GPIO output channel
-GPIO.setup(4, GPIO.OUT)
+GPIO.setup(7, GPIO.OUT)
 
 # move servo 100 times
 for i in range(0,100):
     print i
-    move(4)
+    move(7)
 
 GPIO.cleanup()
