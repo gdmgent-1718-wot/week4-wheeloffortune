@@ -62,7 +62,7 @@ try:
     if (StepCounter<0): StepCounter = StepCount
 
     # Wacht voor de volgende stap (lager = snellere draaisnelheid)
-    sleep(.0009)
+    sleep(.0005)
 
 except KeyboardInterrupt:
   # GPIO netjes afsluiten
