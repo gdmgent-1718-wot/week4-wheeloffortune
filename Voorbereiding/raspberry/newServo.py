@@ -15,11 +15,11 @@ p.start(2.5)
 
 try:
     while True:
-        print "spinning"
-		p.ChangeDutyCycle(2.5)
-		time.sleep(1)
-		p.ChangeDutyCycle(12)
-		time.sleep(1)
+                print "spinning"
+                p.ChangeDutyCycle(2.5)
+                time.sleep(1)
+                p.ChangeDutyCycle(12)
+                time.sleep(1)
 
 
 except KeyboardInterrupt:
