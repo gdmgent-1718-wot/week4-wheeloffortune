@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 GPIO.setmode(GPIO.BOARD)
 #Connect the yellow cable to GPIO pin 18
-GPIO.setup(18, GPIO.OUT)
+GPIO.setup(7, GPIO.OUT)
 #Connect the ground to the 7th top pin starting from the left
 #Connect the V5 to the first top pin starting from the left
 f = 50
