@@ -26,10 +26,10 @@ import RPi.GPIO as GPIO
 import time
 
 
-cred = credentials.Certificate('wheeloffortune-18d6d-firebase-adminsdk-vn804-4f020fab3d.json')
-default_app = firebase_admin.initialize_app(cred,{'databaseURL':'https://wheeloffortune-18d6d.firebaseio.com/','storageBucket': 'gs://wheeloffortune-18d6d.appspot.com'})
-bucket = storage.bucket()
-root = db.reference()
+# cred = credentials.Certificate('wheeloffortune-18d6d-firebase-adminsdk-vn804-4f020fab3d.json')
+# default_app = firebase_admin.initialize_app(cred,{'databaseURL':'https://wheeloffortune-18d6d.firebaseio.com/','storageBucket': 'gs://wheeloffortune-18d6d.appspot.com'})
+# bucket = storage.bucket()
+# root = db.reference()
 GPIO.setmode(GPIO.BOARD)
 #Connect the yellow cable to GPIO pin 18
 GPIO.setup(18, GPIO.OUT)
