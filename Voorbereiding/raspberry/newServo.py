@@ -1,26 +1,18 @@
-# Servo Control
+import RPi.GPIO as GPIO
 import time
-import wiringpi
- 
-# use 'GPIO naming'
-wiringpi.wiringPiSetupGpio()
- 
-# set #18 to be a PWM output
-wiringpi.pinMode(18, wiringpi.GPIO.PWM_OUTPUT)
- 
-# set the PWM mode to milliseconds stype
-wiringpi.pwmSetMode(wiringpi.GPIO.PWM_MODE_MS)
- 
-# divide down clock
-wiringpi.pwmSetClock(192)
-wiringpi.pwmSetRange(2000)
- 
-delay_period = 0.01
- 
-while True:
-        for pulse in range(50, 250, 1):
-                wiringpi.pwmWrite(18, pulse)
-                time.sleep(delay_period)
-        for pulse in range(250, 50, -1):
-                wiringpi.pwmWrite(18, pulse)
-                time.sleep(delay_period)
+GPIO.setmode(GPIO.BOARD)
+#Connect the yellow cable to GPIO pin 18
+GPIO.setup(18, GPIO.OUT)
+#Connect the ground to the 7th top pin starting from the left
+#Connect the V5 to the first top pin starting from the left
+f = 50
+t = (1 / f)
+
+p = GPIO.PWM(7, f)
+p.start(2.5)
+try:
+    while True:
+        p.ChangeDutyCycle(12)
+except KeyboardInterrupt:
+	p.stop()
+	GPIO.cleanup()
