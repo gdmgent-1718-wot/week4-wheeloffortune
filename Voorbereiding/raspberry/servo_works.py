@@ -59,7 +59,7 @@ try:
 			if !pictureTaken
 				#take picture
 				pictureTaken = True
-	
+
 		else:
 			
 			print "spinning"
