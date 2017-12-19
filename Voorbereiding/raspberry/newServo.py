@@ -17,7 +17,7 @@ try:
                     print "spinning"
                     p.ChangeDutyCycle(2.5)
                     time.sleep(1)
-                    p.ChangeDutyCycle(12)
+                    p.ChangeDutyCycle(180)
                     time.sleep(1)
 except KeyboardInterrupt:
 	p.stop()
