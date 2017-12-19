@@ -56,10 +56,10 @@ try:
 			print "stopping"
 			p.ChangeDutyCycle(value)
 			time.sleep(1)
-			if !pictureTaken
-				#take picture
-				pictureTaken = True
-	
+			# if !pictureTaken
+			# 	#take picture
+			# 	pictureTaken = True
+            #
 		else:
 			
 			print "spinning"
