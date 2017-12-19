@@ -18,10 +18,10 @@ Resources:
     - https://i.stack.imgur.com/sVvsB.jpg
 ==============================================
 """
-import firebase_admin
-from firebase_admin import  credentials
-from firebase_admin import db
-from firebase_admin import storage
+# import firebase_admin
+# from firebase_admin import  credentials
+# from firebase_admin import db
+# from firebase_admin import storage
 import RPi.GPIO as GPIO
 import time
 
@@ -45,11 +45,12 @@ pictureTaken = false
 try:
 	while True:
 		#get values from Firebase and put them in variables
-		posdb = root.child('value').get()
-		picked = posdb['picked']
+		# posdb = root.child('value').get()
+		# picked = posdb['picked']
+		picked = false
 		# value should be between 2.5 and 12.5
 		# correct values are 11, 9, 7.5, 5, 3.5
-		value = posdb['value']
+		value = 12
 
 		#if result is picked move to result position and stop spinning
 		if picked:
