@@ -9,16 +9,32 @@
     <title>Design test</title>
 </head>
 <body>
+<div id="myNav" class="overlay">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="overlay-content">
+        <h3>Logout</h3>
+    </div>
+</div>
 <nav class="container-fluid red-bg">
-    <img>
+    <img src="logo.png" class="logo">
+    <a href="#"><img src="menu.png" class="menu-icon" onclick="openNav()"></a>
 </nav>
 <header class="align-items container-fluid red-bg">
     <div class="align-center">
-        <h1>Profielfoto</h1>
+        <h1>Profielinfo</h1>
     </div>
 </header>
 <main class="container-fluid">
-
+    <div class="small-container pt-5">
+        <form class="col-12">
+            <label>Email</label>
+            <input class="col-10" type="text">
+            <label>Wachtwoord</label>
+            <input class="col-10" type="password">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </main>
+<script src="js/menu.js"></script>
 </body>
 </html>

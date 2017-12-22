@@ -1,0 +1,32 @@
+/* _-_-_- modules/BUTTONS -_-_-_ */
+
+
+button {
+  color: $white;
+  padding: $medium-small-padding;
+  background-color: $light-orange;
+  border: solid;
+  border-color: $light-orange;
+  border-radius: $medium-small-radius;
+  outline: none;
+  display: block;
+}
+
+button:hover {
+  background-color: $dark-orange;
+}
+
+
+.letter-button {
+  display: inline-block;
+  margin: $small-margin;
+  border-radius: $small-radius;
+  border-style:none;
+}
+
+button:disabled,
+button[disabled]{
+  background-color: $light-grey;
+  color: $grey;
+border-style: none;
+}

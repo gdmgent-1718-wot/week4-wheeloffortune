@@ -6,6 +6,9 @@ import router from './router'
 import * as firebase from "firebase";
 // import VueSocketio from 'vue-socket.io';
 
+require('../static/css/main.css');
+require('../static/js/menu.js');
+
 var config = {
     apiKey: "AIzaSyCRDbOBN_g2rlAqy8NBSRmjfvrPMswf4EE",
     authDomain: "wheeloffyaortune2-c0e4a.firebaseapp.com",
@@ -14,11 +17,11 @@ var config = {
 };
 firebase.initializeApp(config);
 Vue.config.productionTip = false
-window.jQuery = window.$ = require('../node_modules/jquery/dist/jquery.js');
-// require('https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js');
-
-require('../node_modules/bootstrap/dist/css/bootstrap.css');
-require('../node_modules/bootstrap/dist/js/bootstrap.js');
+// window.jQuery = window.$ = require('../node_modules/jquery/dist/jquery.js');
+// // require('https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js');
+// //
+// // require('../node_modules/bootstrap/dist/css/bootstrap.css');
+// // require('../node_modules/bootstrap/dist/js/bootstrap.js');
 
 /* eslint-disable no-new */
 new Vue({

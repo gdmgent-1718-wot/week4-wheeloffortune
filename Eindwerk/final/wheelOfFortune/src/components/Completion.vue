@@ -1,23 +1,44 @@
 <template>
-    <div class="container">
+  <div>
+    <header class="align-items container-fluid red-bg">
+      <div class="align-center">
         <h1>{{ msg }}</h1>
-        <form>
-            <div class="form-group">
-                <label for="displaynameid">Username</label>
-                <input v-model="displayName" type="text" class="form-control" id="displaynameid" aria-describedby="emailHelp" placeholder="Enter email">
-            </div>
-            <div class="form-group">
-                <label for="phoneid">Phone number</label>
-                <input v-model="phoneNumber" type="tel" class="form-control" id="phoneid" placeholder="phone number">
-            </div>
-            <div class="form-group">
-                <label for="emailid">Email</label>
-                <input v-model="email" type="email" class="form-control" id="emailid" placeholder="email">
-            </div>
-            <button  v-on:click="updateUserData" type="submit" class="btn btn-primary">Update</button>
-            <p>{{errorMessage}}</p>
+      </div>
+    </header>
+    <main class="container-fluid">
+      <div class="small-container pt-5">
+        <form class="col-12">
+          <label for="displaynameid">Username</label>
+          <input v-model="displayName" type="text" class="form-control" id="displaynameid" aria-describedby="emailHelp" placeholder="Enter email">
+          <label for="phoneid">Phone number</label>
+          <input v-model="phoneNumber" type="tel" class="form-control" id="phoneid" placeholder="phone number">
+          <label for="emailid">Email</label>
+          <input v-model="email" type="email" class="form-control" id="emailid" placeholder="email">
+          <button  v-on:click="updateUserData" type="submit" class="btn btn-primary">Update</button>
+          <p>{{errorMessage}}</p>
         </form>
-    </div>
+      </div>
+    </main>
+  </div>
+    <!--<div class="container">-->
+        <!--<h1>{{ msg }}</h1>-->
+        <!--<form>-->
+            <!--<div class="form-group">-->
+                <!--<label for="displaynameid">Username</label>-->
+                <!--<input v-model="displayName" type="text" class="form-control" id="displaynameid" aria-describedby="emailHelp" placeholder="Enter email">-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+                <!--<label for="phoneid">Phone number</label>-->
+                <!--<input v-model="phoneNumber" type="tel" class="form-control" id="phoneid" placeholder="phone number">-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+                <!--<label for="emailid">Email</label>-->
+                <!--<input v-model="email" type="email" class="form-control" id="emailid" placeholder="email">-->
+            <!--</div>-->
+            <!--<button  v-on:click="updateUserData" type="submit" class="btn btn-primary">Update</button>-->
+            <!--<p>{{errorMessage}}</p>-->
+        <!--</form>-->
+    <!--</div>-->
 </template>
 
 <script>

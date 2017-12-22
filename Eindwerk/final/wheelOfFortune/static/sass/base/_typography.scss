@@ -1,0 +1,47 @@
+/* _-_-_- base/TYPOGRAPHY -_-_-_ */
+@import url('https://fonts.googleapis.com/css?family=Oxygen:700');
+
+* {
+  font-family: $oxygen;
+}
+
+h1 {
+  font-size: 7vw;
+  color: $white;
+}
+
+h2 {
+  font-size: 5vw;
+  color: $grey;
+}
+h3 {
+  font-size: 4vw;
+  color: $grey;
+}
+
+.overlay-content h3, .list-inline-item h3 {
+  font-size: 4vw;
+  color: $white;
+}
+
+p {
+  font-size: $normal-text;
+  color: $grey;
+}
+
+.error {
+  color: $red;
+}
+
+a {
+  color: $dark-orange;
+  text-decoration: none;
+}
+
+a:hover {
+  color: $light-orange;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}

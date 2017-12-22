@@ -1,1 +1,23 @@
 /* _-_-_- layout/FORMS -_-_-_ */
+
+input, label, button {
+  display: block;
+  margin: $normal-margin;
+}
+
+input, button {
+  padding: $medium-small-padding;
+  border: solid;
+  border-color: $light-orange;
+  border-radius: $medium-small-radius;
+  outline: none;
+}
+
+button {
+  color: $white;
+  background-color: $light-orange;
+}
+
+button:hover {
+  background-color: $dark-orange;
+}

@@ -1,0 +1,22 @@
+/* _-_-_- base/BASE -_-_-_ */
+@charset 'utf-8';
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.clearfix {
+  overflow: auto;
+  zoom: 1;
+}
+
+.red-bg {
+  background-color: $red;
+}
+.green-bg {
+  background-color: $green;
+}
+.orange-bg {
+  background-color: $light-orange;
+}

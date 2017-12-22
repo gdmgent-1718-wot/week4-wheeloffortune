@@ -1,63 +1,107 @@
 <template>
-    <main class="container mt-5">
-        <div class="col-lg-6 offset-lg-3">
-            <div class="pb-5">
-                <h1 class="text-warning">{{ loading }}</h1>
-                <ul class='result pt-2 pl-0'>
-                    <li class="list-inline-item mr-1" v-for='letter in wordLetters'>
-                        <h1 v-if="letter == ' ' " class="text-muted" style="opacity: 0.2">
-                            {{ isGuessedLetter(letter) ? letter : '█'}}</h1>
-                        <h1 v-else class="text-warning text-uppercase">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>
-                    </li>
-                </ul>
-
-            </div>
-            <div v-if="currentPlayer != null && currentPlayer.active" class="playing">
-                <h5 class="pb-1 text-warning font-weight-bold">{{ randomWordCategory }}</h5>
-                <p class="pb-1 text-muted">De grijze vakjes zijn spaties.</p>
-                <h4 class="pb-3 pt-1 font-weight-bold" :style="{ color: messageColor }">{{message}}</h4>
-                <button type="button" class="btn btn-secondary col-2"
-                        :disabled='single.checked || tries == 0 || showWord()' @click='handleLetterClick(single)'
-                        v-for='single in alphabet'>
-                    {{ single.letter }}
-                </button>
-                <form>
-                    <div class="form-group">
-                        <label for="sel1">Koop een klinker (voor 250 euro):</label>
-                        <select class="form-control col-12 float-left mb-1" id="sel1" v-model="vowel">
-                            <option v-for="klinker in vowels" :value="klinker.id">{{ klinker.letter }}</option>
-                        </select>
-                        <button type="button" class="btn btn-primary btn col-12 mb-5 float-left" @click='unlockVowel'>
-                            Bevestig
-                        </button>
-                    </div>
-                </form>
-                <form>
-                    <div class="form-group">
-                        <label>Mag ik het zeggen Walter (voor 250)?</label>
-                        <div class="col-12 float-left p-0">
-                            <input type="text" class="form-control mb-1" placeholder="Het woord, de zin of gezegde is.."
-                                   @keyup.enter="didIGuessRight" v-model="walterInput">
-                        </div>
-                        <button type="button" class="btn btn-primary btn col-12 mb-2 float-left"
-                                @click='didIGuessRight'>Ik ga het zeggen Walter!
-                        </button>
-                    </div>
-                    <span v-if='walterFeedback' class="font-weight-bold mb-3">{{ walterFeedback }}</span>
-                </form>
-            </div>
-            <div v-else=""></div>
-
-
-            <div class="pb-2 pt-5 mt-5 text-muted">
-                Raad een letter uit een zin, woord of gezegde, als u het <span class="text-success font-weight-bold">juist</span>
-                heeft mag u <span class="text-success font-weight-bold">nog eens draaien</span>
-                aan het rad én mag u nogmaals een letter raden.
-                Indien je <span class="text-danger font-weight-bold">fout</span> hebt geraden is het aan de <span
-                    class="text-danger font-weight-bold">andere speler</span>.
-            </div>
+  <div>
+    <header class="align-items container-fluid green-bg">
+      <ul class='result pt-2 pl-0 small-container'>
+        <li class="list-inline-item mr-1" v-for='letter in wordLetters'>
+          <h3 v-if="letter == ' ' " class="text-muted" style="opacity: 0.2">
+            {{ isGuessedLetter(letter) ? letter : '█'}}</h3>
+          <h3 v-else class="text-uppercase">{{ isGuessedLetter(letter) ? letter : '█'}}</h3>
+        </li>
+      </ul>
+    </header>
+    <main class="container-fluid">
+      <div class="small-container pt-2">
+        <div v-if="currentPlayer != null && currentPlayer.active" class="playing">
+          <p class="pb-1 text-warning font-weight-bold">{{ randomWordCategory }}</p>
+          <p class="pb-1 text-muted">De grijze vakjes zijn spaties.</p>
+          <h4 v-if="message" class="pb-3 font-weight-bold" :style="{ color: messageColor }">{{message}}</h4>
+          <button type="button" class="letter-button"
+                  :disabled='single.checked || tries == 0 || showWord()' @click='handleLetterClick(single)'
+                  v-for='single in alphabet'>
+            {{ single.letter }}
+          </button>
+          <form>
+              <label for="sel1">Koop een klinker (voor 250 euro):</label>
+              <select class="form-control col-12 float-left mb-1" id="sel1" v-model="vowel">
+                <option v-for="klinker in vowels" :value="klinker.id">{{ klinker.letter }}</option>
+              </select>
+              <button type="button" class="btn btn-primary btn col-12 mb-5 float-left" @click='unlockVowel'>
+                Koop klinker. (-€250)
+              </button>
+          </form>
+          <form class="pb-2">
+              <label>Mag ik het zeggen Walter (voor 250 euro)?</label>
+                <input type="text" class="col-12 form-control mb-1" placeholder="Het woord, de zin of gezegde is.."
+                       @keyup.enter="didIGuessRight" v-model="walterInput">
+              <button type="button" class="btn btn-primary btn col-12 mb-2 float-left"
+                      @click='didIGuessRight'>Ik ga het zeggen Walter! (-€250)
+              </button>
+            <span v-if='walterFeedback' class="font-weight-bold mb-3">{{ walterFeedback }}</span>
+          </form>
         </div>
+        <div v-else=""><p>Het is aan een andere speler.</p></div>
+      </div>
     </main>
+  </div>
+    <!--<main class="container mt-5">-->
+        <!--<div class="col-lg-6 offset-lg-3">-->
+            <!--<div class="pb-5">-->
+                <!--<h1 class="text-warning">{{ loading }}</h1>-->
+                <!--<ul class='result pt-2 pl-0'>-->
+                    <!--<li class="list-inline-item mr-1" v-for='letter in wordLetters'>-->
+                        <!--<h1 v-if="letter == ' ' " class="text-muted" style="opacity: 0.2">-->
+                            <!--{{ isGuessedLetter(letter) ? letter : '█'}}</h1>-->
+                        <!--<h1 v-else class="text-warning text-uppercase">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>-->
+                    <!--</li>-->
+                <!--</ul>-->
+
+            <!--</div>-->
+            <!--<div v-if="currentPlayer != null && currentPlayer.active" class="playing">-->
+                <!--<h5 class="pb-1 text-warning font-weight-bold">{{ randomWordCategory }}</h5>-->
+                <!--<p class="pb-1 text-muted">De grijze vakjes zijn spaties.</p>-->
+                <!--<h4 class="pb-3 pt-1 font-weight-bold" :style="{ color: messageColor }">{{message}}</h4>-->
+                <!--<button type="button" class="btn btn-secondary col-2"-->
+                        <!--:disabled='single.checked || tries == 0 || showWord()' @click='handleLetterClick(single)'-->
+                        <!--v-for='single in alphabet'>-->
+                    <!--{{ single.letter }}-->
+                <!--</button>-->
+                <!--<form>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="sel1">Koop een klinker (voor 250 euro):</label>-->
+                        <!--<select class="form-control col-12 float-left mb-1" id="sel1" v-model="vowel">-->
+                            <!--<option v-for="klinker in vowels" :value="klinker.id">{{ klinker.letter }}</option>-->
+                        <!--</select>-->
+                        <!--<button type="button" class="btn btn-primary btn col-12 mb-5 float-left" @click='unlockVowel'>-->
+                            <!--Bevestig-->
+                        <!--</button>-->
+                    <!--</div>-->
+                <!--</form>-->
+                <!--<form>-->
+                    <!--<div class="form-group">-->
+                        <!--<label>Mag ik het zeggen Walter (voor 250)?</label>-->
+                        <!--<div class="col-12 float-left p-0">-->
+                            <!--<input type="text" class="form-control mb-1" placeholder="Het woord, de zin of gezegde is.."-->
+                                   <!--@keyup.enter="didIGuessRight" v-model="walterInput">-->
+                        <!--</div>-->
+                        <!--<button type="button" class="btn btn-primary btn col-12 mb-2 float-left"-->
+                                <!--@click='didIGuessRight'>Ik ga het zeggen Walter!-->
+                        <!--</button>-->
+                    <!--</div>-->
+                    <!--<span v-if='walterFeedback' class="font-weight-bold mb-3">{{ walterFeedback }}</span>-->
+                <!--</form>-->
+            <!--</div>-->
+            <!--<div v-else=""></div>-->
+
+
+            <!--<div class="pb-2 pt-5 mt-5 text-muted">-->
+                <!--Raad een letter uit een zin, woord of gezegde, als u het <span class="text-success font-weight-bold">juist</span>-->
+                <!--heeft mag u <span class="text-success font-weight-bold">nog eens draaien</span>-->
+                <!--aan het rad én mag u nogmaals een letter raden.-->
+                <!--Indien je <span class="text-danger font-weight-bold">fout</span> hebt geraden is het aan de <span-->
+                    <!--class="text-danger font-weight-bold">andere speler</span>.-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</main>-->
 </template>
 
 <script>

@@ -1,23 +1,39 @@
 <template>
-    <div class="container">
-        <h1>{{ msg }}</h1><hr>
-      <router-link :to="{ name: 'Lobby' }" class="btn">Play the game</router-link><hr>
-        <button class="btn-primary btn" v-on:click="logout">Logout</button>
+  <div>
+    <header class="align-items container-fluid red-bg">
+      <div class="align-center">
+        <h1>{{ msg }}</h1>
+      </div>
+    </header>
+    <main class="container-fluid">
+      <div class="small-container pt-5">
+        <p>
+          Raad een letter uit een zin, woord of gezegde, als u het juist heeft mag u nog eens draaien aan het rad én mag u nogmaals een letter raden.  Indien je fout hebt geraden is het aan de andere speler.Klinkers kan u kopen voor 250€, als je denkt het woord te weten mag je dit raden maar als je het fout hebt betaal je ook 250€.
+        </p>
+
+        <router-link :to="{ name: 'Lobby' }" class="btn">Voeg je toe aan de wachtrij en speel het spel.</router-link>
+        <button class="mt-5" v-on:click="logout">Uitloggen</button>
+      </div>
+    </main>
+  </div>
+    <!--<div class="container">-->
+      <!--<router-link :to="{ name: 'Lobby' }" class="btn">Play the game</router-link><hr>-->
+        <!--<button class="btn-primary btn" v-on:click="logout">Logout</button>-->
 
 
 
 
-    </div>
+    <!--</div>-->
 </template>
 
 <script>
     import * as firebase from "firebase";
     import Router from 'vue-router';
     export default {
-        name: 'Profile',
+        name: 'Profiel',
         data() {
             return {
-                msg: 'Welcome ',
+                msg: 'Welkom ',
                 displayName: '',
                 password: '',
                 errorCode: '',
@@ -39,7 +55,7 @@
                     if (user) {
                         console.log(user.displayName);
                         self.displayName = user.displayName;
-                        self.msg = 'Welcome ' + self.displayName;
+                        self.msg = 'Welkom ' + self.displayName;
                     } else {
                         // User is signed out.
                         // ...
@@ -71,21 +87,3 @@
         }
     }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

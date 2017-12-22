@@ -18,18 +18,18 @@ export default new Router({
             path: '/',
             name: 'Login',
             component: Login,
-            beforeEnter: (to, from, next) => {
-              firebase.auth().onAuthStateChanged(function (user) {
-                if (user) {
-                  // console.log('al ingelogd')
-                  to: Profile
-                } else {
-                  // console.log('nietingelogd')
-                  // to: Login
-                  next()
-                }
-              });
-            }
+            // beforeEnter: (to, from, next) => {
+            //   firebase.auth().onAuthStateChanged(function (user) {
+            //     if (user) {
+            //       // console.log('al ingelogd')
+            //       to: Profile
+            //     } else {
+            //       // console.log('nietingelogd')
+            //       // to: Login
+            //       next()
+            //     }
+            //   });
+            // }
         },
         {
             path: '/register',

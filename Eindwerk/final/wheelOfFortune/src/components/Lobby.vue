@@ -1,21 +1,47 @@
 <template>
-    <div class="container">
-        <h1>{{ msg }}</h1><hr>
+  <div>
+    <header class="align-items container-fluid red-bg">
+      <div class="align-center">
+        <h1>{{ msg }}</h1>
+      </div>
+    </header>
+    <main class="container-fluid">
+      <div class="small-container pt-5">
         <div class="spots" v-if="spots && !playing">
-            <h2 class="pb-3">Available spots:</h2>
-            <div v-for="(spot, index) in spots" class="card mb-3">
-                <h3 class="pb-1 pt-3">Player {{spot.number}}</h3>
-                <button class="btn btn-info" v-on:click="claimSpot(spot.number)">Claim spot</button>
-            </div><hr>
+          <h2 class="pb-3">Beschikbare plaatsen:</h2>
+          <div v-for="(spot, index) in spots" class="card mb-3">
+            <h3 class="pb-1 pt-3">Speler {{spot.number}}</h3>
+            <button class="btn btn-info" v-on:click="claimSpot(spot.number)">Eis plaats op</button>
+          </div><hr>
         </div>
+
         <div v-if="occupied" class="occupied">
-            <p class="text-info" v-if="occupied && playing" >The game will start soon waiting for {{spots.length}} more players</p>
-            <h2 v-if="occupied" class="pb-3 pt-1">Current players:</h2>
-            <div v-for="player in occupied" class="card mb-3">
-                <h3 class="pb-1 pt-2">{{player.name}}</h3>
-            </div>
+          <p class="text-info" v-if="occupied && playing" >The game will start soon waiting for {{spots.length}} more players</p>
+          <h2 v-if="occupied" class="pb-3 pt-1">Huidige spelers aan het wachten:</h2>
+          <div v-for="player in occupied" class="card mb-3">
+            <h3 class="pb-1 pt-2">{{player.name}}</h3>
+          </div>
         </div>
-    </div>
+      </div>
+    </main>
+  </div>
+    <!--<div class="container">-->
+        <!--<h1>{{ msg }}</h1><hr>-->
+        <!--<div class="spots" v-if="spots && !playing">-->
+            <!--<h2 class="pb-3">Available spots:</h2>-->
+            <!--<div v-for="(spot, index) in spots" class="card mb-3">-->
+                <!--<h3 class="pb-1 pt-3">Player {{spot.number}}</h3>-->
+                <!--<button class="btn btn-info" v-on:click="claimSpot(spot.number)">Claim spot</button>-->
+            <!--</div><hr>-->
+        <!--</div>-->
+        <!--<div v-if="occupied" class="occupied">-->
+            <!--<p class="text-info" v-if="occupied && playing" >The game will start soon waiting for {{spots.length}} more players</p>-->
+            <!--<h2 v-if="occupied" class="pb-3 pt-1">Current players:</h2>-->
+            <!--<div v-for="player in occupied" class="card mb-3">-->
+                <!--<h3 class="pb-1 pt-2">{{player.name}}</h3>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 </template>
 
 <script>
