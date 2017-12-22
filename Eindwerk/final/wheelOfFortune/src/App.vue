@@ -20,10 +20,10 @@
       <div id="myNav" class="overlay">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="overlay-content">
-          <h3><router-link class="nav-item nav-link active" to="/">Login</router-link></h3>
-          <h3><router-link class="nav-item nav-link" to="game">Play</router-link></h3>
-          <h3><router-link to="profile" class="nav-item nav-link">Profile</router-link></h3>
-          <h3><router-link to="admin" class="nav-item nav-link">Admin</router-link></h3>
+          <h3><router-link onclick="closeNav()" class="nav-item nav-link active" to="/">Login</router-link></h3>
+          <h3><router-link onclick="closeNav()" class="nav-item nav-link" to="game">Play</router-link></h3>
+          <h3><router-link onclick="closeNav()" to="profile" class="nav-item nav-link">Profile</router-link></h3>
+          <h3><router-link onclick="closeNav()" to="admin" class="nav-item nav-link">Admin</router-link></h3>
         </div>
       </div>
       <nav class="container-fluid red-bg">
