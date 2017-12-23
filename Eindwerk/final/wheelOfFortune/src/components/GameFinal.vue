@@ -10,7 +10,7 @@
       </ul>
     </header>
     <main class="container-fluid">
-      <div class="small-container pt-2">
+      <div class="small-container pt-2" style="z-index: 10000">
         <div v-if="currentPlayer != null && currentPlayer.active" class="playing">
           <h3 class="pb-1 text-warning font-weight-bold">{{ randomWordCategory }}</h3>
           <button v-if="message || begin" class="col-12 mb-2 lightgreen-bg" style="border: none;">Draai aan het rad!</button>
@@ -110,6 +110,7 @@
     import Vue from 'vue'
     import * as firebase from "firebase";
     import VueSocketio from 'vue-socket.io';
+    import {throwconfetti} from '../../static/js/confetti.js'
 
     Vue.use(VueSocketio, 'http://localhost:3000/');
 
@@ -195,10 +196,6 @@
             getWord() {
                 this.randomWord = this.game.answer.word;
                 this.randomWordCategory = 'Categorie is: ' + this.game.answer.category;
-            },
-
-            removeUsedVowelFromOptions () {
-
             },
 
             lockVowels() {
@@ -304,6 +301,8 @@
             didIGuessRight() {
                 if (this.walterInput.replace(/\s/g, '').toLowerCase() != '' && this.walterInput.replace(/\s/g, '').toLowerCase() != null) {
                     if (this.walterInput.replace(/\s/g, '').toLowerCase() == this.randomWord.replace(/\s/g, '').toLowerCase()) {
+                        throwconfetti();
+                        firebase.database().ref('game/lettersUsed/').set(null);
                         this.walterFeedback = "Proficiat! U heeft het woord juist geraden!"
                     }
                     else
@@ -437,9 +436,5 @@
     li {
         display: inline-block;
         margin: 0 10px;
-    }
-
-    a {
-        color: #42b983;
     }
 </style>

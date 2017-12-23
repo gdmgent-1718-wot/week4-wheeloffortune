@@ -8,6 +8,7 @@ import * as firebase from "firebase";
 
 require('../static/css/main.css');
 require('../static/js/menu.js');
+require('../static/js/confetti.js');
 
 var config = {
     apiKey: "AIzaSyCRDbOBN_g2rlAqy8NBSRmjfvrPMswf4EE",
