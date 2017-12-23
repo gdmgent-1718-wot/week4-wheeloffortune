@@ -11,9 +11,10 @@ p.start(2.5)
 
 try:
     while True:
-        print "motor turning"
+        print "motor going 7.5"
         p.ChangeDutyCycle (7.5)
         time.sleep(1)
+        print 'motor going 2.5'
         p.ChangeDutyCycle (2.5)
         time.sleep (1)
 
