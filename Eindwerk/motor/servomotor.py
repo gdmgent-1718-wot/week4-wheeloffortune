@@ -12,11 +12,11 @@ p.start(2.5)
 try:
     while True:
         print "motor going 7.5"
-        p.ChangeDutyCycle (7.5)
-        time.sleep(1)
+        p.ChangeDutyCycle (12.5)
+        time.sleep(0.5)
         print 'motor going 2.5'
         p.ChangeDutyCycle (2.5)
-        time.sleep (1)
+        time.sleep (0.5)
 
 except KeyboardInterrupt:
 	p.stop()
