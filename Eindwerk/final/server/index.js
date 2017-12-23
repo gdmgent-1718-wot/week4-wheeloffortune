@@ -16,7 +16,7 @@ app.get('/', function (req, res) {
 function getGameData() {
     let db = admin.database();
     let ref = db.ref("game");
-    self  = this;
+    let self  = this;
     return ref.on("value", function (snapshot) {
         console.log('hallo');
         return snapshot.val();
@@ -90,8 +90,8 @@ function setNewWord() {
             word: randomWordFromFirebase,
             category: randomWordCategoryFromFirebase,
         });
-
-        admin.database().ref('game/lettersUsed/').remove();
+//Dit verwijdert lettersUsed elke keer als het fout is... er wordt toch geen nieuw woord gekozen=,
+        //admin.database().ref('game/lettersUsed/').remove();
     });
 }
 io.on('connection', function (socket) {

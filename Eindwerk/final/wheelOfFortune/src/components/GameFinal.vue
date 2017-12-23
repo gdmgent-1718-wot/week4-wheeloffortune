@@ -34,7 +34,7 @@
               <label>Mag ik het zeggen Walter (voor 250 euro)?</label>
               <input type="text" class="col-12 form-control mb-1" placeholder="Het woord, de zin of gezegde is.."
                      @keyup.enter="didIGuessRight" v-model="walterInput">
-              <button type="button" class="btn btn-primary btn col-12 mb-2 float-left"
+                <button type="button" class="btn btn-primary btn col-12 mb-2 float-left"
                       @click='didIGuessRight'>Ik ga het zeggen Walter! (-€250)
               </button>
               <span v-if='walterFeedback' class="font-weight-bold mb-3">{{ walterFeedback }}</span>
@@ -157,7 +157,7 @@
                     letter: "u"
                   }
                   ],
-                vowelsUsed: '',
+                vowelsUsed: [],
                 randomWord: '',
                 randomWordCategory: '',
                 compareWord: '',
@@ -195,6 +195,10 @@
             getWord() {
                 this.randomWord = this.game.answer.word;
                 this.randomWordCategory = 'Categorie is: ' + this.game.answer.category;
+            },
+
+            removeUsedVowelFromOptions () {
+
             },
 
             lockVowels() {
@@ -343,22 +347,38 @@
                 let self = this;
 
                 firebase.database().ref('game').on('value', function (snapshot) {
-                    console.log(snapshot.val());
                     self.game = snapshot.val();
-
-                    let areLettersUsed = ("lettersUsed" in self.game)
-
-                    if (areLettersUsed){
-                      self.lettersUsed = Object.values(self.game.lettersUsed)
-                    }
-                    else {
-                      self.lettersUsed = []
-                    }
-
                     self.getPlayers(self.game.players)
                     self.checkArray();
                 })
+                this.handleLettersAndVowelsUsed();
             },
+
+            handleLettersAndVowelsUsed () {
+              let self = this
+              firebase.database().ref('game').on('value', function (snapshot) {
+                self.game = snapshot.val();
+
+                let areLettersUsed = ("lettersUsed" in self.game)
+
+                if (areLettersUsed){
+                  self.lettersUsed = Object.values(self.game.lettersUsed)
+                  self.vowelsUsed = self.lettersUsed.filter(function (obj) {
+                    return obj == 'a' || obj == 'e' || obj == 'i' || obj == 'o' || obj == 'u'
+                  })
+                }
+                else {
+                  self.lettersUsed = []
+                }
+
+                for(let i = 0; i < self.vowelsUsed.length; i++){
+                  self.vowels = self.vowels.filter(function (obj) {
+                    return obj.letter != self.vowelsUsed[i]
+                  })
+                }
+              })
+            },
+
             checkArray: function () {
                 this.alphabet = []
                 let values = Object.values(this.game.alphabeth);
@@ -398,6 +418,7 @@
             this.getGameData();
             this.getSocketData();
             this.getDataFromFirebase();
+            this.handleLettersAndVowelsUsed();
         }
     }
 </script>
