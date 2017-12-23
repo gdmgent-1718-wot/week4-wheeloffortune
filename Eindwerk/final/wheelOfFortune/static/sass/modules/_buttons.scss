@@ -1,7 +1,7 @@
 /* _-_-_- modules/BUTTONS -_-_-_ */
 
 
-button {
+button, .link-as-button {
   color: $white;
   padding: $medium-small-padding;
   background-color: $light-orange;
@@ -12,21 +12,26 @@ button {
   display: block;
 }
 
-button:hover {
+button:hover, .link-as-button:hover {
   background-color: $dark-orange;
+  color: $white;
 }
 
 
 .letter-button {
   display: inline-block;
-  margin: $small-margin;
+  margin: $min-margin;
   border-radius: $small-radius;
-  border-style:none;
+  border-style:solid;
+  border-color: $red;
+  background-color: $white;
+  color: $grey;
+  border-width: $min-border-width;
 }
 
 button:disabled,
 button[disabled]{
-  background-color: $light-grey;
+  background-color: $faded-grey;
   color: $grey;
 border-style: none;
 }

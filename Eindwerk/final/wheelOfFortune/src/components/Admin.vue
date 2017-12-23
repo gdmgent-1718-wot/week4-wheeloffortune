@@ -1,8 +1,8 @@
 <template>
   <div>
-    <header class="align-items container-fluid orange-bg">
+    <header class="align-items container-fluid lightgreen-bg">
       <div class="align-center">
-        <h1>Voeg een zin, woord of gezegde toe..</h1>
+        <h1>Admin</h1>
       </div>
     </header>
     <main class="container-fluid">
@@ -16,7 +16,7 @@
             </option>
           </select>
           <span class="input-group-btn">
-              <button class="col-12 btn btn-secondary bg-success" type="button" @click="addWordToArray">
+              <button class="col-12 btn btn-secondary bg-success lightgreen-bg" style="border: none" type="button" @click="addWordToArray">
                   Voeg het toe aan de lijst, vergeet niet op te slaan.
               </button>
           </span>
@@ -28,23 +28,25 @@
         <button class="col-md-6 col-sm-12 mb-2 btn btn-secondary"  type="button" @click="pushDataToFirebase(arrayOfWords)" :class="{'btn-danger': isRed, 'btn-success': isGreen}">
           {{ buttonText }}
         </button>
-        <table class="table">
-          <thead>
-          <tr>
-            <th>Zin, woord of gezegde</th>
-            <th>Categorie</th>
-            <th>Delete</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-for="word in arrayOfWords" :key="word.id">
-            <td class="text-left">{{ word[0] }}</td>
-            <td class="text-left">{{ word[1] }}</td>
-            <td>
-              <button type="button" class="red-bg btn btn-sm btn-danger" @click="removeWordFromArray(word)">X</button> </td>
-          </tr>
-          </tbody>
-        </table>
+        <div style="overflow-x: auto">
+          <table class="table col-12">
+            <thead>
+            <tr>
+              <th>Zin, woord of gezegde</th>
+              <th>Categorie</th>
+              <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="word in arrayOfWords" :key="word.id">
+              <td class="text-left">{{ word[0] }}</td>
+              <td class="text-left">{{ word[1] }}</td>
+              <td>
+                <button type="button" style="border: none" class="red-bg btn btn-sm btn-danger" @click="removeWordFromArray(word)">X</button> </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
         <button class="col-md-6 col-sm-12 mb-5 btn btn-secondary"  type="button" @click="pushDataToFirebase(arrayOfWords)" :class="{'btn-danger': isRed, 'btn-success': isGreen}">
           {{ buttonText }}
         </button>

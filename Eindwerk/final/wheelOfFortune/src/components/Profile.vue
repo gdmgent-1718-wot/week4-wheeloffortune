@@ -6,13 +6,13 @@
       </div>
     </header>
     <main class="container-fluid">
-      <div class="small-container pt-5">
+      <div class="small-container pt-2">
         <p>
-          Raad een letter uit een zin, woord of gezegde, als u het juist heeft mag u nog eens draaien aan het rad én mag u nogmaals een letter raden.  Indien je fout hebt geraden is het aan de andere speler.Klinkers kan u kopen voor 250€, als je denkt het woord te weten mag je dit raden maar als je het fout hebt betaal je ook 250€.
+          Raad een letter uit een zin, woord of gezegde, als u het juist heeft mag u nog eens draaien aan het rad én mag u nogmaals een letter raden.  Indien je fout hebt geraden is het aan de andere speler. Klinkers kan u kopen voor €250, als je denkt het woord te weten mag je dit raden maar als je het fout hebt betaal je ook €250.
         </p>
 
-        <router-link :to="{ name: 'Lobby' }" class="btn">Voeg je toe aan de wachtrij en speel het spel.</router-link>
-        <button class="mt-5" v-on:click="logout">Uitloggen</button>
+        <router-link class="mb-2 link-as-button" :to="{ name: 'Lobby' }">Voeg je toe aan de wachtrij en speel het spel.</router-link>
+        <a href="#" v-on:click="logout">Uitloggen</a>
       </div>
     </main>
   </div>

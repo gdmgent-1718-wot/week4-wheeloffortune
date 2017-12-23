@@ -6,19 +6,19 @@
       </div>
     </header>
     <main class="container-fluid">
-      <div class="small-container pt-5">
-        <div class="spots" v-if="spots && !playing">
-          <h2 class="pb-3">Beschikbare plaatsen:</h2>
-          <div v-for="(spot, index) in spots" class="card mb-3">
-            <h3 class="pb-1 pt-3">Speler {{spot.number}}</h3>
+      <div class="small-container pt-2">
+        <div class="spots inline-block" v-if="spots && !playing">
+          <h2 class="pb-1">Beschikbare plaatsen:</h2>
+          <div v-for="(spot, index) in spots" class="card mb-1 col-4">
+            <h3 class="">Speler {{spot.number}}</h3>
             <button class="btn btn-info" v-on:click="claimSpot(spot.number)">Eis plaats op</button>
-          </div><hr>
+          </div>
         </div>
-
-        <div v-if="occupied" class="occupied">
+        <div v-if="occupied" class="occupied pt-3 inline-block">
+          <hr>
           <p class="text-info" v-if="occupied && playing" >The game will start soon waiting for {{spots.length}} more players</p>
-          <h2 v-if="occupied" class="pb-3 pt-1">Huidige spelers aan het wachten:</h2>
-          <div v-for="player in occupied" class="card mb-3">
+          <h2 v-if="occupied" class="pb-1">Huidige spelers aan het wachten:</h2>
+          <div v-for="player in occupied" class="card">
             <h3 class="pb-1 pt-2">{{player.name}}</h3>
           </div>
         </div>

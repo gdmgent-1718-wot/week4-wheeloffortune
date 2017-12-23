@@ -6,27 +6,28 @@
 }
 
 h1 {
-  font-size: 7vw;
   color: $white;
+  @include responsive-font(7vw, 40px, 60px, 20px);
 }
 
 h2 {
-  font-size: 5vw;
   color: $grey;
+  @include responsive-font(5vw, 30px, 40px, 20px);
 }
 h3 {
-  font-size: 4vw;
   color: $grey;
+  @include responsive-font(3vw, 20px, 28px, 20px);
 }
 
 .overlay-content h3, .list-inline-item h3 {
-  font-size: 4vw;
   color: $white;
+  @include responsive-font(4vw, 20px, 28px, 20px);
 }
 
 p {
   font-size: $normal-text;
   color: $grey;
+  line-height: $medium-line-height;
 }
 
 .error {
