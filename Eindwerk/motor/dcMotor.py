@@ -18,7 +18,7 @@ def set(property, value):
 set("delayed", "0")
 set("mode", "pwm")
 set("frequency", "500")
-set("active", "1")
+set("active", "0")
 
 def clockwise():
     io.output(in1_pin, True)
