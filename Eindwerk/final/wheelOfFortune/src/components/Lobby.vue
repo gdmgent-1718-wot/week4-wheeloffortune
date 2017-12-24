@@ -105,7 +105,6 @@
                             end: false,
                             winner: 'test'
                           });
-                          alert('test')
                             console.log('start the game')
                             this.$socket.emit('startGame')
                             self.$router.push({ name: 'GameFinal',})
@@ -124,7 +123,7 @@
                                 end: false,
                                 winner: 'test'
                               });
-                                firebase.database().ref('game/lettersUsed/').set(null);
+//                                firebase.database().ref('game/lettersUsed/').set(null);
                                 this.$socket.emit('startGame')
                                 self.$router.push({ name: 'GameFinal', })
                             }

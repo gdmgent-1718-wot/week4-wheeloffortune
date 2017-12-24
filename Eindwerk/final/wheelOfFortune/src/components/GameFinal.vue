@@ -266,6 +266,7 @@
             },
 
             handleEndGame(){
+              let self = this
               throwconfetti();
               firebase.database().ref('game/lettersUsed/').set({
                 0: 'a',
@@ -299,9 +300,35 @@
                 end: true,
                 winner: this.currentPlayer.name
               });
-//              setTimeout(function () {
-//
-//              }, 5000)
+             setTimeout(function () {
+               firebase.database().ref('game/players/').update({
+                 player1: {
+                   active: true,
+                   id: 1,
+                   number: 1,
+                   name: '',
+                   playing: false,
+                   score: 0
+                 },
+                 player2: {
+                   active: false,
+                   id: 2,
+                   number: 2,
+                   name: '',
+                   playing: false,
+                   score: 0
+                 },
+                 player3: {
+                   active: false,
+                   id: 3,
+                   number: 3,
+                   name: '',
+                   playing: false,
+                   score: 0
+                 }
+               })
+               self.$router.push({ name: 'Profile', })
+              }, 8000)
             },
             getUserData: function () {
                 let self = this;
@@ -348,6 +375,7 @@
             },
 
           checkIfWonAndChangeMessage(){
+            let self = this
             let finishedStatus;
             let playerWon;
 
@@ -359,6 +387,9 @@
 
             if(finishedStatus == true)
               this.statusMessage = playerWon + ' heeft het spel gewonnen!'
+              setTimeout(function () {
+                self.$router.push({ name: 'Profile', })
+              }, 5000)
           },
 
             handleLettersAndVowelsUsed () {
@@ -425,7 +456,7 @@
         this.getGameData();
         this.getSocketData();
         this.getDataFromFirebase();
-        this.handleLettersAndVowelsUsed();
+//        this.handleLettersAndVowelsUsed();
       },
         mounted() {
             this.authChange();
@@ -433,7 +464,7 @@
             this.getGameData();
             this.getSocketData();
             this.getDataFromFirebase();
-            this.handleLettersAndVowelsUsed();
+//            this.handleLettersAndVowelsUsed();
         }
     }
 </script>
