@@ -13,8 +13,8 @@
       <div class="small-container pt-2" style="z-index: 10000">
         <div v-if="currentPlayer != null && currentPlayer.active" class="playing">
           <h3 class="pb-1 text-warning font-weight-bold">{{ randomWordCategory }}</h3>
-          <button v-if="message || begin" class="col-12 mb-2 lightgreen-bg" style="border: none;">Draai aan het rad!</button>
-          <div>
+          <button v-if="message || begin == 'false'" class="col-12 mb-2 green-bg" style="border: none;" @click="turnWheel">Draai aan het rad!</button>
+          <div v-if="begin == true">
             <h4 v-if="message" class="font-weight-bold" :style="{ color: messageColor }">{{message}}</h4>
             <button type="button" class="letter-button"
                     :disabled='single.checked || tries == 0 || showWord()' @click='handleLetterClick(single)'
@@ -45,65 +45,7 @@
       </div>
     </main>
   </div>
-    <!--<main class="container mt-5">-->
-        <!--<div class="col-lg-6 offset-lg-3">-->
-            <!--<div class="pb-5">-->
-                <!--<h1 class="text-warning">{{ loading }}</h1>-->
-                <!--<ul class='result pt-2 pl-0'>-->
-                    <!--<li class="list-inline-item mr-1" v-for='letter in wordLetters'>-->
-                        <!--<h1 v-if="letter == ' ' " class="text-muted" style="opacity: 0.2">-->
-                            <!--{{ isGuessedLetter(letter) ? letter : '█'}}</h1>-->
-                        <!--<h1 v-else class="text-warning text-uppercase">{{ isGuessedLetter(letter) ? letter : '█'}}</h1>-->
-                    <!--</li>-->
-                <!--</ul>-->
 
-            <!--</div>-->
-            <!--<div v-if="currentPlayer != null && currentPlayer.active" class="playing">-->
-                <!--<h5 class="pb-1 text-warning font-weight-bold">{{ randomWordCategory }}</h5>-->
-                <!--<p class="pb-1 text-muted">De grijze vakjes zijn spaties.</p>-->
-                <!--<h4 class="pb-3 pt-1 font-weight-bold" :style="{ color: messageColor }">{{message}}</h4>-->
-                <!--<button type="button" class="btn btn-secondary col-2"-->
-                        <!--:disabled='single.checked || tries == 0 || showWord()' @click='handleLetterClick(single)'-->
-                        <!--v-for='single in alphabet'>-->
-                    <!--{{ single.letter }}-->
-                <!--</button>-->
-                <!--<form>-->
-                    <!--<div class="form-group">-->
-                        <!--<label for="sel1">Koop een klinker (voor 250 euro):</label>-->
-                        <!--<select class="form-control col-12 float-left mb-1" id="sel1" v-model="vowel">-->
-                            <!--<option v-for="klinker in vowels" :value="klinker.id">{{ klinker.letter }}</option>-->
-                        <!--</select>-->
-                        <!--<button type="button" class="btn btn-primary btn col-12 mb-5 float-left" @click='unlockVowel'>-->
-                            <!--Bevestig-->
-                        <!--</button>-->
-                    <!--</div>-->
-                <!--</form>-->
-                <!--<form>-->
-                    <!--<div class="form-group">-->
-                        <!--<label>Mag ik het zeggen Walter (voor 250)?</label>-->
-                        <!--<div class="col-12 float-left p-0">-->
-                            <!--<input type="text" class="form-control mb-1" placeholder="Het woord, de zin of gezegde is.."-->
-                                   <!--@keyup.enter="didIGuessRight" v-model="walterInput">-->
-                        <!--</div>-->
-                        <!--<button type="button" class="btn btn-primary btn col-12 mb-2 float-left"-->
-                                <!--@click='didIGuessRight'>Ik ga het zeggen Walter!-->
-                        <!--</button>-->
-                    <!--</div>-->
-                    <!--<span v-if='walterFeedback' class="font-weight-bold mb-3">{{ walterFeedback }}</span>-->
-                <!--</form>-->
-            <!--</div>-->
-            <!--<div v-else=""></div>-->
-
-
-            <!--<div class="pb-2 pt-5 mt-5 text-muted">-->
-                <!--Raad een letter uit een zin, woord of gezegde, als u het <span class="text-success font-weight-bold">juist</span>-->
-                <!--heeft mag u <span class="text-success font-weight-bold">nog eens draaien</span>-->
-                <!--aan het rad én mag u nogmaals een letter raden.-->
-                <!--Indien je <span class="text-danger font-weight-bold">fout</span> hebt geraden is het aan de <span-->
-                    <!--class="text-danger font-weight-bold">andere speler</span>.-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</main>-->
 </template>
 
 <script>
@@ -131,7 +73,7 @@
                 currentAnswer: null,
                 showText: false,
                 message: '',
-                begin: '',
+                begin: 'false',
                 messageColor: 'red',
                 loading: 'Willekeurig een zin, woord of gezegde kiezen...',
                 words: [],
@@ -191,6 +133,11 @@
                 this.resetCheckedLetters();
                 this.lockVowels();
                 this.splitWordIntoLetters();
+                this.lettersUsed = []
+            },
+
+            turnWheel() {
+              this.begin = true;
             },
 
             getWord() {
@@ -252,15 +199,15 @@
                 this.countItemInArray(this.wordLetters, single.letter.toLowerCase())
 
                 if (this.wordLetters.includes(single.letter.toLowerCase())) {
-                    this.messageColor = '#5cb85c'
+                    this.messageColor = '#4BE8D8'
                     this.message = 'Je hebt juist geraden en mag nog eens draaien aan het rad.'
                 }
                 else {
-                    this.messageColor = '#d9534f'
+                    this.messageColor = '#DD5B46'
                     this.message = 'Helaas, deze letter zochten we niet, het is aan de volgende...'
                     this.endTurn()
                 }
-                this.checkIfWon()
+                //this.checkIfWon()
             },
 
             countItemInArray(array, value) {
@@ -291,12 +238,12 @@
                 return this.randomWord == this.compareWord;
             },
 
-            checkIfWon() {
-                if (this.compareWord.length == this.wordLetters.length) {
-                    this.messageColor = '#00b84f'
-                    this.message = 'Proficiat! Je hebt gewonnen!!!.'
-                }
-            },
+//            checkIfWon() {
+//                if (this.compareWord.length == this.wordLetters.length) {
+//                    this.messageColor = '#00b84f'
+//                    this.message = 'Proficiat! Je hebt gewonnen!!!.'
+//                }
+//            },
 
             didIGuessRight() {
                 if (this.walterInput.replace(/\s/g, '').toLowerCase() != '' && this.walterInput.replace(/\s/g, '').toLowerCase() != null) {
@@ -411,6 +358,14 @@
                 this.$socket.emit('turnChange', {number: this.currentPlayer.number});
             },
         },
+      created() {
+        this.authChange();
+        this.getUserData();
+        this.getGameData();
+        this.getSocketData();
+        this.getDataFromFirebase();
+        this.handleLettersAndVowelsUsed();
+      },
         mounted() {
             this.authChange();
             this.getUserData();
