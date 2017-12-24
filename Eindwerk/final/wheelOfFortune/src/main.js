@@ -31,3 +31,5 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+export const bus = new Vue();

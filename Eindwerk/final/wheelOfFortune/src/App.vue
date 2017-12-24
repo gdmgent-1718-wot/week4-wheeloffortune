@@ -20,7 +20,8 @@
       <div id="myNav" class="overlay">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="overlay-content">
-          <h3><router-link onclick="closeNav()" class="nav-item nav-link active" to="/">Login</router-link></h3>
+          <h3 v-if="loggedIn == false"><router-link onclick="closeNav()" class="nav-item nav-link active" to="/">Login</router-link></h3>
+          <h3 v-if="loggedIn"><router-link onclick="closeNav()" class="nav-item nav-link active" to="/">Logout</router-link></h3>
           <h3><router-link onclick="closeNav()" class="nav-item nav-link" to="game">Play</router-link></h3>
           <h3><router-link onclick="closeNav()" to="profile" class="nav-item nav-link">Profile</router-link></h3>
           <h3><router-link onclick="closeNav()" to="admin" class="nav-item nav-link">Admin</router-link></h3>
@@ -37,7 +38,38 @@
 </template>
 
 <script>
+  import { bus } from './main';
+  import * as firebase from "firebase";
+
 export default {
-  name: 'app'
-}
+  name: 'app',
+  data () {
+    return {
+      user: firebase.auth().currentUser,
+      loggedIn: false,
+    }
+  },
+  created () {
+    let self = this
+    bus.$on('userLogin', () => {
+      self.checkIfOnline();
+    })
+  },
+  methods: {
+    checkIfOnline (){
+      let self = this
+      console.log('teeeeeeest',self.loggedIn)
+      firebase.auth().onAuthStateChanged(function (user) {
+        if(user != undefined){
+          self.loggedIn = true
+          console.log(self.loggedIn)
+        }
+        else {
+          self.loggedIn = false
+          console.log(self.loggedIn)
+        }
+      }
+      )}
+    }
+  }
 </script>

@@ -42,6 +42,7 @@
     import * as firebase from "firebase";
     import Router from 'vue-router';
     import vuesocket from "vue-socket.io";
+    import { bus } from '../main';
 
 
     export default {
@@ -68,6 +69,7 @@
             }).then(function () {
                 firebase.auth().onAuthStateChanged(function(user) {
                     if (user) {
+                        bus.$emit('userLogin', true)
                         self.$router.push({name: 'Profile'});
                     } else {
                         // No user is signed in.
