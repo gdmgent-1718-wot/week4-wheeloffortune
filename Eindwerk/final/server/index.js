@@ -86,6 +86,7 @@ function setNewWord() {
         let randomNumber = Math.floor(Math.random() * words.length);
         let randomWordFromFirebase = words[randomNumber][0];
         let randomWordCategoryFromFirebase = words[randomNumber][1];
+
         admin.database().ref('game/answer/').update({
             word: randomWordFromFirebase,
             category: randomWordCategoryFromFirebase,

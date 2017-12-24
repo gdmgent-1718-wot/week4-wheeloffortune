@@ -101,6 +101,11 @@
                         self.occupied.push(player)
                         console.log(self.occupied);
                         if(self.occupied.length === 3 ){
+                          firebase.database().ref('game/finished/').update({
+                            end: false,
+                            winner: 'test'
+                          });
+                          alert('test')
                             console.log('start the game')
                             this.$socket.emit('startGame')
                             self.$router.push({ name: 'GameFinal',})
@@ -115,6 +120,11 @@
                             console.log(self.occupied);
                             if(self.occupied.length === 3){
                                 console.log('start the game')
+                              firebase.database().ref('game/finished/').update({
+                                end: false,
+                                winner: 'test'
+                              });
+                                firebase.database().ref('game/lettersUsed/').set(null);
                                 this.$socket.emit('startGame')
                                 self.$router.push({ name: 'GameFinal', })
                             }
@@ -124,7 +134,7 @@
                 }
             },
             claimSpot: function (number) {
-                self = this;
+                let self = this;
                 let selector = "player"+(number);
                 console.log(selector);
                 firebase.database().ref('game/players/'+selector).update({

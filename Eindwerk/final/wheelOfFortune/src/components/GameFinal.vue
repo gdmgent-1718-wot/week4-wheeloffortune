@@ -41,7 +41,7 @@
             </form>
           </div>
         </div>
-        <div v-else=""><p>Het is momenteel aan een andere speler. Wacht uw beurt af.</p></div>
+        <div v-else=""><p>{{ statusMessage }}</p></div>
       </div>
     </main>
   </div>
@@ -110,7 +110,8 @@
                 lettersUsed: [],
                 tries: 6,
                 initialTries: 6,
-                alphabet: []
+                alphabet: [],
+                statusMessage: 'Het is momenteel aan een andere speler. Wacht uw beurt af.'
             }
         },
         sockets: {
@@ -207,7 +208,7 @@
                     this.message = 'Helaas, deze letter zochten we niet, het is aan de volgende...'
                     this.endTurn()
                 }
-                //this.checkIfWon()
+                this.checkIfWon()
             },
 
             countItemInArray(array, value) {
@@ -238,18 +239,23 @@
                 return this.randomWord == this.compareWord;
             },
 
-//            checkIfWon() {
-//                if (this.compareWord.length == this.wordLetters.length) {
-//                    this.messageColor = '#00b84f'
-//                    this.message = 'Proficiat! Je hebt gewonnen!!!.'
-//                }
-//            },
+            checkIfWon() {
+              let wordLettersNoSpaces;
+              wordLettersNoSpaces = this.wordLetters.filter(function(str) {
+                return /\S/.test(str);
+              })
+
+                if (this.compareWord.length == wordLettersNoSpaces.length) {
+                    this.messageColor = '#00b84f'
+                    this.message = 'Proficiat! Je hebt gewonnen!!!.'
+                    this.handleEndGame();
+                }
+            },
 
             didIGuessRight() {
                 if (this.walterInput.replace(/\s/g, '').toLowerCase() != '' && this.walterInput.replace(/\s/g, '').toLowerCase() != null) {
                     if (this.walterInput.replace(/\s/g, '').toLowerCase() == this.randomWord.replace(/\s/g, '').toLowerCase()) {
-                        throwconfetti();
-                        firebase.database().ref('game/lettersUsed/').set(null);
+                        this.handleEndGame();
                         this.walterFeedback = "Proficiat! U heeft het woord juist geraden!"
                     }
                     else
@@ -257,6 +263,45 @@
                 }
                 else
                     this.walterFeedback = "U moet een woord invoeren.."
+            },
+
+            handleEndGame(){
+              throwconfetti();
+              firebase.database().ref('game/lettersUsed/').set({
+                0: 'a',
+                1: 'b',
+                2: 'c',
+                3: 'd',
+                4: 'e',
+                5: 'f',
+                6: 'g',
+                7: 'h',
+                8: 'i',
+                9: 'j',
+                10: 'k',
+                11: 'l',
+                12: 'm',
+                13: 'n',
+                14: 'o',
+                15: 'p',
+                16: 'q',
+                17: 'r',
+                18: 's',
+                19: 't',
+                20: 'u',
+                21: 'v',
+                22: 'w',
+                23: 'x',
+                24: 'y',
+                25: 'z',
+              });
+              firebase.database().ref('game/finished/').update({
+                end: true,
+                winner: this.currentPlayer.name
+              });
+//              setTimeout(function () {
+//
+//              }, 5000)
             },
             getUserData: function () {
                 let self = this;
@@ -279,6 +324,7 @@
                 this.$socket.emit('answer', {player: this.currentPlayer.name, answer: this.answer});
                 this.endTurn();
                 this.answer = null;
+                alert('data send')
             },
             authChange: function () {
                 let self = this
@@ -296,13 +342,28 @@
                     self.game = snapshot.val();
                     self.getPlayers(self.game.players)
                     self.checkArray();
+                    self.handleLettersAndVowelsUsed();
+                    self.checkIfWonAndChangeMessage();
                 })
-                this.handleLettersAndVowelsUsed();
             },
+
+          checkIfWonAndChangeMessage(){
+            let finishedStatus;
+            let playerWon;
+
+            let finishedRef = firebase.database().ref('game/finished');
+            finishedRef.on('value', function(snapshot) {
+              finishedStatus = snapshot.val().end
+              playerWon = snapshot.val().winner
+            });
+
+            if(finishedStatus == true)
+              this.statusMessage = playerWon + ' heeft het spel gewonnen!'
+          },
 
             handleLettersAndVowelsUsed () {
               let self = this
-              firebase.database().ref('game').on('value', function (snapshot) {
+              firebase.database().ref('game').once('value', function (snapshot) {
                 self.game = snapshot.val();
 
                 let areLettersUsed = ("lettersUsed" in self.game)

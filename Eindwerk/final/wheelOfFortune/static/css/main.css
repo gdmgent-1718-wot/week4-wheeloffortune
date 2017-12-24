@@ -40,7 +40,8 @@ table {
 /* _-_-_- base/BASE -_-_-_ */
 body {
   padding: 0;
-  margin: 0; }
+  margin: 0;
+  overflow-x: hidden; }
 
 .clearfix {
   overflow: auto;
