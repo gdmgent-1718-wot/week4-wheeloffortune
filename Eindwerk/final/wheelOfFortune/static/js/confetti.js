@@ -150,18 +150,18 @@ var Confetti = function () {
 
 function throwconfetti(){
   (function () {
-    var DURATION = 5000,
+    var DURATION = 8000,
       LENGTH = 120;
 
     new Confetti({
       width: window.innerWidth,
       height: window.innerHeight,
       length: LENGTH,
-      duration: 5000
+      duration: DURATION
     });
-    return
     //
-    // setTimeout(function () {
+    //
+    // let start = setTimeout(function () {
     //   new Confetti({
     //     width: window.innerWidth,
     //     height: window.innerHeight,
@@ -169,7 +169,10 @@ function throwconfetti(){
     //     duration: DURATION
     //   });
     // }, DURATION / 2);
+    //
+    // clearTimeout(start, 10000)
   })();
+  return
 }
 
 export {throwconfetti}

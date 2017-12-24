@@ -268,6 +268,7 @@
             handleEndGame(){
               let self = this
               throwconfetti();
+              clearTimeout(throwconfetti(), 5000)
               firebase.database().ref('game/lettersUsed/').set({
                 0: 'a',
                 1: 'b',
@@ -384,7 +385,7 @@
               finishedStatus = snapshot.val().end
               playerWon = snapshot.val().winner
             });
-console.log(finishedStatus)
+
             if(finishedStatus == true){
               this.statusMessage = playerWon + ' heeft het spel gewonnen!'
               setTimeout(function () {
