@@ -1,0 +1,20 @@
+{
+  "name": "p2p",
+  "version": "1.0.0",
+  "description": "",
+  "main": "reciever.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run bundle && npm run bundle1 && npm run bundle2 && npm run bundle3",
+    "bundle1": "browserify sstreamer.js -o streamer.js",
+    "bundle": "browserify sreciever.js -o reciever.js",
+    "bundle2": "browserify sreciever2.js -o reciever2.js",
+    "bundle3": "browserify sreciever3.js -o reciever3.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "browserify": "^14.5.0",
+    "express": "^4.16.2"
+  }
+}
