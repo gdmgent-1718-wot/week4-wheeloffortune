@@ -150,24 +150,25 @@ var Confetti = function () {
 
 function throwconfetti(){
   (function () {
-    var DURATION = 8000,
+    var DURATION = 5000,
       LENGTH = 120;
 
     new Confetti({
       width: window.innerWidth,
       height: window.innerHeight,
       length: LENGTH,
-      duration: DURATION
+      duration: 5000
     });
-
-    setTimeout(function () {
-      new Confetti({
-        width: window.innerWidth,
-        height: window.innerHeight,
-        length: LENGTH,
-        duration: DURATION
-      });
-    }, DURATION / 2);
+    return
+    //
+    // setTimeout(function () {
+    //   new Confetti({
+    //     width: window.innerWidth,
+    //     height: window.innerHeight,
+    //     length: LENGTH,
+    //     duration: DURATION
+    //   });
+    // }, DURATION / 2);
   })();
 }
 

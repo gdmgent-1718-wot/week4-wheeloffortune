@@ -384,12 +384,13 @@
               finishedStatus = snapshot.val().end
               playerWon = snapshot.val().winner
             });
-
-            if(finishedStatus == true)
+console.log(finishedStatus)
+            if(finishedStatus == true){
               this.statusMessage = playerWon + ' heeft het spel gewonnen!'
               setTimeout(function () {
                 self.$router.push({ name: 'Profile', })
               }, 5000)
+            }
           },
 
             handleLettersAndVowelsUsed () {
