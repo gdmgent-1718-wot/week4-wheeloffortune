@@ -12,12 +12,13 @@ firebase.auth().signInWithEmailAndPassword("user1@mail.be", "123456").catch(func
 });
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 let constraints = {audio: false, video: true};
-
+let video = document.querySelector("video");
 function errorCallback(error) {
     console.log("getUserMedia error: ", error);
 }
 
 navigator.getUserMedia(constraints, function (stream) {
+    video.src = window.URL.createObjectURL(stream);
     let database = firebase.database()
     let Peer = require('simple-peer')
     let parameters = {

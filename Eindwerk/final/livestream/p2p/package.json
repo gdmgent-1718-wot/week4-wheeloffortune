@@ -5,7 +5,7 @@
   "main": "reciever.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run bundle && npm run bundle1 && npm run bundle2 && npm run bundle3",
+    "build": "yarn bundle && yarn bundle1 && yarn bundle2 && yarn bundle3",
     "bundle1": "browserify sstreamer.js -o streamer.js",
     "bundle": "browserify sreciever.js -o reciever.js",
     "bundle2": "browserify sreciever2.js -o reciever2.js",

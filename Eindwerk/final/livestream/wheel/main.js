@@ -6,12 +6,13 @@ let pusher = new Pusher('338fc3df23a162fc1144', {
 });
 
 let channel = pusher.subscribe('wheelOfFortune');
+let videoStream = null;
 
 pusher.connection.bind( 'error', function( err ) {
     console.log(err.error.data)
 });
 channel.bind('stream', function (data) {
-    console.log(data);
+    console.log(data.message);
 });
 
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
@@ -25,5 +26,5 @@ function errorCallback(error){
 }
 navigator.getUserMedia(constraints, successCallback, errorCallback);
 navigator.getUserMedia({ video: true, audio: false }, function(stream) {
-    currentUser.stream = stream;
+    videoStream = stream;
 }, function() {});
