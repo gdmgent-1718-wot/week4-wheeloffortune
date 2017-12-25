@@ -29,9 +29,10 @@ try:
 		speed = posdb['speed']
 
 		if turning:
-                #print("turning")
-                GPIO.output(07, True)
-                pwm.ChangeDutyCycle(speed)
+            #print("turning")
+            GPIO.output(07, True)
+            pwm.ChangeDutyCycle(speed)
+                
 		else:
                 #print("waiting")
 			    GPIO.output(07, False)
