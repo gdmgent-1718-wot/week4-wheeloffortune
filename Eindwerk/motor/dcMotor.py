@@ -20,13 +20,13 @@ set("mode", "pwm")
 set("frequency", "500")
 set("active", "0")
 
-def clockwise():
-    io.output(in1_pin, True)
+def stop():
+    io.output(in1_pin, False)
     io.output(in2_pin, False)
 
-def counter_clockwise():
-    io.output(in1_pin, False)
-    io.output(in2_pin, True)
+def start():
+    io.output(in1_pin, True)
+    io.output(in2_pin, False)
 
 clockwise()
 
