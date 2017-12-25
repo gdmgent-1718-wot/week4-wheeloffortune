@@ -4,10 +4,9 @@ from firebase_admin import credentials
 from firebase_admin import db
 from time import sleep
 
-cred = credentials.Certificate(
-    'wheeloffortune-18d6d-firebase-adminsdk-vn804-4f020fab3d.json')
-default_app = firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://wheeloffortune-18d6d.firebaseio.com/'})
+
+cred = credentials.Certificate("wheeloffortune2-c0e4a-firebase-adminsdk-xx83k-8a28c73b1e.json")
+firebase_admin.initialize_app(cred, {'databaseURL':'https://wheeloffortune2-c0e4a.firebaseio.com/'})
 root = db.reference()
 GPIO.setmode(GPIO.BOARD)
 
