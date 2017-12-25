@@ -38,5 +38,5 @@ try:
             sleep(2)
             GPIO.output(07, False)
 except KeyboardInterrupt:
-    p.stop()
+    pwm.stop()
     GPIO.cleanup()
