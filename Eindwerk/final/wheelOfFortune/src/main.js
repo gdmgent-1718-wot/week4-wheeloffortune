@@ -16,6 +16,9 @@ var config = {
     databaseURL: "https://wheeloffortune2-c0e4a.firebaseio.com/",
     storageBucket: "gs://wheeloffortune2-c0e4a.appspot.com/",
 };
+
+export const bus = new Vue();
+
 firebase.initializeApp(config);
 Vue.config.productionTip = false
 // window.jQuery = window.$ = require('../node_modules/jquery/dist/jquery.js');
@@ -32,4 +35,4 @@ new Vue({
   components: { App }
 })
 
-export const bus = new Vue();
+
