@@ -16,5 +16,7 @@ GPIO.output(05, False)
 pwm.ChangeDutyCycle(75)
 GPIO.output(07, True)
 sleep(2)
+pwm.ChangeDutyCycle(40)
+sleep(2)
 GPIO.output(07, False)
 
