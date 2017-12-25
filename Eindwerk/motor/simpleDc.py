@@ -26,7 +26,20 @@ try:
         # get values from Firebase and put them in variables
         posdb = root.child('game/motor').get()
         # is motor turning?
-        print posdb
+        turning = posdb['turning']
+        # speed > 70 && < 100
+        speed = posdb['speed']
+        if turning:
+            print 'turning'
+            sleep(2)
+            # print("turning")
+            # GPIO.output(07, True)
+            # pwm.ChangeDutyCycle(speed)
+        else:
+            print 'stopped'
+            sleep(2)
+            # print("waiting")
+            # GPIO.output(07, False)
 except KeyboardInterrupt:
     p.stop()
     GPIO.cleanup()
