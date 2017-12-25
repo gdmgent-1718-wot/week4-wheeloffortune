@@ -29,13 +29,17 @@ try:
 		speed = posdb['speed']
 
 		if turning:
+            print "turning"
+            sleep(2)
             #print("turning")
-            GPIO.output(07, True)
-            pwm.ChangeDutyCycle(speed)
+            #GPIO.output(07, True)
+            #pwm.ChangeDutyCycle(speed)
                 
 		else:
+            print "stopped"
+            sleep(2)
                 #print("waiting")
-			    GPIO.output(07, False)
+			    #GPIO.output(07, False)
 except KeyboardInterrupt:
 	p.stop()
 	GPIO.cleanup()
