@@ -26,17 +26,11 @@ try:
         posdb = root.child('game').child('motor').get()
         # is motor turning?
         turning = posdb['turning']
+        print turning
         # speed > 70 && < 100
         speed = posdb['speed']
-        if turning:
-            print 'turning'
-            # sleep(2)
-            GPIO.output(07, True)
-            pwm.ChangeDutyCycle(speed)
-        else:
-            print 'stopped'
-            sleep(2)
-            GPIO.output(07, False)
+        print speed
+        
 except KeyboardInterrupt:
     pwm.stop()
     GPIO.cleanup()
