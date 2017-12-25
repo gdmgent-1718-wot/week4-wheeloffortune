@@ -328,6 +328,7 @@
                    score: 0
                  }
                })
+               firebase.database().ref('game/lettersUsed/').remove()
                self.$router.push({ name: 'Profile', })
               }, 8000)
             },
