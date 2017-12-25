@@ -29,14 +29,14 @@ try:
 		speed = posdb['speed']
 
 		if turning:
-            print "turning"
+            print 'turning'
             sleep(2)
             #print("turning")
             #GPIO.output(07, True)
             #pwm.ChangeDutyCycle(speed)
                 
 		else:
-            print "stopped"
+            print 'stopped'
             sleep(2)
                 #print("waiting")
 			    #GPIO.output(07, False)
