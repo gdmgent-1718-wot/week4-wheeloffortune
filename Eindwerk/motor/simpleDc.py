@@ -24,7 +24,7 @@ GPIO.output(05, False)
 try:
     while True:
         # get values from Firebase and put them in variables
-        posdb = root.child('game/motor').get()
+        posdb = root.child('game').child('motor').get()
         # is motor turning?
         turning = posdb['turning']
         # speed > 70 && < 100
