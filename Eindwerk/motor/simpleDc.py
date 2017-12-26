@@ -37,6 +37,7 @@ try:
             pwm.ChangeDutyCycle(speed)
         else:
             print 'stopped'
+            pwm.ChangeDutyCycle(40)
             sleep(2)
             GPIO.output(07, False)
 except KeyboardInterrupt:
