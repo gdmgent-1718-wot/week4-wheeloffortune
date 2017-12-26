@@ -40,6 +40,7 @@ try:
             pwm.ChangeDutyCycle(10)
             sleep(2)
             GPIO.output(07, False)
+            pwm.ChangeDutyCycle(0)
 except KeyboardInterrupt:
     pwm.stop()
     GPIO.cleanup()
