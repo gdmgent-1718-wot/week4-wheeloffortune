@@ -37,7 +37,7 @@ try:
             pwm.ChangeDutyCycle(speed)
         else:
             print 'stopped'
-            pwm.ChangeDutyCycle(10)
+            pwm.ChangeDutyCycle(0)
             sleep(2)
             GPIO.output(07, False)
             pwm.ChangeDutyCycle(0)
