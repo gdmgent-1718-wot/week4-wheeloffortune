@@ -30,7 +30,7 @@ try:
         # speed > 70 && < 100
         speed = posdb['speed']
         print speed
-        if turning == False or turning == "False":
+        if turning == True or turning == "True":
             print 'turning'
             # sleep(2)
             GPIO.output(07, True)
