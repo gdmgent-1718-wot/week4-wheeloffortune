@@ -11,6 +11,8 @@
     </header>
     <main class="container-fluid">
       <div class="small-container pt-2" style="z-index: 10000">
+        <p v-for="(value, key) in scorePlayers">Score Speler {{ key }}: {{ value }} </p>
+        <p>Gedraaide score: {{ currentScore }} </p>
         <div v-if="currentPlayer != null && currentPlayer.active" class="playing">
           <h3 class="pb-1 text-warning font-weight-bold">{{ randomWordCategory }}</h3>
           <button v-if="message || begin == 'false'" class="col-12 mb-2 green-bg" style="border: none;" @click="turnWheel">Draai aan het rad!</button>
@@ -111,7 +113,13 @@
                 tries: 6,
                 initialTries: 6,
                 alphabet: [],
-                statusMessage: 'Het is momenteel aan een andere speler. Wacht uw beurt af.'
+                statusMessage: 'Het is momenteel aan een andere speler. Wacht uw beurt af.',
+                scorePlayers: {
+                 1:0,
+                 2:0,
+                 3:0
+                },
+                currentScore: '...'
             }
         },
         sockets: {
@@ -134,11 +142,26 @@
                 this.resetCheckedLetters();
                 this.lockVowels();
                 this.splitWordIntoLetters();
-                this.lettersUsed = []
+                this.assignScoreToPlayers();
+                this.lettersUsed = [];
             },
 
             turnWheel() {
               this.begin = true;
+              //Neem hier de data van de camera stel nu dat het 300 is.
+              this.currentScore = 300
+            },
+
+            assignScoreToPlayers () {
+              let self = this
+              let database = firebase.database()
+              let databaseRef = database.ref('game/players');
+              databaseRef.on('value', function (snapshot) {
+                let playersInfo = snapshot.val()
+                self.scorePlayers[1] = playersInfo.player1.score
+                self.scorePlayers[2]= playersInfo.player2.score
+                self.scorePlayers[3] = playersInfo.player3.score
+              });
             },
 
             getWord() {
@@ -156,6 +179,17 @@
 
             unlockVowel() {
                 this.alphabet[this.vowel].checked = false
+                this.substractMoneyFromCurrentMoney ();
+            },
+
+            substractMoneyFromCurrentMoney () {
+              let currentPlayerScore = this.scorePlayers[this.currentPlayer.number]
+              let substractedScore = currentPlayerScore - 250
+              console.log(substractedScore)
+              this.scorePlayers[this.currentPlayer.number] = substractedScore
+              firebase.database().ref('game/players/player'+ this.currentPlayer.number).update({
+                score: substractedScore
+              });
             },
 
             getDataFromFirebase() {
@@ -219,7 +253,19 @@
                     }
                 }
                 alert('je krijgt ' + n + ' keer het bedrag dat je hebt gedraait')
+                this.updateScore(n)
                 return n;
+            },
+
+            updateScore (times) {
+              if(times != 0){
+                let calculatedScore = (this.currentScore * times) + this.scorePlayers[this.currentPlayer.number]
+                firebase.database().ref('game/players/player'+ this.currentPlayer.number).update({
+                  score: calculatedScore
+                });
+
+                this.scorePlayers[this.currentPlayer.number] = calculatedScore
+              }
             },
 
             isGuessedLetter(letter) {
@@ -258,8 +304,10 @@
                         this.handleEndGame();
                         this.walterFeedback = "Proficiat! U heeft het woord juist geraden!"
                     }
-                    else
-                        this.walterFeedback = "Helaas, u heeft het niet juist geraden."
+                    else {
+                      this.substractMoneyFromCurrentMoney();
+                      this.walterFeedback = "Helaas, u heeft het niet juist geraden."
+                    }
                 }
                 else
                     this.walterFeedback = "U moet een woord invoeren.."
