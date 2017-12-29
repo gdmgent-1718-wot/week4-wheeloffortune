@@ -54,7 +54,8 @@
     import Vue from 'vue'
     import * as firebase from "firebase";
     import VueSocketio from 'vue-socket.io';
-    import {throwconfetti} from '../../static/js/confetti.js'
+    import {throwconfetti} from '../../static/js/confetti.js';
+    import { bus } from '../main';
 
     Vue.use(VueSocketio, 'http://localhost:3000/');
 
@@ -119,7 +120,8 @@
                  2:0,
                  3:0
                 },
-                currentScore: '...'
+                currentScore: '...',
+                isNegative: false
             }
         },
         sockets: {
@@ -178,18 +180,27 @@
             },
 
             unlockVowel() {
-                this.alphabet[this.vowel].checked = false
-                this.substractMoneyFromCurrentMoney ();
+               this.substractMoneyFromCurrentMoney ();
+               if(this.isNegative == false)
+                  this.alphabet[this.vowel].checked = false
             },
 
             substractMoneyFromCurrentMoney () {
               let currentPlayerScore = this.scorePlayers[this.currentPlayer.number]
               let substractedScore = currentPlayerScore - 250
-              console.log(substractedScore)
-              this.scorePlayers[this.currentPlayer.number] = substractedScore
-              firebase.database().ref('game/players/player'+ this.currentPlayer.number).update({
-                score: substractedScore
-              });
+              if(substractedScore < 0){
+                alert('Je score is niet hoog genoeg om een klinker te kopen of het woord te raden.')
+                this.isNegative = true
+              }
+              else {
+                this.isNegative = false
+                this.scorePlayers[this.currentPlayer.number] = substractedScore
+                let database = firebase.database()
+                database.ref('game/players/player'+ this.currentPlayer.number).update({
+                  score: substractedScore
+                });
+              }
+//              console.log(substractedScore)
             },
 
             getDataFromFirebase() {
@@ -350,6 +361,7 @@
                 winner: this.currentPlayer.name
               });
              setTimeout(function () {
+               document.getElementById("confettiCanvas").remove();
                firebase.database().ref('game/players/').update({
                  player1: {
                    active: true,
@@ -438,6 +450,7 @@
             if(finishedStatus == true){
               this.statusMessage = playerWon + ' heeft het spel gewonnen!'
               setTimeout(function () {
+                alert('Het spel is voorbij')
                 self.$router.push({ name: 'Profile', })
               }, 5000)
             }
@@ -502,6 +515,7 @@
             },
         },
       created() {
+        bus.$emit('userLogin', true)
         this.authChange();
         this.getUserData();
         this.getGameData();

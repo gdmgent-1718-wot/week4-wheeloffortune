@@ -53,54 +53,12 @@
       </div>
     </main>
   </div>
-  <!--<div class="container">-->
-    <!--<h3 class="pt-3 pb-5">Voeg een zin, woord of gezegde toe..</h3>-->
-    <!--<div class="input-group">-->
-      <!--<input type="text" @keyup.enter="addWordToArray" class="form-control" placeholder="Voeg een woord toe dat de spelers moeten raden.." aria-label="Voeg een woord toe.." v-model="inputWord">-->
-      <!--<span class="input-group-btn">-->
-                    <!--<button class="btn btn-secondary bg-success" type="button" @click="addWordToArray">-->
-                        <!--+-->
-                    <!--</button>-->
-      <!--</span>-->
-    <!--</div>-->
-    <!--<div class="form-group mt-3">-->
-      <!--<select class="form-control mb-3" v-model="selected">-->
-        <!--<option v-for="category in categories" :value="category">-->
-          <!--{{ category.name }}-->
-        <!--</option>-->
-      <!--</select>-->
-      <!--<span class="description text-muted"><em>{{ selected.description }}</em></span>-->
-    <!--</div>-->
-    <!--<h4 class="pt-5 pb-2">Te raden zinnen, woorden of gezegdes:</h4>-->
-    <!--<button class="col-md-6 col-sm-12 mb-2 btn btn-secondary"  type="button" @click="pushDataToFirebase(arrayOfWords)" :class="{'btn-danger': isRed, 'btn-success': isGreen}">-->
-      <!--{{ buttonText }}-->
-    <!--</button>-->
-    <!--<table class="table">-->
-      <!--<thead>-->
-      <!--<tr>-->
-        <!--<th>Zin, woord of gezegde</th>-->
-        <!--<th>Categorie</th>-->
-        <!--<th>Delete</th>-->
-      <!--</tr>-->
-      <!--</thead>-->
-      <!--<tbody>-->
-      <!--<tr v-for="word in arrayOfWords" :key="word.id">-->
-        <!--<td class="text-left">{{ word[0] }}</td>-->
-        <!--<td class="text-left">{{ word[1] }}</td>-->
-        <!--<td>-->
-          <!--<button type="button" class="btn btn-sm btn-danger" @click="removeWordFromArray(word)">X</button> </td>-->
-      <!--</tr>-->
-      <!--</tbody>-->
-    <!--</table>-->
-    <!--<button class="col-md-6 col-sm-12 mb-5 btn btn-secondary"  type="button" @click="pushDataToFirebase(arrayOfWords)" :class="{'btn-danger': isRed, 'btn-success': isGreen}">-->
-      <!--{{ buttonText }}-->
-    <!--</button>-->
-  <!--</div>-->
 </template>
 
 <script>
   import Vue from 'vue'
   import * as firebase from "firebase";
+  import { bus } from '../main';
   import VueSocketio from 'vue-socket.io';
 
   Vue.use(VueSocketio, 'http://localhost:3000/');
@@ -178,6 +136,7 @@
         },
 
         mounted: function () {
+          bus.$emit('userLogin', true)
           this.getDataFromFirebase()
         }
     }

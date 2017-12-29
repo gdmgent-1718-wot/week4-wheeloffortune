@@ -33,6 +33,7 @@
 <script>
     import Vue from 'vue'
     import * as firebase from "firebase";
+    import { bus } from '../main';
     import VueSocketio from 'vue-socket.io';
     Vue.use(VueSocketio, 'http://localhost:3000/');
 

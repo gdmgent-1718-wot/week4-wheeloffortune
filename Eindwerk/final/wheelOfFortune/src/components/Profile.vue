@@ -16,19 +16,13 @@
       </div>
     </main>
   </div>
-    <!--<div class="container">-->
-      <!--<router-link :to="{ name: 'Lobby' }" class="btn">Play the game</router-link><hr>-->
-        <!--<button class="btn-primary btn" v-on:click="logout">Logout</button>-->
-
-
-
-
-    <!--</div>-->
 </template>
 
 <script>
     import * as firebase from "firebase";
     import Router from 'vue-router';
+    import { bus } from '../main';
+
     export default {
         name: 'Profiel',
         data() {
@@ -39,12 +33,6 @@
                 errorCode: '',
                 errorMessage: '',
                 user: firebase.auth().currentUser,
-//        displayName:'',
-//        emailVerified:'',
-//        photoURL:'',
-//        isAnonymous:'',
-//        uid:'',
-//        providerData:'',
             }
         },
         methods: {
@@ -74,12 +62,13 @@
                 });
             }
 
-        }
-        , mounted: function () {
+        },
+        mounted: function () {
             let self = this
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
                     self.getUserData()
+                    bus.$emit('userLogin', true)
                 } else {
                     self.$router.push({name: 'Lobby'});
                 }

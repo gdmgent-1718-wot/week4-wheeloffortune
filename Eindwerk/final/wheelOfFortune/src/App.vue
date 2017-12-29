@@ -21,14 +21,14 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="overlay-content">
           <h3 v-if="loggedIn == false"><router-link onclick="closeNav()" class="nav-item nav-link active" to="/">Login</router-link></h3>
-          <h3 v-if="loggedIn" @click="logout"><router-link class="nav-item nav-link active" to="/">Logout</router-link></h3>
-          <h3  v-if="loggedIn"><router-link onclick="closeNav()" to="profile" class="nav-item nav-link">Het spel</router-link></h3>
+          <h3  v-if="loggedIn"><router-link onclick="closeNav()" to="profile" class="nav-item nav-link">Home</router-link></h3>
           <h3  v-if="admin"><router-link onclick="closeNav()" to="admin" class="nav-item nav-link">Admin</router-link></h3>
+          <h3 v-if="loggedIn" @click="logout"><router-link class="nav-item nav-link active" to="/">Logout</router-link></h3>
         </div>
       </div>
       <nav class="container-fluid red-bg">
         <img src="../static/img/logo.png" class="logo">
-        <a href="#"><img src="../static/img/menu.png" class="menu-icon" onclick="openNav()"></a>
+        <img src="../static/img/menu.png" class="menu-icon" onclick="openNav()">
       </nav>
         <div id="app">
             <router-view/>
@@ -79,7 +79,7 @@ export default {
         // Sign-out successful.
         self.loggedIn = false
         self.admin = false
-        self.$router.push({name: 'Login'});
+        self.$router.push('/');
       }, function (error) {
         // An error happened.
       });

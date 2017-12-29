@@ -46,6 +46,7 @@
 
 <script>
     import * as firebase from "firebase";
+    import { bus } from '../main';
     import vuesocket from "vue-socket.io";
 
     export default {
@@ -149,6 +150,9 @@
             }
         }
         , mounted: function () {
+        if(document.getElementById("confettiCanvas") != null)
+          document.getElementById("confettiCanvas").remove();
+        bus.$emit('userLogin', true)
             this.authChange();
             this.getUserData();
             this.getGameData();

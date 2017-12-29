@@ -19,16 +19,14 @@ export default new Router({
             name: 'Login',
             component: Login,
             // beforeEnter: (to, from, next) => {
-            //   firebase.auth().onAuthStateChanged(function (user) {
             //     if (user) {
             //       // console.log('al ingelogd')
-            //       to: Profile
+            //       next(Profile)
             //     } else {
             //       // console.log('nietingelogd')
             //       // to: Login
             //       next()
             //     }
-            //   });
             // }
         },
         {

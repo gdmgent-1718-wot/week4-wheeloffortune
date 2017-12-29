@@ -19,23 +19,6 @@
       </div>
     </main>
   </div>
-    <!--<main class="container mt-5" >-->
-            <!--<h1</h1>-->
-            <!--<form>-->
-                <!--<div class="form-group">-->
-                    <!--<label for="emailid">Email address</label>-->
-                    <!--<input v-model="email" type="email" class="form-control" id="emailid" aria-describedby="emailHelp" placeholder="Enter email">-->
-                    <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
-                <!--</div>-->
-                <!--<div class="form-group">-->
-                    <!--<label for="passwordid">Password</label>-->
-                    <!--<input v-model="password" type="password" class="form-control" id="passwordid" placeholder="Password">-->
-                <!--</div>-->
-                <!--<button  v-on:click="login" type="submit" class="btn btn-primary">Submit</button><hr>-->
-                <!--<router-link :to="{ name: 'Register' }">Register</router-link>-->
-                <!--<p>{{errorMessage}}</p>-->
-            <!--</form>-->
-    <!--</main>-->
 </template>
 
 <script>
@@ -70,7 +53,7 @@
                 firebase.auth().onAuthStateChanged(function(user) {
                     if (user) {
                         bus.$emit('userLogin', true)
-                        self.$router.push({name: 'Profile'});
+                        self.$router.push('profile');
                     } else {
                         // No user is signed in.
                     }
@@ -80,9 +63,10 @@
         }
     }
     ,created: function () {
-            console.log('test');
+            console.log(this.user);
             if(this.user){
-                this.$router.push({name: 'Profile'});
+              bus.$emit('userLogin', true)
+              self.$router.push('profile');
             }
         }
 }

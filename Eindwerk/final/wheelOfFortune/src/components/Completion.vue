@@ -20,29 +20,11 @@
       </div>
     </main>
   </div>
-    <!--<div class="container">-->
-        <!--<h1>{{ msg }}</h1>-->
-        <!--<form>-->
-            <!--<div class="form-group">-->
-                <!--<label for="displaynameid">Username</label>-->
-                <!--<input v-model="displayName" type="text" class="form-control" id="displaynameid" aria-describedby="emailHelp" placeholder="Enter email">-->
-            <!--</div>-->
-            <!--<div class="form-group">-->
-                <!--<label for="phoneid">Phone number</label>-->
-                <!--<input v-model="phoneNumber" type="tel" class="form-control" id="phoneid" placeholder="phone number">-->
-            <!--</div>-->
-            <!--<div class="form-group">-->
-                <!--<label for="emailid">Email</label>-->
-                <!--<input v-model="email" type="email" class="form-control" id="emailid" placeholder="email">-->
-            <!--</div>-->
-            <!--<button  v-on:click="updateUserData" type="submit" class="btn btn-primary">Update</button>-->
-            <!--<p>{{errorMessage}}</p>-->
-        <!--</form>-->
-    <!--</div>-->
 </template>
 
 <script>
     import * as firebase from "firebase";
+    import { bus } from '../main';
     import Router from 'vue-router';
     export default {
         name: 'Completion',
@@ -104,7 +86,10 @@
                     self.$router.push({name: 'Login'});
                 }
             });
-        }
+        },
+        created: function () {
+          bus.$emit('userLogin', true)
+    }
     }
 </script>
 

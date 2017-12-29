@@ -62,6 +62,7 @@ var Confetti = function () {
 
     this.parent = param.elm || document.body;
     this.canvas = document.createElement("canvas");
+    this.canvas.setAttribute('id', 'confettiCanvas')
     this.ctx = this.canvas.getContext("2d");
     this.width = param.width || this.parent.offsetWidth;
     this.height = param.height || this.parent.offsetHeight;
@@ -69,7 +70,7 @@ var Confetti = function () {
     this.yRange = param.yRange || this.height * 2;
     this.progress = new Progress({
       duration: param.duration,
-      isLoop: true
+      isLoop: false
     });
     this.rotationRange = typeof param.rotationLength === "number" ? param.rotationRange : 10;
     this.speedRange = typeof param.speedRange === "number" ? param.speedRange : 10;
@@ -150,8 +151,8 @@ var Confetti = function () {
 
 function throwconfetti(){
   (function () {
-    var DURATION = 8000,
-      LENGTH = 120;
+    var DURATION = 5000,
+      LENGTH = 100;
 
     new Confetti({
       width: window.innerWidth,
@@ -159,20 +160,7 @@ function throwconfetti(){
       length: LENGTH,
       duration: DURATION
     });
-    //
-    //
-    // let start = setTimeout(function () {
-    //   new Confetti({
-    //     width: window.innerWidth,
-    //     height: window.innerHeight,
-    //     length: LENGTH,
-    //     duration: DURATION
-    //   });
-    // }, DURATION / 2);
-    //
-    // clearTimeout(start, 10000)
   })();
-  return
 }
 
 export {throwconfetti}
