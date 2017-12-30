@@ -249,8 +249,8 @@
                     this.message = 'Je hebt juist geraden en mag nog eens draaien aan het rad.'
                 }
                 else {
-                    this.messageColor = '#DD5B46'
-                    this.message = 'Helaas, deze letter zochten we niet, het is aan de volgende...'
+                    // this.messageColor = '#DD5B46'
+                    // this.message = 'Helaas, deze letter zochten we niet, het is aan de volgende...'
                     this.endTurn()
                 }
                 this.checkIfWon()
@@ -360,7 +360,7 @@
                 end: true,
                 winner: this.currentPlayer.name
               });
-             setTimeout(function () {
+              setTimeout(function () {
                document.getElementById("confettiCanvas").remove();
                firebase.database().ref('game/players/').update({
                  player1: {
@@ -388,10 +388,12 @@
                    score: 0
                  }
                })
+                alert('Removing lettersUsed')
                firebase.database().ref('game/lettersUsed/').remove()
                self.$router.push({ name: 'Profile', })
               }, 8000)
             },
+
             getUserData: function () {
                 let self = this;
                 firebase.auth().onAuthStateChanged(function (user) {
@@ -400,6 +402,7 @@
                     }
                 });
             },
+
             getSocketData: function () {
                 let self = this;
                 self.$options.sockets.turnChange = (data) => {
@@ -409,12 +412,14 @@
                     self.currentAnswer = data;
                 }
             },
+
             sendAnswer: function () {
                 this.$socket.emit('answer', {player: this.currentPlayer.name, answer: this.answer});
                 this.endTurn();
                 this.answer = null;
                 alert('data send')
             },
+
             authChange: function () {
                 let self = this
                 firebase.auth().onAuthStateChanged(function (user) {
@@ -424,6 +429,7 @@
                     }
                 });
             },
+
             getGameData: function () {
                 let self = this;
 
@@ -431,12 +437,12 @@
                     self.game = snapshot.val();
                     self.getPlayers(self.game.players)
                     self.checkArray();
-                    self.handleLettersAndVowelsUsed();
-                    self.checkIfWonAndChangeMessage();
+                    // self.handleLettersAndVowelsUsed();
+                    // self.checkIfWonAndChangeMessage();
                 })
             },
 
-          checkIfWonAndChangeMessage(){
+            checkIfWonAndChangeMessage(){
             let self = this
             let finishedStatus;
             let playerWon;
@@ -450,7 +456,6 @@
             if(finishedStatus == true){
               this.statusMessage = playerWon + ' heeft het spel gewonnen!'
               setTimeout(function () {
-                alert('Het spel is voorbij')
                 self.$router.push({ name: 'Profile', })
               }, 5000)
             }
@@ -458,16 +463,14 @@
 
             handleLettersAndVowelsUsed () {
               let self = this
-              firebase.database().ref('game').once('value', function (snapshot) {
-                self.game = snapshot.val();
+              firebase.database().ref('game/lettersUsed').on('value', function (snapshot) {
+                let lettersFromDatabase = snapshot.val();
 
-                let areLettersUsed = ("lettersUsed" in self.game)
-
-                if (areLettersUsed){
-                  self.lettersUsed = Object.values(self.game.lettersUsed)
-                  self.vowelsUsed = self.lettersUsed.filter(function (obj) {
-                    return obj == 'a' || obj == 'e' || obj == 'i' || obj == 'o' || obj == 'u'
-                  })
+                if(lettersFromDatabase != null && lettersFromDatabase.length != 0){
+                  self.lettersUsed = Object.values(lettersFromDatabase)
+                    self.vowelsUsed = self.lettersUsed.filter(function (obj) {
+                      return obj == 'a' || obj == 'e' || obj == 'i' || obj == 'o' || obj == 'u'
+                    })
                 }
                 else {
                   self.lettersUsed = []
@@ -492,6 +495,7 @@
                     //console.log(this.alphabet)
                 }
             },
+
             getPlayers: function (players) {
                 let self = this;
                 self.players = [];
@@ -513,7 +517,15 @@
             endTurn: function () {
                 this.$socket.emit('turnChange', {number: this.currentPlayer.number});
             },
+
+            whenGameFinishedDatabaseChangeIsMade () {
+              let self = this;
+              firebase.database().ref('game/finished').on('value', function (snapshot) {
+                self.checkIfWonAndChangeMessage();
+              })
+            }
         },
+
       created() {
         bus.$emit('userLogin', true)
         this.authChange();
@@ -521,15 +533,17 @@
         this.getGameData();
         this.getSocketData();
         this.getDataFromFirebase();
-//        this.handleLettersAndVowelsUsed();
+        this.whenGameFinishedDatabaseChangeIsMade ();
+        this.handleLettersAndVowelsUsed();
       },
-        mounted() {
-            this.authChange();
-            this.getUserData();
-            this.getGameData();
-            this.getSocketData();
-            this.getDataFromFirebase();
-//            this.handleLettersAndVowelsUsed();
+
+      mounted() {
+        this.authChange();
+        this.getUserData();
+        this.getGameData();
+        this.getSocketData();
+        this.getDataFromFirebase();
+        this.handleLettersAndVowelsUsed();
         }
     }
 </script>

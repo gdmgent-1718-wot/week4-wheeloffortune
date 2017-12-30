@@ -91,10 +91,7 @@ function setNewWord() {
             word: randomWordFromFirebase,
             category: randomWordCategoryFromFirebase,
         });
-//Dit verwijdert lettersUsed elke keer als het fout is... er wordt toch geen nieuw woord gekozen=,
-//         admin.database().ref('game/lettersUsed/').set({null});
     });
-    admin.database().ref('game/lettersUsed/').remove();
 }
 io.on('connection', function (socket) {
     console.log('someone connected');
