@@ -64,6 +64,8 @@
 
         },
         mounted: function () {
+            if(document.getElementById("confettiCanvas") != null)
+              document.getElementById("confettiCanvas").remove();
             let self = this
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {

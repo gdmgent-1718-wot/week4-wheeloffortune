@@ -24,6 +24,7 @@
           <h3  v-if="loggedIn"><router-link onclick="closeNav()" to="profile" class="nav-item nav-link">Home</router-link></h3>
           <h3  v-if="admin"><router-link onclick="closeNav()" to="admin" class="nav-item nav-link">Admin</router-link></h3>
           <h3 v-if="loggedIn" @click="logout"><router-link class="nav-item nav-link active" to="/">Logout</router-link></h3>
+          <h3 v-if="loggedIn" @click="stopGame"><router-link onclick="closeNav()" class="nav-item nav-link active" to="profile">Stop het spel</router-link></h3>
         </div>
       </div>
       <nav class="container-fluid red-bg">
@@ -72,6 +73,9 @@ export default {
         }
       }
       )},
+    stopGame () {
+      firebase.database().ref('game/wasStopped/').set(true)
+    },
     logout () {
       closeNav()
       let self = this

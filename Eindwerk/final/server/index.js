@@ -34,6 +34,11 @@ function changeActivePlayer(currentPlayer, newPlayer) {
 }
 function checkPlayers() {
     let players = []
+    let finished;
+    admin.database().ref('game/finished/end').once("value", function(snapshot) {
+        finished = snapshot.val()
+    })
+    console.log(finished)
     admin.database().ref('game').on("value", function(snapshot) {
         let game = snapshot.val()
         for (let player of Object.values(game.players)) {

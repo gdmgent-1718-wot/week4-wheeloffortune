@@ -25,23 +25,6 @@
       </div>
     </main>
   </div>
-    <!--<div class="container">-->
-        <!--<h1>{{ msg }}</h1><hr>-->
-        <!--<div class="spots" v-if="spots && !playing">-->
-            <!--<h2 class="pb-3">Available spots:</h2>-->
-            <!--<div v-for="(spot, index) in spots" class="card mb-3">-->
-                <!--<h3 class="pb-1 pt-3">Player {{spot.number}}</h3>-->
-                <!--<button class="btn btn-info" v-on:click="claimSpot(spot.number)">Claim spot</button>-->
-            <!--</div><hr>-->
-        <!--</div>-->
-        <!--<div v-if="occupied" class="occupied">-->
-            <!--<p class="text-info" v-if="occupied && playing" >The game will start soon waiting for {{spots.length}} more players</p>-->
-            <!--<h2 v-if="occupied" class="pb-3 pt-1">Current players:</h2>-->
-            <!--<div v-for="player in occupied" class="card mb-3">-->
-                <!--<h3 class="pb-1 pt-2">{{player.name}}</h3>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
 </template>
 
 <script>
@@ -107,7 +90,6 @@
                             winner: 'test'
                           });
                             console.log('start the game')
-                            this.$socket.emit('startGame')
                             self.$router.push({ name: 'GameFinal',})
 
 
@@ -124,8 +106,6 @@
                                 end: false,
                                 winner: 'test'
                               });
-//                                firebase.database().ref('game/lettersUsed/').set(null);
-                                this.$socket.emit('startGame')
                                 self.$router.push({ name: 'GameFinal', })
                             }
                         }
@@ -149,15 +129,22 @@
                 self.checkSpot();
             }
         }
-        , mounted: function () {
+        ,
+      created () {
         if(document.getElementById("confettiCanvas") != null)
           document.getElementById("confettiCanvas").remove();
         bus.$emit('userLogin', true)
-            this.authChange();
-            this.getUserData();
-            this.getGameData();
-            //this.getSocketData();
-
+        this.authChange();
+        this.getUserData();
+        this.getGameData();
+      },
+      mounted: function () {
+        if(document.getElementById("confettiCanvas") != null)
+          document.getElementById("confettiCanvas").remove();
+        bus.$emit('userLogin', true)
+        this.authChange();
+        this.getUserData();
+        this.getGameData();
         }
     }
 </script>

@@ -11,7 +11,7 @@
     </header>
     <main class="container-fluid">
       <div class="small-container pt-2" style="z-index: 10000">
-        <p v-for="(value, key) in scorePlayers">Score Speler {{ key }}: {{ value }} </p>
+        <p v-for="(value, key)  in scorePlayers"><span :id="key">Score Speler {{ key }}: {{ value }} </span></p>
         <p>Gedraaide score: {{ currentScore }} </p>
         <div v-if="currentPlayer != null && currentPlayer.active" class="playing">
           <h3 class="pb-1 text-warning font-weight-bold">{{ randomWordCategory }}</h3>
@@ -144,7 +144,6 @@
                 this.resetCheckedLetters();
                 this.lockVowels();
                 this.splitWordIntoLetters();
-                this.assignScoreToPlayers();
                 this.lettersUsed = [];
             },
 
@@ -158,6 +157,7 @@
               let self = this
               let database = firebase.database()
               let databaseRef = database.ref('game/players');
+
               databaseRef.on('value', function (snapshot) {
                 let playersInfo = snapshot.val()
                 self.scorePlayers[1] = playersInfo.player1.score
@@ -277,6 +277,8 @@
 
                 this.scorePlayers[this.currentPlayer.number] = calculatedScore
               }
+              let test = document.getElementById(this.currentPlayer.number)
+              test.classList.add('orange')
             },
 
             isGuessedLetter(letter) {
@@ -362,36 +364,42 @@
               });
               setTimeout(function () {
                document.getElementById("confettiCanvas").remove();
-               firebase.database().ref('game/players/').update({
-                 player1: {
-                   active: true,
-                   id: 1,
-                   number: 1,
-                   name: '',
-                   playing: false,
-                   score: 0
-                 },
-                 player2: {
-                   active: false,
-                   id: 2,
-                   number: 2,
-                   name: '',
-                   playing: false,
-                   score: 0
-                 },
-                 player3: {
-                   active: false,
-                   id: 3,
-                   number: 3,
-                   name: '',
-                   playing: false,
-                   score: 0
-                 }
-               })
-                alert('Removing lettersUsed')
-               firebase.database().ref('game/lettersUsed/').remove()
-               self.$router.push({ name: 'Profile', })
+               self.resetWholeGame();
+               // self.$socket.emit('startGame')
               }, 8000)
+            },
+
+            resetWholeGame() {
+              firebase.database().ref('game/players/').update({
+                player1: {
+                  active: true,
+                  id: 1,
+                  number: 1,
+                  name: '',
+                  playing: false,
+                  score: 0
+                },
+                player2: {
+                  active: false,
+                  id: 2,
+                  number: 2,
+                  name: '',
+                  playing: false,
+                  score: 0
+                },
+                player3: {
+                  active: false,
+                  id: 3,
+                  number: 3,
+                  name: '',
+                  playing: false,
+                  score: 0
+                }
+              })
+              firebase.database().ref('game/lettersUsed/').remove()
+              firebase.database().ref('game/wasStopped/').set(false)
+              this.$socket.emit('startGame')
+              this.$router.push({ name: 'Profile', })
             },
 
             getUserData: function () {
@@ -484,6 +492,8 @@
               })
             },
 
+            
+
             checkArray: function () {
                 this.alphabet = []
                 let values = Object.values(this.game.alphabeth);
@@ -523,6 +533,15 @@
               firebase.database().ref('game/finished').on('value', function (snapshot) {
                 self.checkIfWonAndChangeMessage();
               })
+            },
+
+            checkIfGameWasStopped () {
+              let self = this;
+              firebase.database().ref('game/wasStopped').on('value', function (snapshot) {
+                if(snapshot.val() == true)
+                  self.resetWholeGame()
+                  // self.$socket.emit('startGame')
+              })
             }
         },
 
@@ -535,6 +554,8 @@
         this.getDataFromFirebase();
         this.whenGameFinishedDatabaseChangeIsMade ();
         this.handleLettersAndVowelsUsed();
+        this.checkIfGameWasStopped();
+        this.assignScoreToPlayers();
       },
 
       mounted() {
