@@ -492,8 +492,6 @@
               })
             },
 
-            
-
             checkArray: function () {
                 this.alphabet = []
                 let values = Object.values(this.game.alphabeth);
@@ -542,7 +540,7 @@
                   self.resetWholeGame()
                   // self.$socket.emit('startGame')
               })
-            }
+            },
         },
 
       created() {

@@ -8,12 +8,12 @@
     <main class="container-fluid">
       <div class="small-container pt-5">
         <form class="col-12">
-          <label for="displaynameid">Username</label>
-          <input v-model="displayName" type="text" class="form-control" id="displaynameid" aria-describedby="emailHelp" placeholder="Enter email">
-          <label for="phoneid">Phone number</label>
-          <input v-model="phoneNumber" type="tel" class="form-control" id="phoneid" placeholder="phone number">
+          <label for="displaynameid">Gebruikernaam</label>
+          <input v-model="displayName" type="text" class="form-control" id="displaynameid" aria-describedby="emailHelp" placeholder="Uw gebruikersnaam">
+          <label for="phoneid">Telefoonnummer</label>
+          <input v-model="phoneNumber" type="tel" class="form-control" id="phoneid" placeholder="Telefoonnummer">
           <label for="emailid">Email</label>
-          <input v-model="email" type="email" class="form-control" id="emailid" placeholder="email">
+          <input v-model="email" type="email" class="form-control" id="emailid" placeholder="Uw email">
           <button  v-on:click="updateUserData" type="submit" class="btn btn-primary">Update</button>
           <p>{{errorMessage}}</p>
         </form>
@@ -30,7 +30,7 @@
         name: 'Completion',
         data() {
             return {
-                msg: 'Complete your profile',
+                msg: 'Profielinfo',
                 displayName: '',
                 phoneNumber: '',
                 imageURL: 'http://hope4merton.com/wp-content/uploads/2015/12/profile-placeholder.gif',

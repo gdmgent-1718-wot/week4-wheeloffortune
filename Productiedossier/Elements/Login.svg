@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="64 521 101 18">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        font-size: 14px;
+        font-family: Oxygen-Bold, Oxygen;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <text id="Login" class="cls-1" transform="translate(64 521)"><tspan x="32.197" y="14">Login</tspan></text>
+</svg>

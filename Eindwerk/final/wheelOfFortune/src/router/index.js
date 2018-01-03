@@ -60,7 +60,16 @@ export default new Router({
             path: '/game',
             name: 'GameFinal',
             component: GameFinal,
-            props: { default: true }
+            props: { default: true },
+            // beforeEnter: (to, from, next) => {
+          //HIER CHECKEN OF DE 3 SPELERS OP TRUE STAAN DAN VERDER GAAN
+            //     if (user) {
+            //       // console.log('al ingelogd')
+            //       next('/game')
+            //     } else {
+            //       next('/login')
+            //     }
+            // }
 
         },
         {
