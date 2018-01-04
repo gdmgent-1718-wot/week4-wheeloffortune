@@ -8,6 +8,7 @@ import Lobby from '@/components/Lobby'
 import Game from '@/components/Game'
 import GameFinal from '@/components/GameFinal'
 import Admin from '@/components/Admin'
+import Camera from '@/components/Camera'
 
 Vue.use(Router)
 import * as firebase from "firebase";
@@ -76,6 +77,25 @@ export default new Router({
             path: '/admin',
             name: 'Admin',
             component: Admin,
+          beforeEnter: (to, from, next) => {
+            firebase.auth().onAuthStateChanged(function (user) {
+              if(user != undefined){
+                if (user.email == 'player1@test.be') {
+                  next()
+                } else {
+                  to: Login
+                }
+              }
+              else {
+                to: Login
+              }
+            });
+          }
+        },
+        {
+            path: '/admin/camera',
+            name: 'Camera',
+            component: Camera,
           beforeEnter: (to, from, next) => {
             firebase.auth().onAuthStateChanged(function (user) {
               if(user != undefined){

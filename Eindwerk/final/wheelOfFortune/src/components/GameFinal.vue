@@ -44,6 +44,7 @@
           </div>
         </div>
         <div v-else=""><p>{{ statusMessage }}</p></div>
+          <video id="videoStream"></video>
       </div>
     </main>
   </div>
@@ -55,6 +56,7 @@
     import * as firebase from "firebase";
     import VueSocketio from 'vue-socket.io';
     import {throwconfetti} from '../../static/js/confetti.js';
+    import Peer from 'simple-peer';
     import { bus } from '../main';
 
     Vue.use(VueSocketio, 'http://localhost:3000/');
@@ -64,6 +66,8 @@
         name: 'GameFinal',
         data() {
             return {
+                showStream: false,
+                peer: new Peer({trickle: false}),
                 msg: 'Game ',
                 errorCode: '',
                 errorMessage: '',
@@ -135,6 +139,7 @@
 
         methods: {
             initializeGame() {
+                this.connectToStream()
                 this.tries = this.initialTries;
                 this.randomWord = '';
                 this.randomWordCategory = '';
@@ -145,6 +150,31 @@
                 this.lockVowels();
                 this.splitWordIntoLetters();
                 this.lettersUsed = [];
+            },
+            connectToStream() {
+                let database = firebase.database()
+                self = this;
+                alert('fuck');
+                console.log(self.players);
+                for (let i = 0; i < self.players.length; i++) {
+                    if(self.players[i].id === self.user.uid) {
+                        console.log('start stream')
+                        database.ref('game/players/player'+self.currentPlayer.number+'/host').on('value', function(snapshot){
+                            self.peer.signal(snapshot.val())
+                        });
+                        self.peer.on('signal', function(data){
+                            database.ref('game/players/player'+self.currentPlayer.number).update({
+                                identity: JSON.stringify(data)
+                            });
+                        });
+                        self.peer.on('stream', function (stream) {
+                            let video = document.querySelector('video');
+                            video.src = window.URL.createObjectURL(stream);
+                            video.play();
+                        })
+                    }
+
+                }
             },
 
             turnWheel() {
@@ -373,27 +403,36 @@
               firebase.database().ref('game/players/').update({
                 player1: {
                   active: true,
+                  host: 0,
                   id: 1,
+                  identity:0,
                   number: 1,
                   name: '',
                   playing: false,
-                  score: 0
+                  score: 0,
+                  stream: false,
                 },
                 player2: {
                   active: false,
+                  host: 0,
                   id: 2,
+                  identity:0,
                   number: 2,
                   name: '',
                   playing: false,
-                  score: 0
+                  score: 0,
+                  stream: false,
                 },
                 player3: {
                   active: false,
+                  host: 0,
                   id: 3,
+                  identity: 0,
                   number: 3,
                   name: '',
                   playing: false,
-                  score: 0
+                  score: 0,
+                  stream: false,
                 }
               })
               firebase.database().ref('game/lettersUsed/').remove()
@@ -556,13 +595,13 @@
         this.assignScoreToPlayers();
       },
 
-      mounted() {
-        this.authChange();
-        this.getUserData();
-        this.getGameData();
-        this.getSocketData();
-        this.getDataFromFirebase();
-        this.handleLettersAndVowelsUsed();
+        mounted() {
+            this.authChange();
+            this.getUserData();
+            this.getGameData();
+            this.getSocketData();
+            this.getDataFromFirebase();
+            this.handleLettersAndVowelsUsed();
         }
     }
 </script>
