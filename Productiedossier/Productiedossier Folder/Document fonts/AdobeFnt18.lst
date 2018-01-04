@@ -1,0 +1,120 @@
+%!Adobe-FontList 1.18
+%Locale:0x409
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:Gotham-Bold
+FamilyName:Gotham
+StyleName:Bold
+FullName:Gotham Bold
+MenuName:Gotham
+StyleBits:2
+WritingScript:Roman
+OutlineFileName:C:\Users\adria\Desktop\Productiedossier Folder\Document fonts\GOTHAM-BOLD.OTF
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+FileLength:21408
+FileModTime:1463739043
+WeightClass:700
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,Gotham Bold
+NameArray:0,Win,1,Gotham
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Oxygen-Bold
+FamilyName:Oxygen
+StyleName:Bold
+FullName:Oxygen Bold
+MenuName:Oxygen
+StyleBits:2
+WritingScript:Roman
+OutlineFileName:C:\Users\adria\Desktop\Productiedossier Folder\Document fonts\Oxygen-Bold.ttf
+DataFormat:sfntData
+hasSVG:no
+FileLength:48812
+FileModTime:1513798610
+WeightClass:700
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,18,Oxygen Bold
+NameArray:0,Mac,4,Oxygen Bold
+NameArray:0,Win,1,Oxygen
+NameArray:0,Win,16,Oxygen
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Oxygen-Light
+FamilyName:Oxygen
+StyleName:Light
+FullName:Oxygen Light
+MenuName:Oxygen
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Users\adria\Desktop\Productiedossier Folder\Document fonts\Oxygen-Light.ttf
+DataFormat:sfntData
+hasSVG:no
+FileLength:43852
+FileModTime:1513798610
+WeightClass:300
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,18,Oxygen Light
+NameArray:0,Mac,4,Oxygen Light
+NameArray:0,Win,1,Oxygen
+NameArray:0,Win,16,Oxygen
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Oxygen-Regular
+FamilyName:Oxygen
+StyleName:Regular
+FullName:Oxygen Regular
+MenuName:Oxygen
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Users\adria\Desktop\Productiedossier Folder\Document fonts\Oxygen-Regular.ttf
+DataFormat:sfntData
+hasSVG:no
+FileLength:48092
+FileModTime:1513798611
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,18,Oxygen Regular
+NameArray:0,Mac,4,Oxygen Regular
+NameArray:0,Win,1,Oxygen
+NameArray:0,Win,16,Oxygen
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:WorkSans-Regular
+FamilyName:Work Sans
+StyleName:Regular
+FullName:Work Sans
+MenuName:Work Sans
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Users\adria\Desktop\Productiedossier Folder\Document fonts\WorkSans-Regular.ttf
+DataFormat:sfntData
+hasSVG:no
+FileLength:135828
+FileModTime:1506525933
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Win,1,Work Sans
+%EndFont
+
