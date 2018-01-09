@@ -15,7 +15,7 @@
         <p>Gedraaide score: {{ currentScore }} </p>
         <div v-if="currentPlayer != null && currentPlayer.active" class="playing">
           <h3 class="pb-1 text-warning font-weight-bold">{{ randomWordCategory }}</h3>
-          <button v-if="message || begin == 'false'" class="col-12 mb-2 green-bg" style="border: none;" @click="turnWheel">Draai aan het rad!</button>
+          <button v-if="begin == false" class="col-12 mb-2 green-bg" style="border: none;" @click="turnWheel">Draai aan het rad!</button>
           <div v-if="begin == true">
             <h4 v-if="message" class="font-weight-bold" :style="{ color: messageColor }">{{message}}</h4>
             <button type="button" class="letter-button"
@@ -80,7 +80,7 @@
                 currentAnswer: null,
                 showText: false,
                 message: '',
-                begin: 'false',
+                begin: false,
                 messageColor: 'red',
                 loading: 'Willekeurig een zin, woord of gezegde kiezen...',
                 words: [],
@@ -139,7 +139,7 @@
 
         methods: {
             initializeGame() {
-                this.connectToStream()
+                this.connectToStream();
                 this.tries = this.initialTries;
                 this.randomWord = '';
                 this.randomWordCategory = '';
@@ -153,9 +153,9 @@
             },
             connectToStream() {
                 let database = firebase.database()
-                self = this;
-                alert('fuck');
-                console.log(self.players);
+                let self = this;
+                // alert('Connecting to stream');
+                //console.log(self.players);
                 for (let i = 0; i < self.players.length; i++) {
                     if(self.players[i].id === self.user.uid) {
                         console.log('start stream')
@@ -164,7 +164,7 @@
                         });
                         self.peer.on('signal', function(data){
                             database.ref('game/players/player'+self.currentPlayer.number).update({
-                                identity: JSON.stringify(data)
+                                  identity: JSON.stringify(data)
                             });
                         });
                         self.peer.on('stream', function (stream) {
@@ -277,6 +277,7 @@
                 if (this.wordLetters.includes(single.letter.toLowerCase())) {
                     this.messageColor = '#4BE8D8'
                     this.message = 'Je hebt juist geraden en mag nog eens draaien aan het rad.'
+                    this.begin = false
                 }
                 else {
                     // this.messageColor = '#DD5B46'
@@ -307,8 +308,8 @@
 
                 this.scorePlayers[this.currentPlayer.number] = calculatedScore
               }
-              let test = document.getElementById(this.currentPlayer.number)
-              test.classList.add('orange')
+
+              this.currentScore = '...'
             },
 
             isGuessedLetter(letter) {
@@ -482,6 +483,7 @@
 
                 firebase.database().ref('game').on('value', function (snapshot) {
                     self.game = snapshot.val();
+                    console.log('check this')
                     self.getPlayers(self.game.players)
                     self.checkArray();
                     // self.handleLettersAndVowelsUsed();
@@ -548,10 +550,11 @@
                 self.players = [];
                 self.currentPlayer = [];
                 for (let player of Object.values(players)) {
-
                     if (player.id === self.user.uid) {
                         self.currentPlayer = player;
                         self.players.push(player)
+                        let test = document.getElementById(self.currentPlayer.number)
+                        test.classList.add('orange')
                     }
                     else {
                         if (player.playing) {
