@@ -308,6 +308,8 @@
 
                 this.scorePlayers[this.currentPlayer.number] = calculatedScore
               }
+
+              this.currentScore = '...'
             },
 
             isGuessedLetter(letter) {
