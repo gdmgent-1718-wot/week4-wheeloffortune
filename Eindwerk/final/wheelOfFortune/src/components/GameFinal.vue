@@ -308,8 +308,6 @@
 
                 this.scorePlayers[this.currentPlayer.number] = calculatedScore
               }
-              let test = document.getElementById(this.currentPlayer.number)
-              test.classList.add('orange')
             },
 
             isGuessedLetter(letter) {
@@ -550,10 +548,11 @@
                 self.players = [];
                 self.currentPlayer = [];
                 for (let player of Object.values(players)) {
-
                     if (player.id === self.user.uid) {
                         self.currentPlayer = player;
                         self.players.push(player)
+                        let test = document.getElementById(self.currentPlayer.number)
+                        test.classList.add('orange')
                     }
                     else {
                         if (player.playing) {
