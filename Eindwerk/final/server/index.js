@@ -126,6 +126,17 @@ io.on('connection', function (socket) {
         checkPlayers();
         resetAlphabeth();
     });
+    socket.on('newStreamPeer', function (data) {
+        io.emit('newStreamPeer', {host: data.host, number: data.number});
+
+    })
+    socket.on('newRecievePeer', function (data) {
+        console.log(data);
+        io.emit('newRecievePeer', {identity: data.identity, number: data.number});
+    })
+    socket.on('getColor', function (data) {
+        console.log(data);
+    })
 });
 
 

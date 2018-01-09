@@ -28,19 +28,24 @@
                 peers: null,
                 firebaseObject: null,
                 players: null,
-
+            }
+        },
+        sockets: {
+            connect: function () {
+                console.log('socket connected')
+            },
+            customEmit: function (val) {
+                console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
             }
         },
         methods: {
-            startStream: function () {
-                console.log('hello');
-                let index = 0;
-                Object.keys(self.players).forEach(function (key) {
-                    if (self.players[key].identity !== 0) {
-                            self.peers[index].signal(self.players[key].identity)
-                    }
-                    index++;
-                })
+            getSockets: function () {
+                self = this;
+                self.$options.sockets.newRecievePeer = (data) => {
+                    console.log(self.peers[data.number-1])
+                    self.peers[data.number-1].signal(data.identity)
+
+                }
             },
             streamData: function () {
                 self = this;
@@ -49,19 +54,12 @@
                     new Peer(self.parameters),
                     new Peer(self.parameters),
                 ]
-                let index = 0;
+                console.log('about to stream data');
                 Object.keys(self.players).forEach(function (key) {
                     self.peers[index].on('signal', function (data) {
-                        console.log('ffuck')
-                        if (self.players[key].host === 0) {
-                            self.database.ref('game/players/' + key).update({host: JSON.stringify(data)})
-                        }
-                    })
-                    index++
-                    if (index === 2) {
-                        self.startStream()
-                    }
-
+                        self.$socket.emit('newStreamPeer', {host: JSON.stringify(data), number: self.players[key].number});
+                        console.log('socket shit');
+                    });
                 })
             },
             checkPeers: function () {
@@ -78,9 +76,7 @@
                             }
                         }
                     })
-
                 });
-
             },
             getVideo: function () {
                 self = this;
@@ -99,6 +95,7 @@
 
         mounted() {
             this.getVideo();
+            this.getSockets();
         }
 
     }
