@@ -55,11 +55,13 @@
                     new Peer(self.parameters),
                 ]
                 console.log('about to stream data');
+                let index = 0;
                 Object.keys(self.players).forEach(function (key) {
                     self.peers[index].on('signal', function (data) {
                         self.$socket.emit('newStreamPeer', {host: JSON.stringify(data), number: self.players[key].number});
                         console.log('socket shit');
                     });
+                    index++;
                 })
             },
             checkPeers: function () {

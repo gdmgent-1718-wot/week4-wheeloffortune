@@ -151,29 +151,24 @@
                 this.splitWordIntoLetters();
                 this.lettersUsed = [];
             },
-            connectToStream() {
+            connectToStream(data) {
                 let database = firebase.database()
-                let self = this;
-                // alert('Connecting to stream');
-                //console.log(self.players);
-                for (let i = 0; i < self.players.length; i++) {
-                    if(self.players[i].id === self.user.uid) {
-                        console.log('start stream')
-                        database.ref('game/players/player'+self.currentPlayer.number+'/host').on('value', function(snapshot){
-                            self.peer.signal(snapshot.val())
-                        });
-                        self.peer.on('signal', function(data){
-                            database.ref('game/players/player'+self.currentPlayer.number).update({
-                                  identity: JSON.stringify(data)
-                            });
-                        });
-                        self.peer.on('stream', function (stream) {
-                            let video = document.querySelector('video');
-                            video.src = window.URL.createObjectURL(stream);
-                            video.play();
-                        })
-                    }
+                self = this;
+                if (self.currentPlayer.number === data.number && !self.currentPlayer.stream) {
+                    database.ref('game/players/player' + this.currentPlayer.number).update({
+                        stream: true
+                    });
+                    self.peer.signal(data.host)
+                    self.peer.on('signal', function (signal) {
+                        console.log(signal);
+                        self.$socket.emit('newRecievePeer', {identity: signal, number: self.currentPlayer.number});
+                    })
+                    self.peer.on('stream', function (stream) {
+                        let video = document.querySelector('video');
+                        video.src = window.URL.createObjectURL(stream);
+                        video.play();
 
+                    })
                 }
             },
 
@@ -458,6 +453,10 @@
                 }
                 self.$options.sockets.answer = (data) => {
                     self.currentAnswer = data;
+                }
+                self.$options.sockets.newStreamPeer = (data) => {
+                    console.log('hello');
+                    self.connectToStream(data);
                 }
             },
 
