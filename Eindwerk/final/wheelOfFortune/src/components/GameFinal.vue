@@ -350,18 +350,28 @@
             },
 
             didIGuessRight() {
+              let self = this
+              let currentPlayerScore = this.scorePlayers[this.currentPlayer.number]
+              if(currentPlayerScore >= 250){
                 if (this.walterInput.replace(/\s/g, '').toLowerCase() != '' && this.walterInput.replace(/\s/g, '').toLowerCase() != null) {
-                    if (this.walterInput.replace(/\s/g, '').toLowerCase() == this.randomWord.replace(/\s/g, '').toLowerCase()) {
-                        this.handleEndGame();
-                        this.walterFeedback = "Proficiat! U heeft het woord juist geraden!"
-                    }
-                    else {
-                      this.substractMoneyFromCurrentMoney();
-                      this.walterFeedback = "Helaas, u heeft het niet juist geraden."
-                    }
+                  if (this.walterInput.replace(/\s/g, '').toLowerCase() == this.randomWord.replace(/\s/g, '').toLowerCase()) {
+                    this.handleEndGame();
+                    this.walterFeedback = "Proficiat! U heeft het woord juist geraden!"
+                  }
+                  else {
+                    this.substractMoneyFromCurrentMoney();
+                    this.walterFeedback = "Helaas, u heeft het niet juist geraden. En de beurt gaat nu naar een andere speler."
+                    setTimeout(function () {
+                      self.endTurn();
+                    }, 2500)
+                  }
                 }
                 else
-                    this.walterFeedback = "U moet een woord invoeren.."
+                  this.walterFeedback = "U moet een woord invoeren.."
+              }
+              else {
+                this.alertMessage = 'Helaas, je score is niet hoog genoeg om een woord te raden. Je moet minstens 250 hebben.'
+              }
             },
 
             handleEndGame(){
