@@ -127,6 +127,7 @@ io.on('connection', function (socket) {
         resetAlphabeth();
     });
     socket.on('newStreamPeer', function (data) {
+        console.log(data);
         io.emit('newStreamPeer', {host: data.host, number: data.number});
 
     })

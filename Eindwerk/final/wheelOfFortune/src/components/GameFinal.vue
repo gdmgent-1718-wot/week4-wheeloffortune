@@ -139,7 +139,6 @@
 
         methods: {
             initializeGame() {
-                this.connectToStream();
                 this.tries = this.initialTries;
                 this.randomWord = '';
                 this.randomWordCategory = '';
@@ -152,6 +151,7 @@
                 this.lettersUsed = [];
             },
             connectToStream(data) {
+                console.log(data)
                 let database = firebase.database()
                 self = this;
                 if (self.currentPlayer.number === data.number && !self.currentPlayer.stream) {
@@ -455,7 +455,6 @@
                     self.currentAnswer = data;
                 }
                 self.$options.sockets.newStreamPeer = (data) => {
-                    console.log('hello');
                     self.connectToStream(data);
                 }
             },
