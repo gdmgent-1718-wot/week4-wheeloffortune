@@ -102,6 +102,44 @@ io.on('connection', function (socket) {
     console.log('someone connected');
     socket.on('disconnect', function () {
         console.log('user disconnected');
+        io.emit('userDisconnected')
+        admin.database().ref('game/players/').update({
+                player1: {
+                    active: true,
+                    host: 0,
+                    id: 1,
+                    identity:0,
+                    number: 1,
+                    name: '',
+                    playing: false,
+                    score: 0,
+                    stream: false,
+                },
+                player2: {
+                    active: false,
+                    host: 0,
+                    id: 2,
+                    identity:0,
+                    number: 2,
+                    name: '',
+                    playing: false,
+                    score: 0,
+                    stream: false,
+                },
+                player3: {
+                    active: false,
+                    host: 0,
+                    id: 3,
+                    identity: 0,
+                    number: 3,
+                    name: '',
+                    playing: false,
+                    score: 0,
+                    stream: false,
+                }
+            })
+        admin.database().ref('game/lettersUsed/').remove()
+        admin.database().ref('game/wasStopped/').set(false)
     });
     socket.on('turnChange', function (data) {
         console.log(data);

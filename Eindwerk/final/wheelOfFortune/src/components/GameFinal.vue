@@ -9,7 +9,7 @@
         </li>
         <div v-if="alertMessage" class="alertbox">
           <p>{{ alertMessage }}</p>
-          <button @click="dismissAlert">Ok</button>
+          <button v-if="canDismissAlert" @click="dismissAlert">Ok</button>
         </div>
       </ul>
     </header>
@@ -130,7 +130,8 @@
                 },
                 currentScore: '...',
                 isNegative: false,
-                alertMessage: false
+                alertMessage: false,
+                canDismissAlert: true
             }
         },
         sockets: {
@@ -468,6 +469,18 @@
                 self.$options.sockets.newStreamPeer = (data) => {
                     self.connectToStream(data);
                 }
+                self.$options.sockets.userDisconnected = (data) => {
+                    self.userDisconnectedAlert()
+                }
+            },
+
+            userDisconnectedAlert(){
+              let self = this
+              this.canDismissAlert = false
+              this.alertMessage = 'Oeps! Een speler heeft het spel verlaten. Deze rond zal worden beëindigd.'
+              setTimeout(function () {
+                self.$router.push({ name: 'Profile', })
+              }, 5000)
             },
 
             sendAnswer: function () {
@@ -598,6 +611,12 @@
             dismissAlert() {
               this.alertMessage = false
             },
+
+            warnBeforeRefresh () {
+              window.onbeforeunload = function() {
+                return "Als je de pagina herlaadt zal het spel beëindigen! Weet je het zeker?";
+              };
+            }
         },
 
       created() {
