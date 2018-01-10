@@ -72,7 +72,7 @@
     import {bus} from '../main';
 
     Vue.use(VueSocketio, 'http://localhost:5000/');
-    //    Vue.use(VueSocketio, 'https://wheeloffortune1718.herokuapp.com/');
+//        Vue.use(VueSocketio, 'https://wheeloffortune1718.herokuapp.com/');
 
     export default {
         name: 'GameFinal',
@@ -190,27 +190,6 @@
                         video.src = window.URL.createObjectURL(stream);
                         video.play();
                     });
-                }
-            },
-            connectToStream(data) {
-//                console.log(data)
-                let database = firebase.database()
-                self = this;
-                if (self.currentPlayer.number === data.number && !self.currentPlayer.stream) {
-                    database.ref('game/players/player' + this.currentPlayer.number).update({
-                        stream: true
-                    });
-                    self.peer.signal(data.host)
-                    self.peer.on('signal', function (signal) {
-                        console.log(signal);
-                        self.$socket.emit('newRecievePeer', {identity: signal, number: self.currentPlayer.number});
-                    })
-                    self.peer.on('stream', function (stream) {
-                        let video = document.querySelector('video');
-                        video.src = window.URL.createObjectURL(stream);
-                        video.play();
-
-                    })
                 }
             },
 
@@ -512,9 +491,6 @@
                 self.$options.sockets.answer = (data) => {
                     self.currentAnswer = data;
                 }
-                self.$options.sockets.newStreamPeer = (data) => {
-                    self.connectToStream(data);
-                }
                 self.$options.sockets.userDisconnected = (data) => {
                     self.userDisconnectedAlert()
                 }
@@ -523,15 +499,6 @@
                     console.log(data);
                     self.acceptConnection(data);
                 }
-//                self.$options.sockets.startStream = (data) => {
-//                    console.log('hello? Stream?');
-//                    self.peer.on('stream', function (stream) {
-//                        console.log('stream? maybe? please?')
-//                        let video = document.querySelector('video');
-//                        video.src = window.URL.createObjectURL(stream);
-//                        video.play();
-//                    });
-//                }
             },
 
 

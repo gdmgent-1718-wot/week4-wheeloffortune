@@ -20,7 +20,7 @@
     import VueSocketio from 'vue-socket.io';
 
     Vue.use(VueSocketio, 'http://localhost:5000/');
-    //    Vue.use(VueSocketio, 'https://wheeloffortune1718.herokuapp.com/');
+//        Vue.use(VueSocketio, 'https://wheeloffortune1718.herokuapp.com/');
 
 
     export default {

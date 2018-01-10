@@ -142,15 +142,7 @@ io.on('connection', function (socket) {
         checkPlayers();
         resetAlphabeth();
     });
-    socket.on('newStreamPeer', function (data) {
-        console.log(data);
-        io.emit('newStreamPeer', {host: data.host, number: data.number});
 
-    })
-    socket.on('newRecievePeer', function (data) {
-        console.log(data);
-        io.emit('newRecievePeer', {identity: data.identity, number: data.number});
-    })
     socket.on('getColor', function (data) {
         console.log(data);
     })
@@ -166,8 +158,4 @@ io.on('connection', function (socket) {
         console.log('player '+ data.playerNum +' accepts the connection');
         io.emit('acceptConnection', data);
     })
-    // socket.on('startStream', function (data) {
-    //     console.log('player '+ data.playerNum +' start the stream');
-    //     io.emit('startStream', data);
-    // })
 });
