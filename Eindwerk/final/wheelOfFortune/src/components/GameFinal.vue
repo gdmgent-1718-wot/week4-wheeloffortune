@@ -1,57 +1,65 @@
 <template>
-  <div>
-    <header class="align-items container-fluid green-bg">
-      <ul class='result pt-2 pl-0 small-container'>
-        <li class="list-inline-item mr-1" v-for='letter in wordLetters'>
-          <h3 v-if="letter == ' ' " class="text-muted" style="opacity: 0.2">
-            {{ isGuessedLetter(letter) ? letter : '█'}}</h3>
-          <h3 v-else class="text-uppercase">{{ isGuessedLetter(letter) ? letter : '█'}}</h3>
-        </li>
-        <div v-if="alertMessage" class="alertbox">
-          <p>{{ alertMessage }}</p>
-          <button v-if="canDismissAlert" @click="dismissAlert">Ok</button>
-        </div>
-      </ul>
-    </header>
-    <main class="container-fluid">
-      <div class="small-container pt-2" style="z-index: 10000">
-        <p v-for="(value, key)  in scorePlayers"><span :id="key">Score Speler {{ key }}: {{ value }} </span></p>
-        <p>Gedraaide score: {{ currentScore }} </p>
-        <div v-if="currentPlayer != null && currentPlayer.active" class="playing">
-          <h3 class="pb-1 text-warning font-weight-bold">{{ randomWordCategory }}</h3>
-          <button v-if="begin == false" class="col-12 mb-2 green-bg" style="border: none;" @click="turnWheel">Draai aan het rad!</button>
-          <div v-if="begin == true">
-            <h4 v-if="message" class="font-weight-bold" :style="{ color: messageColor }">{{message}}</h4>
-            <button type="button" class="letter-button"
-                    :disabled='single.checked || tries == 0 || showWord()' @click='handleLetterClick(single)'
-                    v-for='single in alphabet'>
-              {{ single.letter }}
-            </button>
-            <form class="pt-2">
-              <label for="sel1">Koop een klinker (voor 250 euro):</label>
-              <select class="form-control col-12 float-left mb-1 text-uppercase" id="sel1" v-model="vowel">
-                <option class="text-uppercase" v-for="klinker in vowels" :value="klinker.id">{{ klinker.letter }}</option>
-              </select>
-              <button type="button" class="btn btn-primary btn col-12 mb-5 float-left" @click='unlockVowel'>
-                Koop klinker. (-€250)
-              </button>
-            </form>
-            <form class="pb-2">
-              <label>Mag ik het zeggen Walter (voor 250 euro)?</label>
-              <input type="text" class="col-12 form-control mb-1" placeholder="Het woord, de zin of gezegde is.."
-                     @keyup.enter="didIGuessRight" v-model="walterInput">
-                <button type="button" class="btn btn-primary btn col-12 mb-2 float-left"
-                      @click='didIGuessRight'>Ik ga het zeggen Walter! (-€250)
-              </button>
-              <span v-if='walterFeedback' class="font-weight-bold mb-3">{{ walterFeedback }}</span>
-            </form>
-          </div>
-        </div>
-        <div v-else=""><p>{{ statusMessage }}</p></div>
-          <video id="videoStream"></video>
-      </div>
-    </main>
-  </div>
+    <div>
+        <header class="align-items container-fluid green-bg">
+            <ul class='result pt-2 pl-0 small-container'>
+                <li class="list-inline-item mr-1" v-for='letter in wordLetters'>
+                    <h3 v-if="letter == ' ' " class="text-muted" style="opacity: 0.2">
+                        {{ isGuessedLetter(letter) ? letter : '█'}}</h3>
+                    <h3 v-else class="text-uppercase">{{ isGuessedLetter(letter) ? letter : '█'}}</h3>
+                </li>
+                <div v-if="alertMessage" class="alertbox">
+                    <p>{{ alertMessage }}</p>
+                    <button v-if="canDismissAlert" @click="dismissAlert">Ok</button>
+                </div>
+            </ul>
+        </header>
+        <main class="container-fluid">
+            <div class="small-container pt-2" style="z-index: 10000">
+                <p v-for="(value, key)  in scorePlayers"><span :id="key">Score Speler {{ key }}: {{ value }} </span></p>
+                <p>Gedraaide score: {{ currentScore }} </p>
+                <div v-if="currentPlayer != null && currentPlayer.active" class="playing">
+                    <h3 class="pb-1 text-warning font-weight-bold">{{ randomWordCategory }}</h3>
+                    <button v-if="begin == false" class="col-12 mb-2 green-bg" style="border: none;" @click="turnWheel">
+                        Draai aan het rad!
+                    </button>
+                    <div v-if="begin == true">
+                        <h4 v-if="message" class="font-weight-bold" :style="{ color: messageColor }">{{message}}</h4>
+                        <button type="button" class="letter-button"
+                                :disabled='single.checked || tries == 0 || showWord()'
+                                @click='handleLetterClick(single)'
+                                v-for='single in alphabet'>
+                            {{ single.letter }}
+                        </button>
+                        <form class="pt-2">
+                            <label for="sel1">Koop een klinker (voor 250 euro):</label>
+                            <select class="form-control col-12 float-left mb-1 text-uppercase" id="sel1"
+                                    v-model="vowel">
+                                <option class="text-uppercase" v-for="klinker in vowels" :value="klinker.id">
+                                    {{ klinker.letter }}
+                                </option>
+                            </select>
+                            <button type="button" class="btn btn-primary btn col-12 mb-5 float-left"
+                                    @click='unlockVowel'>
+                                Koop klinker. (-€250)
+                            </button>
+                        </form>
+                        <form class="pb-2">
+                            <label>Mag ik het zeggen Walter (voor 250 euro)?</label>
+                            <input type="text" class="col-12 form-control mb-1"
+                                   placeholder="Het woord, de zin of gezegde is.."
+                                   @keyup.enter="didIGuessRight" v-model="walterInput">
+                            <button type="button" class="btn btn-primary btn col-12 mb-2 float-left"
+                                    @click='didIGuessRight'>Ik ga het zeggen Walter! (-€250)
+                            </button>
+                            <span v-if='walterFeedback' class="font-weight-bold mb-3">{{ walterFeedback }}</span>
+                        </form>
+                    </div>
+                </div>
+                <div v-else=""><p>{{ statusMessage }}</p></div>
+                <video id="videoStream"></video>
+            </div>
+        </main>
+    </div>
 
 </template>
 
@@ -61,10 +69,10 @@
     import VueSocketio from 'vue-socket.io';
     import {throwconfetti} from '../../static/js/confetti.js';
     import Peer from 'simple-peer';
-    import { bus } from '../main';
+    import {bus} from '../main';
 
-    Vue.use(VueSocketio, 'http://localhost:3000/');
-
+    Vue.use(VueSocketio, 'http://localhost:5000/');
+    //    Vue.use(VueSocketio, 'https://wheeloffortune1718.herokuapp.com/');
 
     export default {
         name: 'GameFinal',
@@ -90,27 +98,27 @@
                 words: [],
                 vowel: '',
                 vowels: [
-                  {
-                    id: 0,
-                    letter: "a"
-                  },
-                  {
-                    id: 4,
-                    letter: "e"
-                  },
-                  {
-                    id: 8,
-                    letter: "i"
-                  },
-                  {
-                    id: 14,
-                    letter: "o"
-                  },
-                  {
-                    id: 20,
-                    letter: "u"
-                  }
-                  ],
+                    {
+                        id: 0,
+                        letter: "a"
+                    },
+                    {
+                        id: 4,
+                        letter: "e"
+                    },
+                    {
+                        id: 8,
+                        letter: "i"
+                    },
+                    {
+                        id: 14,
+                        letter: "o"
+                    },
+                    {
+                        id: 20,
+                        letter: "u"
+                    }
+                ],
                 vowelsUsed: [],
                 randomWord: '',
                 randomWordCategory: '',
@@ -124,9 +132,9 @@
                 alphabet: [],
                 statusMessage: 'Het is momenteel aan een andere speler. Wacht uw beurt af.',
                 scorePlayers: {
-                 1:0,
-                 2:0,
-                 3:0
+                    1: 0,
+                    2: 0,
+                    3: 0
                 },
                 currentScore: '...',
                 isNegative: false,
@@ -156,8 +164,36 @@
                 this.splitWordIntoLetters();
                 // this.lettersUsed = [];
             },
+            letMeWatch() {
+                console.log('LET ME WATCH');
+                console.log(this.currentPlayer.number);
+                this.$socket.emit('letMeWatch', {playerNum: this.currentPlayer.number})
+            },
+            acceptConnection(data) {
+                console.log('let me accept?');
+                self = this
+                if (self.currentPlayer.number === data.playerNum) {
+                    self.peer.signal(data.hostSignal);
+                    self.peer.on('signal', function (signal) {
+                        console.log(signal);
+                        console.log('signal??');
+                        self.$socket.emit('acceptConnection', {
+                            playerNum: data.playerNum,
+                            hostSignal: data.hostname,
+                            peerIndex: data.peerIndex,
+                            playerSignal: JSON.stringify(signal)
+                        });
+                    })
+                    self.peer.on('stream', function (stream) {
+                        console.log('stream? maybe? please?')
+                        let video = document.querySelector('video');
+                        video.src = window.URL.createObjectURL(stream);
+                        video.play();
+                    });
+                }
+            },
             connectToStream(data) {
-                console.log(data)
+//                console.log(data)
                 let database = firebase.database()
                 self = this;
                 if (self.currentPlayer.number === data.number && !self.currentPlayer.stream) {
@@ -179,23 +215,23 @@
             },
 
             turnWheel() {
-              this.begin = true;
-              //Neem hier de data van de camera stel nu dat het 300 is.
-              this.currentScore = 300
-              this.alertMessage = false
+                this.begin = true;
+                //Neem hier de data van de camera stel nu dat het 300 is.
+                this.currentScore = 300
+                this.alertMessage = false
             },
 
-            assignScoreToPlayers () {
-              let self = this
-              let database = firebase.database()
-              let databaseRef = database.ref('game/players');
+            assignScoreToPlayers() {
+                let self = this
+                let database = firebase.database()
+                let databaseRef = database.ref('game/players');
 
-              databaseRef.on('value', function (snapshot) {
-                let playersInfo = snapshot.val()
-                self.scorePlayers[1] = playersInfo.player1.score
-                self.scorePlayers[2]= playersInfo.player2.score
-                self.scorePlayers[3] = playersInfo.player3.score
-              });
+                databaseRef.on('value', function (snapshot) {
+                    let playersInfo = snapshot.val()
+                    self.scorePlayers[1] = playersInfo.player1.score
+                    self.scorePlayers[2] = playersInfo.player2.score
+                    self.scorePlayers[3] = playersInfo.player3.score
+                });
             },
 
             getWord() {
@@ -212,32 +248,32 @@
             },
 
             unlockVowel() {
-               this.substractMoneyFromCurrentMoney ();
-               if(this.isNegative == false)
-                  this.alphabet[this.vowel].checked = false
+                this.substractMoneyFromCurrentMoney();
+                if (this.isNegative == false)
+                    this.alphabet[this.vowel].checked = false
             },
 
-            substractMoneyFromCurrentMoney () {
-              let currentPlayerScore = this.scorePlayers[this.currentPlayer.number]
-              let substractedScore = currentPlayerScore - 250
-              if(substractedScore < 0){
-                // alert  ('Je score is niet hoog genoeg om een klinker te kopen of het woord te raden.')
-                this.alertMessage = 'Je score is niet hoog genoeg om een klinker te kopen of het woord te raden.'
-                this.isNegative = true
-              }
-              else {
-                this.isNegative = false
-                this.scorePlayers[this.currentPlayer.number] = substractedScore
-                let database = firebase.database()
-                database.ref('game/players/player'+ this.currentPlayer.number).update({
-                  score: substractedScore
-                });
-              }
+            substractMoneyFromCurrentMoney() {
+                let currentPlayerScore = this.scorePlayers[this.currentPlayer.number]
+                let substractedScore = currentPlayerScore - 250
+                if (substractedScore < 0) {
+                    // alert  ('Je score is niet hoog genoeg om een klinker te kopen of het woord te raden.')
+                    this.alertMessage = 'Je score is niet hoog genoeg om een klinker te kopen of het woord te raden.'
+                    this.isNegative = true
+                }
+                else {
+                    this.isNegative = false
+                    this.scorePlayers[this.currentPlayer.number] = substractedScore
+                    let database = firebase.database()
+                    database.ref('game/players/player' + this.currentPlayer.number).update({
+                        score: substractedScore
+                    });
+                }
 //              console.log(substractedScore)
             },
 
             getDataFromFirebase() {
-              let self = this
+                let self = this
                 let database = firebase.database()
                 let databaseRef = database.ref('words');
                 databaseRef.on('value', function (snapshot) {
@@ -265,13 +301,13 @@
 
                 let database = firebase.database()
                 database.ref('game/alphabeth/').update({
-                  [letterFromAlpha] : true
+                    [letterFromAlpha]: true
                 });
 
                 let letterClicked = single.letter.toLowerCase()
                 this.lettersUsed.push(letterClicked);
                 database.ref('game/lettersUsed').push(
-                  letterClicked
+                    letterClicked
                 );
                 this.compareWords();
 
@@ -298,25 +334,25 @@
                     }
                 }
                 // alert('je krijgt ' + n + ' keer het bedrag dat je hebt gedraait')
-                if(n == 0)
-                  this.alertMessage = 'Helaas, deze letter zoeken we niet. Het is aan de volgende.'
+                if (n == 0)
+                    this.alertMessage = 'Helaas, deze letter zoeken we niet. Het is aan de volgende.'
                 else
-                  this.alertMessage = 'Goed gedaan! Je zit op de juiste weg, je krijgt ' + n + ' keer het bedrag dat je hebt gedraaid en je mag nog eens draaien aan het rad.'
+                    this.alertMessage = 'Goed gedaan! Je zit op de juiste weg, je krijgt ' + n + ' keer het bedrag dat je hebt gedraaid en je mag nog eens draaien aan het rad.'
                 this.updateScore(n)
                 return n;
             },
 
-            updateScore (times) {
-              if(times != 0){
-                let calculatedScore = (this.currentScore * times) + this.scorePlayers[this.currentPlayer.number]
-                firebase.database().ref('game/players/player'+ this.currentPlayer.number).update({
-                  score: calculatedScore
-                });
+            updateScore(times) {
+                if (times != 0) {
+                    let calculatedScore = (this.currentScore * times) + this.scorePlayers[this.currentPlayer.number]
+                    firebase.database().ref('game/players/player' + this.currentPlayer.number).update({
+                        score: calculatedScore
+                    });
 
-                this.scorePlayers[this.currentPlayer.number] = calculatedScore
-              }
+                    this.scorePlayers[this.currentPlayer.number] = calculatedScore
+                }
 
-              this.currentScore = '...'
+                this.currentScore = '...'
             },
 
             isGuessedLetter(letter) {
@@ -337,10 +373,10 @@
             },
 
             checkIfWon() {
-              let wordLettersNoSpaces;
-              wordLettersNoSpaces = this.wordLetters.filter(function(str) {
-                return /\S/.test(str);
-              })
+                let wordLettersNoSpaces;
+                wordLettersNoSpaces = this.wordLetters.filter(function (str) {
+                    return /\S/.test(str);
+                })
 
                 if (this.compareWord.length == wordLettersNoSpaces.length) {
                     this.messageColor = '#00b84f'
@@ -350,113 +386,113 @@
             },
 
             didIGuessRight() {
-              let self = this
-              let currentPlayerScore = this.scorePlayers[this.currentPlayer.number]
-              if(currentPlayerScore >= 250){
-                if (this.walterInput.replace(/\s/g, '').toLowerCase() != '' && this.walterInput.replace(/\s/g, '').toLowerCase() != null) {
-                  if (this.walterInput.replace(/\s/g, '').toLowerCase() == this.randomWord.replace(/\s/g, '').toLowerCase()) {
-                    this.handleEndGame();
-                    this.walterFeedback = "Proficiat! U heeft het woord juist geraden!"
-                  }
-                  else {
-                    this.substractMoneyFromCurrentMoney();
-                    this.walterFeedback = "Helaas, u heeft het niet juist geraden. En de beurt gaat nu naar een andere speler."
-                    setTimeout(function () {
-                      self.endTurn();
-                    }, 2500)
-                  }
+                let self = this
+                let currentPlayerScore = this.scorePlayers[this.currentPlayer.number]
+                if (currentPlayerScore >= 250) {
+                    if (this.walterInput.replace(/\s/g, '').toLowerCase() != '' && this.walterInput.replace(/\s/g, '').toLowerCase() != null) {
+                        if (this.walterInput.replace(/\s/g, '').toLowerCase() == this.randomWord.replace(/\s/g, '').toLowerCase()) {
+                            this.handleEndGame();
+                            this.walterFeedback = "Proficiat! U heeft het woord juist geraden!"
+                        }
+                        else {
+                            this.substractMoneyFromCurrentMoney();
+                            this.walterFeedback = "Helaas, u heeft het niet juist geraden. En de beurt gaat nu naar een andere speler."
+                            setTimeout(function () {
+                                self.endTurn();
+                            }, 2500)
+                        }
+                    }
+                    else
+                        this.walterFeedback = "U moet een woord invoeren.."
                 }
-                else
-                  this.walterFeedback = "U moet een woord invoeren.."
-              }
-              else {
-                this.alertMessage = 'Helaas, je score is niet hoog genoeg om een woord te raden. Je moet minstens 250 hebben.'
-              }
+                else {
+                    this.alertMessage = 'Helaas, je score is niet hoog genoeg om een woord te raden. Je moet minstens 250 hebben.'
+                }
             },
 
-            handleEndGame(){
-              let self = this
-              throwconfetti();
-              clearTimeout(throwconfetti(), 5000)
-              firebase.database().ref('game/lettersUsed/').set({
-                0: 'a',
-                1: 'b',
-                2: 'c',
-                3: 'd',
-                4: 'e',
-                5: 'f',
-                6: 'g',
-                7: 'h',
-                8: 'i',
-                9: 'j',
-                10: 'k',
-                11: 'l',
-                12: 'm',
-                13: 'n',
-                14: 'o',
-                15: 'p',
-                16: 'q',
-                17: 'r',
-                18: 's',
-                19: 't',
-                20: 'u',
-                21: 'v',
-                22: 'w',
-                23: 'x',
-                24: 'y',
-                25: 'z',
-              });
-              firebase.database().ref('game/finished/').update({
-                end: true,
-                winner: this.currentPlayer.name
-              });
-              setTimeout(function () {
-               document.getElementById("confettiCanvas").remove();
-               self.resetWholeGame();
-               // self.$socket.emit('startGame')
-              }, 8000)
+            handleEndGame() {
+                let self = this
+                throwconfetti();
+                clearTimeout(throwconfetti(), 5000)
+                firebase.database().ref('game/lettersUsed/').set({
+                    0: 'a',
+                    1: 'b',
+                    2: 'c',
+                    3: 'd',
+                    4: 'e',
+                    5: 'f',
+                    6: 'g',
+                    7: 'h',
+                    8: 'i',
+                    9: 'j',
+                    10: 'k',
+                    11: 'l',
+                    12: 'm',
+                    13: 'n',
+                    14: 'o',
+                    15: 'p',
+                    16: 'q',
+                    17: 'r',
+                    18: 's',
+                    19: 't',
+                    20: 'u',
+                    21: 'v',
+                    22: 'w',
+                    23: 'x',
+                    24: 'y',
+                    25: 'z',
+                });
+                firebase.database().ref('game/finished/').update({
+                    end: true,
+                    winner: this.currentPlayer.name
+                });
+                setTimeout(function () {
+                    document.getElementById("confettiCanvas").remove();
+                    self.resetWholeGame();
+                    // self.$socket.emit('startGame')
+                }, 8000)
             },
 
             resetWholeGame() {
-              firebase.database().ref('game/players/').update({
-                player1: {
-                  active: true,
-                  host: 0,
-                  id: 1,
-                  identity:0,
-                  number: 1,
-                  name: '',
-                  playing: false,
-                  score: 0,
-                  stream: false,
-                },
-                player2: {
-                  active: false,
-                  host: 0,
-                  id: 2,
-                  identity:0,
-                  number: 2,
-                  name: '',
-                  playing: false,
-                  score: 0,
-                  stream: false,
-                },
-                player3: {
-                  active: false,
-                  host: 0,
-                  id: 3,
-                  identity: 0,
-                  number: 3,
-                  name: '',
-                  playing: false,
-                  score: 0,
-                  stream: false,
-                }
-              })
-              firebase.database().ref('game/lettersUsed/').remove()
-              firebase.database().ref('game/wasStopped/').set(false)
-              this.$socket.emit('startGame')
-              this.$router.push({ name: 'Profile', })
+                firebase.database().ref('game/players/').update({
+                    player1: {
+                        active: true,
+                        host: 0,
+                        id: 1,
+                        identity: 0,
+                        number: 1,
+                        name: '',
+                        playing: false,
+                        score: 0,
+                        stream: false,
+                    },
+                    player2: {
+                        active: false,
+                        host: 0,
+                        id: 2,
+                        identity: 0,
+                        number: 2,
+                        name: '',
+                        playing: false,
+                        score: 0,
+                        stream: false,
+                    },
+                    player3: {
+                        active: false,
+                        host: 0,
+                        id: 3,
+                        identity: 0,
+                        number: 3,
+                        name: '',
+                        playing: false,
+                        score: 0,
+                        stream: false,
+                    }
+                })
+                firebase.database().ref('game/lettersUsed/').remove()
+                firebase.database().ref('game/wasStopped/').set(false)
+                this.$socket.emit('startGame')
+                this.$router.push({name: 'Profile',})
             },
 
             getUserData: function () {
@@ -482,15 +518,30 @@
                 self.$options.sockets.userDisconnected = (data) => {
                     self.userDisconnectedAlert()
                 }
+                self.$options.sockets.startConnection = (data) => {
+                    console.log('start connection');
+                    console.log(data);
+                    self.acceptConnection(data);
+                }
+//                self.$options.sockets.startStream = (data) => {
+//                    console.log('hello? Stream?');
+//                    self.peer.on('stream', function (stream) {
+//                        console.log('stream? maybe? please?')
+//                        let video = document.querySelector('video');
+//                        video.src = window.URL.createObjectURL(stream);
+//                        video.play();
+//                    });
+//                }
             },
 
-            userDisconnectedAlert(){
-              let self = this
-              this.canDismissAlert = false
-              this.alertMessage = 'Oeps! Een speler heeft het spel verlaten. Deze rond zal worden beëindigd.'
-              setTimeout(function () {
-                self.$router.push({ name: 'Profile', })
-              }, 5000)
+
+            userDisconnectedAlert() {
+                let self = this
+                this.canDismissAlert = false
+                this.alertMessage = 'Oeps! Een speler heeft het spel verlaten. Deze rond zal worden beëindigd.'
+                setTimeout(function () {
+                    self.$router.push({name: 'Profile',})
+                }, 5000)
             },
 
             sendAnswer: function () {
@@ -523,48 +574,48 @@
                 })
             },
 
-            checkIfWonAndChangeMessage(){
-            let self = this
-            let finishedStatus;
-            let playerWon;
+            checkIfWonAndChangeMessage() {
+                let self = this
+                let finishedStatus;
+                let playerWon;
 
-            let finishedRef = firebase.database().ref('game/finished');
-            finishedRef.on('value', function(snapshot) {
-              finishedStatus = snapshot.val().end
-              playerWon = snapshot.val().winner
-            });
+                let finishedRef = firebase.database().ref('game/finished');
+                finishedRef.on('value', function (snapshot) {
+                    finishedStatus = snapshot.val().end
+                    playerWon = snapshot.val().winner
+                });
 
-            if(finishedStatus == true){
-              this.statusMessage = playerWon + ' heeft het spel gewonnen!'
-              setTimeout(function () {
-                self.$router.push({ name: 'Profile', })
-              }, 5000)
-            }
-          },
-
-            handleLettersAndVowelsUsed () {
-              let self = this
-              firebase.database().ref('game/lettersUsed').on('value', function (snapshot) {
-                let lettersFromDatabase = snapshot.val();
-                console.log(lettersFromDatabase)
-                if(lettersFromDatabase != null && lettersFromDatabase.length != 0){
-                  console.log('LettersLoadedFromDatabase')
-                  self.lettersUsed = Object.values(lettersFromDatabase)
-                  console.log(self.lettersUsed)
-                    self.vowelsUsed = self.lettersUsed.filter(function (obj) {
-                      return obj == 'a' || obj == 'e' || obj == 'i' || obj == 'o' || obj == 'u'
-                    })
+                if (finishedStatus == true) {
+                    this.statusMessage = playerWon + ' heeft het spel gewonnen!'
+                    setTimeout(function () {
+                        self.$router.push({name: 'Profile',})
+                    }, 5000)
                 }
-                else {
-                  self.lettersUsed = []
-                }
+            },
 
-                for(let i = 0; i < self.vowelsUsed.length; i++){
-                  self.vowels = self.vowels.filter(function (obj) {
-                    return obj.letter != self.vowelsUsed[i]
-                  })
-                }
-              })
+            handleLettersAndVowelsUsed() {
+                let self = this
+                firebase.database().ref('game/lettersUsed').on('value', function (snapshot) {
+                    let lettersFromDatabase = snapshot.val();
+                    console.log(lettersFromDatabase)
+                    if (lettersFromDatabase != null && lettersFromDatabase.length != 0) {
+                        console.log('LettersLoadedFromDatabase')
+                        self.lettersUsed = Object.values(lettersFromDatabase)
+                        console.log(self.lettersUsed)
+                        self.vowelsUsed = self.lettersUsed.filter(function (obj) {
+                            return obj == 'a' || obj == 'e' || obj == 'i' || obj == 'o' || obj == 'u'
+                        })
+                    }
+                    else {
+                        self.lettersUsed = []
+                    }
+
+                    for (let i = 0; i < self.vowelsUsed.length; i++) {
+                        self.vowels = self.vowels.filter(function (obj) {
+                            return obj.letter != self.vowelsUsed[i]
+                        })
+                    }
+                })
             },
 
             checkArray: function () {
@@ -584,12 +635,13 @@
                 self.players = [];
                 self.currentPlayer = [];
                 for (let player of Object.values(players)) {
-                  if (player.id === self.user.uid) {
-                    self.currentPlayer = player;
-                    self.players.push(player)
-                    let test = document.getElementById(self.currentPlayer.number)
-                    test.classList.add('orange')
-                  }
+                    if (player.id === self.user.uid) {
+                        self.currentPlayer = player;
+                        self.players.push(player);
+                        self.letMeWatch();
+                        let test = document.getElementById(self.currentPlayer.number)
+                        test.classList.add('orange')
+                    }
                     else {
                         if (player.playing) {
                             self.players.push(player);
@@ -602,50 +654,50 @@
                 this.$socket.emit('turnChange', {number: this.currentPlayer.number});
             },
 
-            whenGameFinishedDatabaseChangeIsMade () {
-              let self = this;
-              firebase.database().ref('game/finished').on('value', function (snapshot) {
-                self.checkIfWonAndChangeMessage();
-              })
+            whenGameFinishedDatabaseChangeIsMade() {
+                let self = this;
+                firebase.database().ref('game/finished').on('value', function (snapshot) {
+                    self.checkIfWonAndChangeMessage();
+                })
             },
 
-            checkIfGameWasStopped () {
-              let self = this;
-              firebase.database().ref('game/wasStopped').on('value', function (snapshot) {
-                if(snapshot.val() == true)
-                  self.resetWholeGame()
-                  // self.$socket.emit('startGame')
-              })
+            checkIfGameWasStopped() {
+                let self = this;
+                firebase.database().ref('game/wasStopped').on('value', function (snapshot) {
+                    if (snapshot.val() == true)
+                        self.resetWholeGame()
+                    // self.$socket.emit('startGame')
+                })
             },
 
             dismissAlert() {
-              this.alertMessage = false
+                this.alertMessage = false
             },
 
-            warnBeforeRefresh () {
-              window.onbeforeunload = function() {
-                return "Als je de pagina herlaadt zal het spel beëindigen! Weet je het zeker?";
-              };
+            warnBeforeRefresh() {
+                window.onbeforeunload = function () {
+                    return "Als je de pagina herlaadt zal het spel beëindigen! Weet je het zeker?";
+                };
             }
         },
 
-      created() {
-        bus.$emit('userLogin', true)
-        this.authChange();
-        this.handleLettersAndVowelsUsed();
-        this.getUserData();
-        this.getGameData();
-        this.getSocketData();
-        this.getDataFromFirebase();
-        this.whenGameFinishedDatabaseChangeIsMade ();
-        this.checkIfGameWasStopped();
-        this.assignScoreToPlayers();
-      },
+        created() {
+            bus.$emit('userLogin', true)
+            this.authChange();
+            this.handleLettersAndVowelsUsed();
+            this.getUserData();
+            this.getGameData();
+//            this.getSocketData();
+            this.getDataFromFirebase();
+            this.whenGameFinishedDatabaseChangeIsMade();
+            this.checkIfGameWasStopped();
+            this.assignScoreToPlayers();
+        },
 
         mounted() {
             this.authChange();
             this.getUserData();
-            this.getGameData();
+//            this.getGameData();
             this.getSocketData();
             this.getDataFromFirebase();
             // this.handleLettersAndVowelsUsed();

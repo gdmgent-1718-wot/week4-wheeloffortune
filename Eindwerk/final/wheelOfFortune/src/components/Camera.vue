@@ -19,7 +19,9 @@
     import Peer from 'simple-peer';
     import VueSocketio from 'vue-socket.io';
 
-    Vue.use(VueSocketio, 'http://localhost:3000/');
+    Vue.use(VueSocketio, 'http://localhost:5000/');
+    //    Vue.use(VueSocketio, 'https://wheeloffortune1718.herokuapp.com/');
+
 
     export default {
         name: 'Camera',
@@ -33,15 +35,15 @@
                     initiator: true,
                     stream: null,
                 },
-                peers: null,
+                peers: [],
                 firebaseObject: null,
                 players: null,
                 canvas: null,
                 overlay: null,
                 ctx: null,
                 octx: null,
-                x:100,
-                y:100,
+                x: 100,
+                y: 100,
                 videoWidth: null,
                 videoHeight: null,
             }
@@ -60,13 +62,45 @@
                 self = this;
                 self.$options.sockets.newRecievePeer = (data) => {
                     console.log('fuck ruck')
-                    console.log(self.peers[data.number-1])
-                    self.peers[data.number-1].signal(data.identity)
+                    console.log(self.peers[data.number - 1])
+                    self.peers[data.number - 1].signal(data.identity)
                 };
                 self.$options.sockets.getColor = (data) => {
                     console.log(data)
-                    self.peers[data.number-1].signal(data.identity)
+                    self.peers[data.number - 1].signal(data.identity)
+                };
+                self.$options.sockets.letMeWatch = (data) => {
+                    console.log('someone wants to watch');
+                    self.newPlayerStream(data);
                 }
+                self.$options.sockets.acceptConnection = (data) => {
+                    console.log('let them watch');
+                    console.log(self.parameters);
+//                    self.startStream(data);
+                    self.peers[data.peerIndex].signal(data.playerSignal)
+//                    self.$socket.emit('startStream', data);
+
+
+                }
+            },
+            newPlayerStream(data) {
+                self = this;
+                let peer = new Peer(self.parameters);
+                console.log(data);
+                self.peers.push(peer)
+                let index = 0;
+                if(self.peers.length >= 1){
+                    index = self.peers.length - 1;
+                };
+                console.log(self.peers)
+                peer.on('signal', function (signal) {
+                    console.log(signal)
+                    self.$socket.emit('startConnection', {playerNum: data.playerNum, hostSignal: JSON.stringify(signal), peerIndex: index});
+                });
+
+            },
+            startStream(data){
+
             },
             initializeOverlay: function () {
 
@@ -122,38 +156,7 @@
 
 
             },
-            streamData: function () {
-                self = this;
-                self.peers = [
-                    new Peer(self.parameters),
-                    new Peer(self.parameters),
-                    new Peer(self.parameters),
-                ]
-                let index = 0;
-                Object.keys(self.players).forEach(function (key) {
-                    self.peers[index].on('signal', function (data) {
-                        console.log(data)
-                        self.$socket.emit('newStreamPeer', {host: JSON.stringify(data), number: self.players[key].number});
-                    });
-                    index++;
-                })
-            },
-            checkPeers: function () {
-                self = this;
-                self.database.ref('game/players').on('value', function (snapshot) {
-                    self.players = snapshot.val();
-
-                    let playing = 0;
-                    Object.keys(snapshot.val()).forEach(function (key) {
-                        if (self.players[key].playing) {
-                            ++playing
-                            if (playing === 3) {
-                                self.streamData();
-                            }
-                        }
-                    })
-                });
-            },
+//
             getVideo: function () {
                 self = this;
                 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
@@ -162,7 +165,6 @@
                 navigator.getUserMedia(this.constraints, function (stream) {
                     self.video.src = window.URL.createObjectURL(stream);
                     self.parameters.stream = stream;
-                    self.checkPeers();
                     self.initializeCanvas();
 
                 }, function (error) {
