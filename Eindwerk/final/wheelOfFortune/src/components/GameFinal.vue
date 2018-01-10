@@ -584,12 +584,12 @@
                 self.players = [];
                 self.currentPlayer = [];
                 for (let player of Object.values(players)) {
-                    if (player.id === self.user.uid) {
-                        self.currentPlayer = player;
-                        self.players.push(player)
-                        let test = document.getElementById(self.currentPlayer.number)
-                        test.classList.add('orange')
-                    }
+                  if (player.id === self.user.uid) {
+                    self.currentPlayer = player;
+                    self.players.push(player)
+                    let test = document.getElementById(self.currentPlayer.number)
+                    test.classList.add('orange')
+                  }
                     else {
                         if (player.playing) {
                             self.players.push(player);
