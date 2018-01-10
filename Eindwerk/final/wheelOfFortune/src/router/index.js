@@ -5,7 +5,6 @@ import Register from '@/components/Register'
 import Completion from '@/components/Completion'
 import Profile from '@/components/Profile'
 import Lobby from '@/components/Lobby'
-import Game from '@/components/Game'
 import GameFinal from '@/components/GameFinal'
 import Admin from '@/components/Admin'
 import Camera from '@/components/Camera'
@@ -19,16 +18,6 @@ export default new Router({
             path: '/',
             name: 'Login',
             component: Login,
-            // beforeEnter: (to, from, next) => {
-            //     if (user) {
-            //       // console.log('al ingelogd')
-            //       next(Profile)
-            //     } else {
-            //       // console.log('nietingelogd')
-            //       // to: Login
-            //       next()
-            //     }
-            // }
         },
         {
             path: '/register',
@@ -50,28 +39,11 @@ export default new Router({
             name: 'Lobby',
             component: Lobby,
         },
-        // {
-        //     path: '/game',
-        //     name: 'Game',
-        //     component: Game,
-        //     props: { default: true }
-        //
-        // },
         {
             path: '/game',
             name: 'GameFinal',
             component: GameFinal,
             props: { default: true },
-            // beforeEnter: (to, from, next) => {
-          //HIER CHECKEN OF DE 3 SPELERS OP TRUE STAAN DAN VERDER GAAN
-            //     if (user) {
-            //       // console.log('al ingelogd')
-            //       next('/game')
-            //     } else {
-            //       next('/login')
-            //     }
-            // }
-
         },
         {
             path: '/admin',
