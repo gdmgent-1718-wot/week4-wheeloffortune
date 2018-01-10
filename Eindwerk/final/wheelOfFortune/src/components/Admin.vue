@@ -56,12 +56,13 @@
 </template>
 
 <script>
+// Import dependencies.
 import Vue from "vue";
 import * as firebase from "firebase";
 import { bus } from "../main";
 import VueSocketio from "vue-socket.io";
 
-Vue.use(VueSocketio, "http://localhost:3000/");
+Vue.use(VueSocketio, "http://localhost:5000/");
 
 export default {
   name: "Lobby",
@@ -80,28 +81,36 @@ export default {
     };
   },
   methods: {
+    // This changes the description from the categories dynamically.
     changeDescription() {
       this.description = this.selected.description;
     },
+
+    // You can add a word to the array, this will be added on the front-end but still has to be pushed to Firebase.
     addWordToArray() {
       if (
+        // Makes sure you have chosen a category.
         this.selected.description == "" ||
         this.selected.description == "U moet een categorie selecteren!"
       ) {
         this.selected.description = "U moet een categorie selecteren!";
       } else {
+        // If you have chosen a category you can push to the array.
         this.input.push(this.inputWord);
         this.input.push(this.selected.name);
+        // Bring to the top of the array.
         this.arrayOfWords.unshift(this.input);
         this.input = "";
         this.inputWord = "";
         this.makeButtonRed();
       }
     },
+    // Delete a word from the array, this has to be saved and pushed to Firebase.
     removeWordFromArray(word) {
       this.arrayOfWords.splice(this.arrayOfWords.indexOf(word), 1);
       this.makeButtonRed();
     },
+    // Push the data to the Firebase.
     pushDataToFirebase(words) {
       let database = firebase.database();
       database.ref("words").set({
@@ -109,20 +118,21 @@ export default {
       });
       this.makeButtonGreen();
     },
+
+    // Get the words and categories from the database.
     getDataFromFirebase() {
       this.makeButtonGreen();
       let self = this;
       let database = firebase.database();
       let databaseRef = database.ref("words");
       let databaseRefCat = database.ref("categories");
-      console.log(databaseRefCat);
       databaseRef.on("value", function(snapshot) {
+        // Place words in array that will be shown in table.
         self.arrayOfWords = snapshot.val().values;
-        //                    console.log(self.arrayOfWords)
       });
       databaseRefCat.on("value", function(catSnapshot) {
+        // Place categories in array that will be shown in dropdown.
         self.categories = catSnapshot.val();
-        console.log("teeeeeeeeeeeeeest", self.categories);
       });
     },
     makeButtonGreen() {
@@ -138,6 +148,7 @@ export default {
   },
 
   mounted: function() {
+    // Edit menu items.
     bus.$emit("userLogin", true);
     this.getDataFromFirebase();
   }

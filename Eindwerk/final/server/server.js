@@ -13,7 +13,7 @@ admin.initializeApp({
 
 app.set('port', (process.env.PORT || 5000));
 
-var server = app.listen(app.get('port'), function() {
+var server = app.listen(app.get('port'), function () {
     console.log('Node app is running on port', app.get('port'));
 });
 
@@ -23,7 +23,7 @@ app.get('/', function (req, res) {
     res.send('<marquee><h1>Server is running</h1></marquee>');
 });
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     next();
@@ -32,7 +32,7 @@ app.use(function(req, res, next) {
 function getGameData() {
     let db = admin.database();
     let ref = db.ref("game");
-    let self  = this;
+    let self = this;
     return ref.on("value", function (snapshot) {
         console.log('hallo');
         return snapshot.val();
@@ -40,29 +40,31 @@ function getGameData() {
         console.log("The read failed: " + errorObject.code);
     });
 }
+
 function changeActivePlayer(currentPlayer, newPlayer) {
-    admin.database().ref('game/players/player'+currentPlayer).update({
+    admin.database().ref('game/players/player' + currentPlayer).update({
         active: false,
     });
-    admin.database().ref('game/players/player'+newPlayer).update({
+    admin.database().ref('game/players/player' + newPlayer).update({
         active: true,
     });
 }
+
 function checkPlayers() {
     let players = []
     let finished;
-    admin.database().ref('game/finished/end').once("value", function(snapshot) {
+    admin.database().ref('game/finished/end').once("value", function (snapshot) {
         finished = snapshot.val()
     })
     console.log(finished)
-    admin.database().ref('game').on("value", function(snapshot) {
+    admin.database().ref('game').on("value", function (snapshot) {
         let game = snapshot.val()
         for (let player of Object.values(game.players)) {
             console.log(player.playing)
-            if(player.playing){
+            if (player.playing) {
                 players.push(player);
                 console.log(players.length);
-                if(players.length === 3){
+                if (players.length === 3) {
                     setNewWord();
                 }
             }
@@ -70,7 +72,7 @@ function checkPlayers() {
     });
 }
 
-function resetAlphabeth () {
+function resetAlphabeth() {
     admin.database().ref('game/alphabeth').update({
         A: true,
         B: false,
@@ -102,7 +104,7 @@ function resetAlphabeth () {
 }
 
 function setNewWord() {
-    admin.database().ref('words/values').on("value", function(snapshot) {
+    admin.database().ref('words/values').on("value", function (snapshot) {
         let words = snapshot.val();
         let randomNumber = Math.floor(Math.random() * words.length);
         let randomWordFromFirebase = words[randomNumber][0];
@@ -122,15 +124,19 @@ io.on('connection', function (socket) {
     socket.on('turnChange', function (data) {
         console.log(data);
         let num = parseInt(data.number);
-        if(num === 3){
+        if (num === 3) {
             num = 1;
             console.log(num);
-            io.emit('turnChange', {'number': num})
+            io.emit('turnChange', {
+                'number': num
+            })
             changeActivePlayer(data.number, num)
-        }else{
+        } else {
             num++;
             console.log(num);
-            io.emit('turnChange', {'number': num})
+            io.emit('turnChange', {
+                'number': num
+            })
             changeActivePlayer(data.number, num)
         }
     });
@@ -155,7 +161,7 @@ io.on('connection', function (socket) {
         io.emit('startConnection', data);
     })
     socket.on('acceptConnection', function (data) {
-        console.log('player '+ data.playerNum +' accepts the connection');
+        console.log('player ' + data.playerNum + ' accepts the connection');
         io.emit('acceptConnection', data);
     })
 });

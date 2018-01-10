@@ -43,11 +43,11 @@ export default {
     };
   },
   methods: {
+    // Get data from the user and get extra info.
     getUserData: function() {
       self = this;
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-          console.log(user);
           self.user = user;
           self.displayName = user.displayName;
           self.email = user.email;
@@ -55,12 +55,13 @@ export default {
         }
       });
     },
+
+    // Update the user data bij adding email etc.
     updateUserData: function() {
-      //todo upload profile picture
       self = this;
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-          console.log(user);
+          // Signed-in.
           user
             .updateProfile({
               displayName: self.displayName,
@@ -68,16 +69,15 @@ export default {
               email: self.email
             })
             .then(function() {
-              // Update successful.
+              // Update successful, push to Profile page.
               self.$router.push({ name: "Profile" });
             })
             .catch(function(error) {
+              // Update not succesfull.
               self.errorMessage = error.message;
             });
         }
       });
-      //                user = firebase.auth().currentUser;
-      //                console.log(user);
     }
   },
   mounted: function() {
@@ -85,12 +85,15 @@ export default {
     self.getUserData();
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
+        // User is signed-in.
       } else {
+        // User not signed-in, go to Login.
         self.$router.push({ name: "Login" });
       }
     });
   },
   created: function() {
+    // Change menu items with bus event.
     bus.$emit("userLogin", true);
   }
 };
