@@ -23,79 +23,83 @@
 </template>
 
 <script>
-    import * as firebase from "firebase";
-    import { bus } from '../main';
-    import Router from 'vue-router';
-    export default {
-        name: 'Completion',
-        data() {
-            return {
-                msg: 'Profielinfo',
-                displayName: '',
-                phoneNumber: '',
-                imageURL: 'http://hope4merton.com/wp-content/uploads/2015/12/profile-placeholder.gif',
-                email: '',
-                errorCode: '',
-                errorMessage: '',
-                user:'',
-            }
-        },
-        methods: {
-            getUserData: function () {
-                self = this;
-                firebase.auth().onAuthStateChanged(function (user) {
-                    if (user) {
-                        console.log(user);
-                        self.user = user;
-                        self.displayName = user.displayName;
-                        self.email = user.email;
-                        self.imageURL = user.photoURL;
-                    }
-                });
-            },
-            updateUserData: function () {
-                //todo upload profile picture
-                self = this;
-                firebase.auth().onAuthStateChanged(function (user) {
-                    if (user) {
-                        console.log(user)
-                        user.updateProfile({
-                            displayName: self.displayName,
-                            photoURL: self.imageURL,
-                            email: self.email
-                        }).then(function() {
-                            // Update successful.
-                            self.$router.push({name: 'Profile'});
-                        }).catch(function(error) {
-                            self.errorMessage = error.message;
-                        });
-                    }
-                });
-//                user = firebase.auth().currentUser;
-//                console.log(user);
-
-            }
-
+// Import dependencies.
+import * as firebase from "firebase";
+import { bus } from "../main";
+import Router from "vue-router";
+export default {
+  name: "Completion",
+  data() {
+    return {
+      msg: "Profielinfo",
+      displayName: "",
+      phoneNumber: "",
+      imageURL:
+        "http://hope4merton.com/wp-content/uploads/2015/12/profile-placeholder.gif",
+      email: "",
+      errorCode: "",
+      errorMessage: "",
+      user: ""
+    };
+  },
+  methods: {
+    getUserData: function() {
+      self = this;
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          console.log(user);
+          self.user = user;
+          self.displayName = user.displayName;
+          self.email = user.email;
+          self.imageURL = user.photoURL;
         }
-        , mounted: function () {
-            self = this;
-            self.getUserData();
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                } else {
-                    self.$router.push({name: 'Login'});
-                }
+      });
+    },
+    updateUserData: function() {
+      //todo upload profile picture
+      self = this;
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          console.log(user);
+          user
+            .updateProfile({
+              displayName: self.displayName,
+              photoURL: self.imageURL,
+              email: self.email
+            })
+            .then(function() {
+              // Update successful.
+              self.$router.push({ name: "Profile" });
+            })
+            .catch(function(error) {
+              self.errorMessage = error.message;
             });
-        },
-        created: function () {
-          bus.$emit('userLogin', true)
+        }
+      });
+      //                user = firebase.auth().currentUser;
+      //                console.log(user);
     }
-    }
+  },
+  mounted: function() {
+    self = this;
+    self.getUserData();
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+      } else {
+        self.$router.push({ name: "Login" });
+      }
+    });
+  },
+  created: function() {
+    bus.$emit("userLogin", true);
+  }
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {

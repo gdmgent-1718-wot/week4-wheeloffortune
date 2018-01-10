@@ -19,75 +19,59 @@
       </div>
     </main>
   </div>
-    <!--<div class="container">-->
-        <!--<h1>{{ msg }}</h1>-->
-        <!--<form>-->
-            <!--<div class="form-group">-->
-                <!--<label for="emailid">Email address</label>-->
-                <!--<input v-model="email" type="email" class="form-control" id="emailid" aria-describedby="emailHelp" placeholder="Enter email">-->
-                <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
-            <!--</div>-->
-            <!--<div class="form-group">-->
-                <!--<label for="passwordid">Password</label>-->
-                <!--<input v-model="password" type="password" class="form-control" id="passwordid" placeholder="Password">-->
-            <!--</div>-->
-            <!--<button  v-on:click="register" type="submit" class="btn btn-primary">Submit</button>-->
-            <!--<router-link :to="{ name: 'Login' }">Login</router-link>-->
-            <!--<p>{{message}}</p>-->
-        <!--</form>-->
-    <!--</div>-->
 </template>
 
 <script>
-    import * as firebase from "firebase";
-    import vuesocket from "vue-socket.io";
+// Import dependencies.
+import * as firebase from "firebase";
+import vuesocket from "vue-socket.io";
 
-    export default {
-
-  name: 'Register',
-  data () {
+export default {
+  name: "Register",
+  data() {
     return {
-      msg: 'Registreer',
-        email: '',
-        password:'',
-        errorCode:'',
-        message: '',
-    }
+      msg: "Registreer",
+      email: "",
+      password: "",
+      errorCode: "",
+      message: ""
+    };
   },
   methods: {
-      register: function () {
-          console.log('button is clicked');
-          self = this;
-          firebase.auth().createUserWithEmailAndPassword(self.email, self.password).catch(function(error) {
-              // Handle Errors here.
-
-              self.errorCode = error.code;
-              self.message = error.message;
-              console.log(error)
-
-
-          }).then(function() {
-              firebase.auth().onAuthStateChanged(function(user) {
-                  if (user) {
-                      console.log('registered')
-                      self.message = "successfully registered"
-                      self.$router.push({name: 'Completion'});
-                  } else {
-                      // No user is signed in.
-                  }
-              });
-
+    // You can register. It will  create the account and sign-in the user to complete the profile.
+    register: function() {
+      self = this;
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(self.email, self.password)
+        .catch(function(error) {
+          // Handle Errors here.
+          self.errorCode = error.code;
+          self.message = error.message;
+          // Show errors in the console.
+          console.log(error);
+        })
+        .then(function() {
+          firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              // Give feedback when the user is registered succesfully.
+              self.message = "De gebruiker is succesvol geregistreerd.";
+              // Redirect the user so he can complete the registration and add more information.
+              self.$router.push({ name: "Completion" });
+            } else {
+              // No user is signed in.
+            }
           });
-
-      }
-
+        });
+    }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {

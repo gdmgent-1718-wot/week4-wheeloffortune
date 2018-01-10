@@ -56,88 +56,90 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import * as firebase from "firebase";
-  import { bus } from '../main';
-  import VueSocketio from 'vue-socket.io';
+import Vue from "vue";
+import * as firebase from "firebase";
+import { bus } from "../main";
+import VueSocketio from "vue-socket.io";
 
-  Vue.use(VueSocketio, 'http://localhost:3000/');
+Vue.use(VueSocketio, "http://localhost:3000/");
 
-    export default {
-        name: 'Lobby',
-        data() {
-            return {
-              inputWord: '',
-              input: [],
-              arrayOfWords: [],
-              id: null,
-              isGreen: false,
-              isRed: false,
-              buttonText: 'Vergeet niet op te slaan!',
-              description: 'Selecteer een categorie',
-              selected: '',
-              categories: [],
-            }
-        },
-        methods: {
-          changeDescription () {
-            this.description = this.selected.description
-          },
-          addWordToArray () {
-            if(this.selected.description == '' || this.selected.description == 'U moet een categorie selecteren!'){
-              this.selected.description = 'U moet een categorie selecteren!'
-            }
-            else {
-              this.input.push(this.inputWord)
-              this.input.push(this.selected.name)
-              this.arrayOfWords.unshift(this.input);
-              this.input = ''
-              this.inputWord = ''
-              this.makeButtonRed()
-            }
-          },
-          removeWordFromArray (word) {
-            this.arrayOfWords.splice(this.arrayOfWords.indexOf(word), 1)
-            this.makeButtonRed()
-          },
-          pushDataToFirebase (words) {
-            let database = firebase.database()
-            database.ref('words').set({
-              values: words
-            });
-            this.makeButtonGreen()
-          },
-          getDataFromFirebase () {
-            this.makeButtonGreen();
-            let self = this
-            let database = firebase.database()
-            let databaseRef = database.ref('words');
-            let databaseRefCat = database.ref('categories');
-            console.log(databaseRefCat)
-            databaseRef.on('value', function(snapshot) {
-              self.arrayOfWords = snapshot.val().values
-//                    console.log(self.arrayOfWords)
-            });
-            databaseRefCat.on('value', function(catSnapshot) {
-              self.categories = catSnapshot.val()
-                console.log('teeeeeeeeeeeeeest',self.categories)
-            });
-          },
-          makeButtonGreen () {
-            this.isRed = false
-            this.isGreen = true
-            this.buttonText = 'Wijzigingen opgeslagen!'
-          },
-          makeButtonRed () {
-            this.isGreen = false
-            this.isRed = true
-            this.buttonText = 'Klik hier om wijzigingen op te slaan!'
-          }
-        },
-
-        mounted: function () {
-          bus.$emit('userLogin', true)
-          this.getDataFromFirebase()
-        }
+export default {
+  name: "Lobby",
+  data() {
+    return {
+      inputWord: "",
+      input: [],
+      arrayOfWords: [],
+      id: null,
+      isGreen: false,
+      isRed: false,
+      buttonText: "Vergeet niet op te slaan!",
+      description: "Selecteer een categorie",
+      selected: "",
+      categories: []
+    };
+  },
+  methods: {
+    changeDescription() {
+      this.description = this.selected.description;
+    },
+    addWordToArray() {
+      if (
+        this.selected.description == "" ||
+        this.selected.description == "U moet een categorie selecteren!"
+      ) {
+        this.selected.description = "U moet een categorie selecteren!";
+      } else {
+        this.input.push(this.inputWord);
+        this.input.push(this.selected.name);
+        this.arrayOfWords.unshift(this.input);
+        this.input = "";
+        this.inputWord = "";
+        this.makeButtonRed();
+      }
+    },
+    removeWordFromArray(word) {
+      this.arrayOfWords.splice(this.arrayOfWords.indexOf(word), 1);
+      this.makeButtonRed();
+    },
+    pushDataToFirebase(words) {
+      let database = firebase.database();
+      database.ref("words").set({
+        values: words
+      });
+      this.makeButtonGreen();
+    },
+    getDataFromFirebase() {
+      this.makeButtonGreen();
+      let self = this;
+      let database = firebase.database();
+      let databaseRef = database.ref("words");
+      let databaseRefCat = database.ref("categories");
+      console.log(databaseRefCat);
+      databaseRef.on("value", function(snapshot) {
+        self.arrayOfWords = snapshot.val().values;
+        //                    console.log(self.arrayOfWords)
+      });
+      databaseRefCat.on("value", function(catSnapshot) {
+        self.categories = catSnapshot.val();
+        console.log("teeeeeeeeeeeeeest", self.categories);
+      });
+    },
+    makeButtonGreen() {
+      this.isRed = false;
+      this.isGreen = true;
+      this.buttonText = "Wijzigingen opgeslagen!";
+    },
+    makeButtonRed() {
+      this.isGreen = false;
+      this.isRed = true;
+      this.buttonText = "Klik hier om wijzigingen op te slaan!";
     }
+  },
+
+  mounted: function() {
+    bus.$emit("userLogin", true);
+    this.getDataFromFirebase();
+  }
+};
 </script>
