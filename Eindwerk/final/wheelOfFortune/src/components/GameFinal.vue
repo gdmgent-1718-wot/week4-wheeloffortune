@@ -148,12 +148,12 @@
                 this.randomWord = '';
                 this.randomWordCategory = '';
                 this.compareWord = '';
-                this.wordLetters = [];
+                // this.wordLetters = [];
                 this.getWord();
-                this.resetCheckedLetters();
+                // this.resetCheckedLetters();
                 this.lockVowels();
                 this.splitWordIntoLetters();
-                this.lettersUsed = [];
+                // this.lettersUsed = [];
             },
             connectToStream(data) {
                 console.log(data)
@@ -523,9 +523,11 @@
               let self = this
               firebase.database().ref('game/lettersUsed').on('value', function (snapshot) {
                 let lettersFromDatabase = snapshot.val();
-
+                console.log(lettersFromDatabase)
                 if(lettersFromDatabase != null && lettersFromDatabase.length != 0){
+                  console.log('LettersLoadedFromDatabase')
                   self.lettersUsed = Object.values(lettersFromDatabase)
+                  console.log(self.lettersUsed)
                     self.vowelsUsed = self.lettersUsed.filter(function (obj) {
                       return obj == 'a' || obj == 'e' || obj == 'i' || obj == 'o' || obj == 'u'
                     })
@@ -601,12 +603,12 @@
       created() {
         bus.$emit('userLogin', true)
         this.authChange();
+        this.handleLettersAndVowelsUsed();
         this.getUserData();
         this.getGameData();
         this.getSocketData();
         this.getDataFromFirebase();
         this.whenGameFinishedDatabaseChangeIsMade ();
-        this.handleLettersAndVowelsUsed();
         this.checkIfGameWasStopped();
         this.assignScoreToPlayers();
       },
@@ -617,7 +619,7 @@
             this.getGameData();
             this.getSocketData();
             this.getDataFromFirebase();
-            this.handleLettersAndVowelsUsed();
+            // this.handleLettersAndVowelsUsed();
         }
     }
 </script>
