@@ -148,7 +148,7 @@
                 this.randomWord = '';
                 this.randomWordCategory = '';
                 this.compareWord = '';
-                // this.wordLetters = [];
+                this.wordLetters = [];
                 this.getWord();
                 // this.resetCheckedLetters();
                 this.lockVowels();
