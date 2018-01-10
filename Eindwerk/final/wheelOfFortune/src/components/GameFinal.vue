@@ -7,6 +7,10 @@
             {{ isGuessedLetter(letter) ? letter : '█'}}</h3>
           <h3 v-else class="text-uppercase">{{ isGuessedLetter(letter) ? letter : '█'}}</h3>
         </li>
+        <div v-if="alertMessage" class="alertbox">
+          <p>{{ alertMessage }}</p>
+          <button @click="dismissAlert">Ok</button>
+        </div>
       </ul>
     </header>
     <main class="container-fluid">
@@ -125,7 +129,8 @@
                  3:0
                 },
                 currentScore: '...',
-                isNegative: false
+                isNegative: false,
+                alertMessage: false
             }
         },
         sockets: {
@@ -176,6 +181,7 @@
               this.begin = true;
               //Neem hier de data van de camera stel nu dat het 300 is.
               this.currentScore = 300
+              this.alertMessage = false
             },
 
             assignScoreToPlayers () {
@@ -214,7 +220,8 @@
               let currentPlayerScore = this.scorePlayers[this.currentPlayer.number]
               let substractedScore = currentPlayerScore - 250
               if(substractedScore < 0){
-                alert('Je score is niet hoog genoeg om een klinker te kopen of het woord te raden.')
+                // alert  ('Je score is niet hoog genoeg om een klinker te kopen of het woord te raden.')
+                this.alertMessage = 'Je score is niet hoog genoeg om een klinker te kopen of het woord te raden.'
                 this.isNegative = true
               }
               else {
@@ -271,7 +278,7 @@
 
                 if (this.wordLetters.includes(single.letter.toLowerCase())) {
                     this.messageColor = '#4BE8D8'
-                    this.message = 'Je hebt juist geraden en mag nog eens draaien aan het rad.'
+                    this.message = 'Omdat je vorige letter goed hebt geraden mag je nu nog een letter kiezen.'
                     this.begin = false
                 }
                 else {
@@ -289,7 +296,11 @@
                         n++
                     }
                 }
-                alert('je krijgt ' + n + ' keer het bedrag dat je hebt gedraait')
+                // alert('je krijgt ' + n + ' keer het bedrag dat je hebt gedraait')
+                if(n == 0)
+                  this.alertMessage = 'Helaas, deze letter zoeken we niet. Het is aan de volgende.'
+                else
+                  this.alertMessage = 'Goed gedaan! Je zit op de juiste weg, je krijgt ' + n + ' keer het bedrag dat je hebt gedraaid en je mag nog eens draaien aan het rad.'
                 this.updateScore(n)
                 return n;
             },
@@ -580,6 +591,10 @@
                   self.resetWholeGame()
                   // self.$socket.emit('startGame')
               })
+            },
+
+            dismissAlert() {
+              this.alertMessage = false
             },
         },
 

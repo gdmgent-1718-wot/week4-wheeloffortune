@@ -1926,6 +1926,23 @@ button[disabled] {
   float: left;
   min-width: 108px; }
 
+.alertbox {
+  background-color: #fbfbfb;
+  position: fixed;
+  text-align: left;
+  box-shadow: 10px 10px;
+  color: #F1B052;
+  width: 85%;
+  max-width: 500px;
+  z-index: 1000000000; }
+
+.alertbox p {
+  margin: 1.2rem; }
+
+.alertbox button {
+  float: right;
+  margin: 1.2rem; }
+
 /* _-_-_- pages/ABOUT -_-_-_ */
 /* _-_-_- pages/CONTACT -_-_-_ */
 /* _-_-_- pages/HOME -_-_-_ */
