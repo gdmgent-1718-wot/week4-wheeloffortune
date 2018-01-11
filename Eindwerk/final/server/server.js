@@ -149,8 +149,12 @@ io.on('connection', function (socket) {
         resetAlphabeth();
     });
 
-    socket.on('getColor', function (data) {
-        console.log(data);
+    socket.on('getScore', function () {
+        io.emit('getScore');
+    })
+    socket.on('giveScore', function (data) {
+        io.emit('giveScore', data);
+        console.log(data)
     })
     socket.on('letMeWatch', function (data) {
         console.log('player ' + data.playerNum + ' wants to watch');

@@ -76,11 +76,6 @@ export default {
         console.log(self.peers[data.number - 1]);
         self.peers[data.number - 1].signal(data.identity);
       };
-      self.$options.sockets.getColor = data => {
-        // Get color data.
-        console.log(data);
-        self.peers[data.number - 1].signal(data.identity);
-      };
       self.$options.sockets.letMeWatch = data => {
         // Recieve connection requests to livestream.
         console.log("Some requests to watch Wheel of Fortune.");
@@ -93,6 +88,12 @@ export default {
         //                    self.startStream(data);
         self.peers[data.peerIndex].signal(data.playerSignal);
         //                    self.$socket.emit('startStream', data);
+      };
+
+      // Ask the color
+      self.$options.sockets.getScore = data => {
+        // Get the score.
+        self.getPixelColor();
       };
     },
     // New stream openened for a player.
@@ -170,7 +171,12 @@ export default {
       // Convert the pixel data to RBGa object.
       self.rgbFormatted =
         "rgb(" + pixeldata[0] + ", " + pixeldata[1] + ", " + pixeldata[2] + ")";
+
+      // Check the color and assign a score.
       self.checkWhichColorWithRange(pixeldata[0], pixeldata[1], pixeldata[2]);
+
+      // Give score to server.
+      self.$socket.emit("giveScore", self.score);
     },
     // Place red pixel on overlay where you want, will set x and y coordinates.
     setPixel: function() {

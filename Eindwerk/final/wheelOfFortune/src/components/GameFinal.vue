@@ -201,9 +201,13 @@ export default {
     },
     // Turn the wheel en fill in the score that you just turned.
     turnWheel() {
+      let self = this
       this.begin = true;
+      // Wait 30 seconds and then get the score from the server. (Server first has to take a picture)
+      setTimeout(function () {
+        self.$socket.emit("getScore");
+      }, 3000)
       // Here comes score from the camera.
-      this.currentScore = 300;
       this.alertMessage = false;
     },
 
@@ -557,6 +561,14 @@ export default {
       self.$options.sockets.startConnection = data => {
         console.log(data);
         self.acceptConnection(data);
+      };
+      self.$options.sockets.startConnection = data => {
+        console.log(data);
+        self.acceptConnection(data);
+      };
+      self.$options.sockets.giveScore = data => {
+        console.log(data);
+        this.currentScore = data;
       };
     },
 
