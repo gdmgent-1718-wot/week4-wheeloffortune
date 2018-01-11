@@ -226,7 +226,14 @@
                 // Ask the color
                 self.$options.sockets.getScore = data => {
                     // Get the score.
-                    self.getPixelColor();
+//                    self.getPixelColor();
+                    self.database.ref("game/motor/").update({
+                        turning: "False",
+                    });
+                    setTimeout(function () {
+                        self.getPixelColor();
+                        console.log("wheel should have stopped");
+                    }, 15000)
                 };
             },
             // New stream openened for a player.

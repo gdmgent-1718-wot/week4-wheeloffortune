@@ -85,6 +85,7 @@
                 msg: "Game ",
                 errorCode: "",
                 errorMessage: "",
+                database: firebase.database(),
                 game: null,
                 user: {},
                 active: false,
@@ -203,10 +204,15 @@
             turnWheel() {
                 let self = this
                 this.begin = true;
-                // Wait 30 seconds and then get the score from the server. (Server first has to take a picture)
+                self.database.ref("game/motor/").update({
+                    turning: "True",
+                    hasStopped: "False"
+                });
+
+                // Wait 3 seconds and then get the score from the server. (Server first has to take a picture)
                 setTimeout(function () {
                     self.$socket.emit("getScore");
-                }, 3000)
+                }, 10000)
                 // Here comes score from the camera.
                 this.alertMessage = false;
             },
