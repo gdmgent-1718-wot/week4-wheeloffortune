@@ -63,6 +63,9 @@ import { bus } from "../main";
 import VueSocketio from "vue-socket.io";
 
 Vue.use(VueSocketio, "http://localhost:5000/");
+// When online:
+//Vue.use(VueSocketio, 'https://wheeloffortune1718.herokuapp.com/');
+
 
 export default {
   name: "Lobby",
