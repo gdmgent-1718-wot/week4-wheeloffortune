@@ -64,8 +64,8 @@
     import VueSocketio from "vue-socket.io";
 
     Vue.use(VueSocketio, "http://localhost:5000/");
-    // When building:
-    // Vue.use(VueSocketio, 'https://wheeloffortune1718.herokuapp.com/');
+    //    // When building:
+//         Vue.use(VueSocketio, 'https://wheeloffortune1718.herokuapp.com/');
 
     export default {
         name: "Camera",
@@ -93,7 +93,9 @@
                 rgb: [],
                 rgbFormatted: "",
                 color: '',
+                differences: [],
                 score: '',
+                differecesColors: [],
                 colors: {
                     black: {
                         r: 0,
@@ -155,64 +157,48 @@
                 this.colors.black.r = this.rgb[0];
                 this.colors.black.g = this.rgb[1]
                 this.colors.black.b = this.rgb[2]
-                console.log(colors.black);
-                µ
             },
             setOrange: function () {
                 this.getPixelColor();
                 this.colors.orange.r = this.rgb[0];
                 this.colors.orange.g = this.rgb[1]
                 this.colors.orange.b = this.rgb[2]
-                console.log(colors.orange);
-                µ
             },
             setMagenta: function () {
                 this.getPixelColor();
                 this.colors.magenta.r = this.rgb[0];
                 this.colors.magenta.g = this.rgb[1]
                 this.colors.magenta.b = this.rgb[2]
-                console.log(colors.magenta);
-                µ
             },
             setRed: function () {
                 this.getPixelColor();
                 this.colors.red.r = this.rgb[0];
                 this.colors.red.g = this.rgb[1]
                 this.colors.red.b = this.rgb[2]
-                console.log(colors.red);
-                µ
             },
             setCyan: function () {
                 this.getPixelColor();
                 this.colors.cyan.r = this.rgb[0];
                 this.colors.cyan.g = this.rgb[1]
                 this.colors.cyan.b = this.rgb[2]
-                console.log(colors.cyan);
-                µ
             },
             setGreen: function () {
                 this.getPixelColor();
                 this.colors.green.r = this.rgb[0];
                 this.colors.green.g = this.rgb[1]
                 this.colors.green.b = this.rgb[2]
-                console.log(colors.green);
-                µ
             },
             setYellow: function () {
                 this.getPixelColor();
                 this.colors.yellow.r = this.rgb[0];
                 this.colors.yellow.g = this.rgb[1]
                 this.colors.yellow.b = this.rgb[2]
-                console.log(colors.yellow);
-                µ
             },
             setBlue: function () {
                 this.getPixelColor();
                 this.colors.blue.r = this.rgb[0];
                 this.colors.blue.g = this.rgb[1]
                 this.colors.blue.b = this.rgb[2]
-                console.log(colors.blue);
-                µ
             },
 
             // Connect with sockets to recieve data.
@@ -324,7 +310,7 @@
                 self.checkWhichColorWithRange(pixeldata[0], pixeldata[1], pixeldata[2]);
 
                 // Give score to server.
-                self.$socket.emit("giveScore", self.score);
+//                self.$socket.emit("giveScore", self.score);
             },
             // Place red pixel on overlay where you want, will set x and y coordinates.
             setPixel: function () {
@@ -367,43 +353,93 @@
             },
             // Check the range of the color detected, if it is between .. and .. it corresponds to Score ...
             checkWhichColorWithRange(pixelRed, pixelGreen, pixelBlue) {
-                // Check of het blauw is?
-                if (this.colorDistance(this.colors.cyan.r, this.colors.cyan.g, this.colors.cyan.b, pixelRed, pixelGreen, pixelBlue) == true) {
-                    this.color = 'blauw!'
-                    this.score = 100
-                }
-                if (this.colorDistance(this.colors.green.r, this.colors.green.g, this.colors.green.b, pixelRed, pixelGreen, pixelBlue) == true) {
-                    this.color = 'groen!'
-                    this.score = 50
-                }
-                if (this.colorDistance(this.colors.yellow.r, this.colors.yellow.g, this.colors.yellow.b, pixelRed, pixelGreen, pixelBlue) == true) {
-                    this.color = 'geel!'
-                    this.score = 150
-                }
-                if (this.colorDistance(this.colors.black.r, this.colors.black.g, this.colors.black.b, pixelRed, pixelGreen, pixelBlue) == true) {
-                    this.color = 'zwart!'
-                    this.score = 0
-                }
-                if (this.colorDistance(this.colors.blue.r, this.colors.blue.g, this.colors.blue.b, pixelRed, pixelGreen, pixelBlue) == true) {
-                    this.color = 'paars!'
-                    this.score = 50
-                }
-                if (this.colorDistance(this.colors.red.r, this.colors.red.g, this.colors.red.b, pixelRed, pixelGreen, pixelBlue) == true) {
-                    this.color = 'rood!'
-                    this.score = 50
-                }
-                if (this.colorDistance(this.colors.orange.r, this.colors.orange.g, this.colors.orange.b, pixelRed, pixelGreen, pixelBlue) == true) {
-                    this.color = 'oranje!'
-                    this.score = 250
-                }
-                if (this.colorDistance(this.colors.magenta.r, this.colors.magenta.g, this.colors.magenta.b, pixelRed, pixelGreen, pixelBlue) == true) {
-                    this.color = 'roze!'
-                    this.score = 25
-                }
+                let self = this;
+                let index = 0;
+                self.differences = []
+                self.differecesColors = []
+                Object.keys(this.colors).forEach(function (key) {
+                    self.colorDistance(self.colors[key].r, self.colors[key].g, self.colors[key].b, pixelRed, pixelGreen, pixelBlue, key);
+                    index++;
+                    console.log(index);
+                    console.log(Object.keys(self.colors).length)
+
+                    if (index === Object.keys(self.colors).length) {
+                        console.log('gedaan');
+                        console.log(self.differences);
+                        console.log(self.differecesColors);
+                        console.log(self.differecesColors[self.differences.indexOf(Math.min.apply(null, self.differences))]);
+                        switch (self.differecesColors[self.differences.indexOf(Math.min.apply(null, self.differences))]) {
+                            case 'black': {
+                                self.$socket.emit("giveScore", 0);
+                            }break;
+                            case 'orange': {
+                                self.$socket.emit("giveScore", 250);
+                            }break;
+                            case 'magenta': {
+                                self.$socket.emit("giveScore", 25);
+                            }break;
+                            case 'red': {
+                                self.$socket.emit("giveScore", 50);
+                            }break;
+                            case 'cyan': {
+                                self.$socket.emit("giveScore", 100);
+                            }break;
+                            case 'green': {
+                                self.$socket.emit("giveScore", 50);
+                            }break;
+                            case 'yellow': {
+                                self.$socket.emit("giveScore", 150);
+                            }break;
+                            case 'blue': {
+                                self.$socket.emit("giveScore", 50);
+                            }break;
+
+                        }
+                    }
+                });
+//                // Check of het blauw is?
+//                if (this.colorDistance(this.colors.cyan.r, this.colors.cyan.g, this.colors.cyan.b, pixelRed, pixelGreen, pixelBlue) == true) {
+//                    this.color = 'blauw!'
+//                    this.score = 100
+//                }
+//                if (this.colorDistance(this.colors.green.r, this.colors.green.g, this.colors.green.b, pixelRed, pixelGreen, pixelBlue) == true) {
+//                    this.color = 'groen!'
+//                    this.score = 50
+//                }
+//                if (this.colorDistance(this.colors.yellow.r, this.colors.yellow.g, this.colors.yellow.b, pixelRed, pixelGreen, pixelBlue) == true) {
+//                    this.color = 'geel!'
+//                    this.score = 150
+//                }
+//                if (this.colorDistance(this.colors.black.r, this.colors.black.g, this.colors.black.b, pixelRed, pixelGreen, pixelBlue) == true) {
+//                    this.color = 'zwart!'
+//                    this.score = 0
+//                }
+//                if (this.colorDistance(this.colors.blue.r, this.colors.blue.g, this.colors.blue.b, pixelRed, pixelGreen, pixelBlue) == true) {
+//                    this.color = 'paars!'
+//                    this.score = 50
+//                }
+//                if (this.colorDistance(this.colors.blue.r, this.colors.blue.g, this.colors.blue.b, pixelRed, pixelGreen, pixelBlue) == true) {
+//                    this.color = 'paars!'
+//                    this.score = 50
+//                }
+//
+//                if (this.colorDistance(this.colors.red.r, this.colors.red.g, this.colors.red.b, pixelRed, pixelGreen, pixelBlue) == true) {
+//                    this.color = 'rood!'
+//                    this.score = 50
+//                }
+//                if (this.colorDistance(this.colors.orange.r, this.colors.orange.g, this.colors.orange.b, pixelRed, pixelGreen, pixelBlue) == true) {
+//                    this.color = 'oranje!'
+//                    this.score = 250
+//                }
+//                if (this.colorDistance(this.colors.magenta.r, this.colors.magenta.g, this.colors.magenta.b, pixelRed, pixelGreen, pixelBlue) == true) {
+//                    this.color = 'roze!'
+//                    this.score = 25
+//                }
             },
 
-            colorDistance(colorRed, colorGreen, colorBlue, pixelRed, pixelGreen, pixelBlue) {
+            colorDistance(colorRed, colorGreen, colorBlue, pixelRed, pixelGreen, pixelBlue, key) {
                 let diffR, diffG, diffB;
+                let self = this;
 
                 // distance to color
                 diffR = colorRed - pixelRed;
@@ -411,13 +447,9 @@
                 diffB = colorBlue - pixelBlue;
 
                 let difference = Math.sqrt(diffR * diffR + diffG * diffG + diffB * diffB);
-                console.log(difference)
-                if (difference < 98) {
-                    return true
-                }
-                else {
-                    return false
-                }
+
+                self.differences.push(difference);
+                self.differecesColors.push(key)
             },
             getColorPos: function () {
                 self = this;
