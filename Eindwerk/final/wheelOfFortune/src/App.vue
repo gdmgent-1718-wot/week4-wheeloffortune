@@ -1,22 +1,5 @@
 <template>
     <div class="parent">
-        <!--<nav class="navbar navbar-toggleable-md navbar-light bg-faded pt-3 pb-3">-->
-            <!--<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">-->
-                <!--<span class="navbar-toggler-icon"></span>-->
-            <!--</button>-->
-            <!--<router-link class="navbar-brand" to="profile">-->
-                <!--<img src="static/img/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="">-->
-                <!--<span class="ml-3">Wheel of Fortune</span>-->
-            <!--</router-link>-->
-            <!--<div class="collapse navbar-collapse" id="navbarNavAltMarkup">-->
-                <!--<div class="navbar-nav">-->
-                    <!--<router-link class="nav-item nav-link active" to="/">Login <span class="sr-only">(current)</span></router-link>-->
-                    <!--<router-link class="nav-item nav-link" to="game">Play</router-link>-->
-                    <!--<router-link to="profile" class="nav-item nav-link">Profile</router-link>-->
-                    <!--<router-link to="admin" class="nav-item nav-link">Admin</router-link>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</nav>-->
       <div id="myNav" class="overlay">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="overlay-content">
