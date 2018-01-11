@@ -73,9 +73,9 @@
     import Peer from "simple-peer";
     import {bus} from "../main";
 
-    Vue.use(VueSocketio, "http://localhost:5000/");
+//    Vue.use(VueSocketio, "http://localhost:5000/");
     // When online:
-//    Vue.use(VueSocketio, 'https://wheeloffortune1718.herokuapp.com/');
+    Vue.use(VueSocketio, 'https://wheeloffortune1718.herokuapp.com/');
 
     export default {
         name: "GameFinal",
