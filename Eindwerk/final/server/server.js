@@ -60,11 +60,12 @@ function checkPlayers() {
     admin.database().ref('game').on("value", function (snapshot) {
         let game = snapshot.val()
         for (let player of Object.values(game.players)) {
-            console.log(player.playing)
             if (player.playing) {
                 players.push(player);
-                console.log(players.length);
+                console.log('players length: ',players.length);
                 if (players.length === 3) {
+                    console.log('Setting a new word')
+                    console.log('players length in if: ', players.length)
                     setNewWord();
                 }
             }
@@ -140,10 +141,10 @@ io.on('connection', function (socket) {
             changeActivePlayer(data.number, num)
         }
     });
-    socket.on('answer', function (data) {
-        console.log(data);
-        io.emit('answer', data)
-    });
+    // socket.on('answer', function (data) {
+    //     console.log(data);
+    //     io.emit('answer', data)
+    // });
     socket.on('startGame', function () {
         checkPlayers();
         resetAlphabeth();

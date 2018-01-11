@@ -22,7 +22,8 @@
                     <button v-if="begin == false" class="col-12 mb-2 green-bg" style="border: none;" @click="turnWheel">
                         Draai aan het rad!
                     </button>
-                    <div v-if="begin == true">
+                    <p v-if="turningMessage">Het rad is aan het draaien! De score dat je hebt gedraaid kan je hierboven aflezen in een klein half minuutje.</p>
+                    <div v-if="showKeyboard">
                         <h4 v-if="message" class="font-weight-bold" :style="{ color: messageColor }">{{message}}</h4>
                         <button type="button" class="letter-button"
                                 :disabled='single.checked || tries == 0 || showWord()'
@@ -56,7 +57,7 @@
                     </div>
                 </div>
                 <div v-else=""><p>{{ statusMessage }}</p></div>
-                <video id="videoStream"></video>
+                <video class="col-12" id="videoStream"></video>
             </div>
         </main>
     </div>
@@ -143,7 +144,9 @@
                 currentScore: "...",
                 isNegative: false,
                 alertMessage: false,
-                canDismissAlert: true
+                canDismissAlert: true,
+                showKeyboard: false,
+                turningMessage: false
             };
         },
         // Make a connection with Sockets, you can recieve triggers.
@@ -203,16 +206,23 @@
             // Turn the wheel en fill in the score that you just turned.
             turnWheel() {
                 let self = this
-                this.begin = true;
+                this.begin = true
+                this.turningMessage = true
                 self.database.ref("game/motor/").update({
                     turning: "True",
                     hasStopped: "False"
                 });
 
-                // Wait 3 seconds and then get the score from the server. (Server first has to take a picture)
+                // Wait 10 seconds and then get the score from the server. (Server first has to take a picture)
                 setTimeout(function () {
                     self.$socket.emit("getScore");
                 }, 10000)
+
+                // Wait 25 seconds until wheel has stopped to show the keyboard.
+                setTimeout(function () {
+                  self.showKeyboard = true
+                  self.turningMessage = false
+                }, 25000)
                 // Here comes score from the camera.
                 this.alertMessage = false;
             },
@@ -318,6 +328,7 @@
                     this.messageColor = "#4BE8D8";
                     this.message =
                         "Omdat je vorige letter goed hebt geraden mag je nu nog een letter kiezen.";
+                    this.showKeyboard = false;
                     this.begin = false;
                 } else {
                     // End your turn and go to next player.
@@ -343,6 +354,8 @@
                         "Goed gedaan! Je zit op de juiste weg, je krijgt " +
                         n +
                         " keer het bedrag dat je hebt gedraaid en je mag nog eens draaien aan het rad.";
+                    this.begin = false
+                    this.showKeyboard = false
                 }
                 this.updateScore(n);
                 return n;
