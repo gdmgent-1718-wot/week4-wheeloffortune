@@ -5,6 +5,9 @@
     <canvas id="video"></canvas>
     <canvas style="position: absolute" id="overlay"></canvas>
     <div>
+      <p>{{ rgb }}</p>
+      <p v-if="color">De kleur dat ik zie is: {{ color }}</p>
+      <p v-if="score">De speler maakt kans om {{ score }} euro te winnen.</p>
       <label title="X position">X position</label>
       <input type="range" min="0" max="640" @change="setPixel" name="X position" v-model="x"/>
       <label title="Y position">Y position</label>
@@ -46,7 +49,11 @@ export default {
       x: 100,
       y: 100,
       videoWidth: null,
-      videoHeight: null
+      videoHeight: null,
+      rgb: [],
+      rgbFormatted: "",
+      color: '',
+      score: ''
     };
   },
   // Make a connection with Sockets, you can recieve triggers.
@@ -63,7 +70,7 @@ export default {
   methods: {
     // Connect with sockets to recieve data.
     getSockets: function() {
-      self = this;
+      let self = this;
       self.$options.sockets.newRecievePeer = data => {
         // Get peer info.
         console.log(self.peers[data.number - 1]);
@@ -90,7 +97,7 @@ export default {
     },
     // New stream openened for a player.
     newPlayerStream(data) {
-      self = this;
+      let self = this;
       let peer = new Peer(self.parameters);
       self.peers.push(peer);
       let index = 0;
@@ -109,13 +116,18 @@ export default {
     },
     // Start the stream.
     startStream(data) {},
-    initializeOverlay: function() {},
+    // Draw an overlay on top of canvas. Not being used.
+    // initializeOverlay: function() {},
+
+    // Make a canvas.
     initializeCanvas: function() {
-      self = this;
+      let self = this;
       // Make a canvas where the video will be shown.
       let canvas = document.querySelector("canvas");
       let overlay = document.getElementById("overlay");
+      // Canvascontext.
       self.ctx = canvas.getContext("2d");
+      // Overlay context.
       self.octx = overlay.getContext("2d");
       let video = self.video;
       // Let the video play.
@@ -148,12 +160,21 @@ export default {
       );
     },
     getPixelColor: function() {
-      self = this;
+      let self = this;
+      // Get info from the Canvascontext.
       let pixel = self.ctx.getImageData(self.x, self.y, 1, 1);
-      console.log(pixel.data);
+      // This info will be a Uint8ClampedArray representing RGBA but everything will be between 0-255.
+      let pixeldata = pixel.data;
+      // Write RGB values to array.
+      self.rgb = [pixeldata[0], pixeldata[1], pixeldata[2]];
+      // Convert the pixel data to RBGa object.
+      self.rgbFormatted =
+        "rgb(" + pixeldata[0] + ", " + pixeldata[1] + ", " + pixeldata[2] + ")";
+      self.checkWhichColorWithRange(pixeldata[0], pixeldata[1], pixeldata[2]);
     },
+    // Place red pixel on overlay where you want, will set x and y coordinates.
     setPixel: function() {
-      self = this;
+      let self = this;
       self.octx.clearRect(0, 0, self.videoWidth, self.videoHeight);
 
       self.octx.fillStyle = "rgba(0, 0, 0, 0.75)";
@@ -165,7 +186,7 @@ export default {
     },
     //
     getVideo: function() {
-      self = this;
+      let self = this;
       navigator.getUserMedia =
         navigator.getUserMedia ||
         navigator.webkitGetUserMedia ||
@@ -183,6 +204,60 @@ export default {
           console.log("getUserMedia error: ", error);
         }
       );
+    },
+    // Check the range of the color detected, if it is between .. and .. it corresponds to Score ...
+    checkWhichColorWithRange(pixelRed, pixelGreen,pixelBlue) {
+      // Check of het blauw is?
+      if(this.colorDistance(78,163,255, pixelRed, pixelGreen, pixelBlue) == true){
+        this.color = 'blauw!'
+        this.score = 100
+      }
+      if(this.colorDistance(93, 115, 74, pixelRed, pixelGreen, pixelBlue) == true){
+        this.color = 'groen!'
+        this.score = 50
+      }
+      if(this.colorDistance(250, 230, 78, pixelRed, pixelGreen, pixelBlue) == true){
+        this.color = 'geel!'
+        this.score = 150
+      }
+      if(this.colorDistance(24, 19, 11 , pixelRed, pixelGreen, pixelBlue) == true){
+        this.color = 'zwart!'
+        this.score = 0
+      }
+      if(this.colorDistance(60, 47, 104 , pixelRed, pixelGreen, pixelBlue) == true){
+        this.color = 'paars!'
+        this.score = 50
+      }
+      if(this.colorDistance(176, 63, 9, pixelRed, pixelGreen, pixelBlue) == true){
+        this.color = 'rood!'
+        this.score = 50
+      }
+      if(this.colorDistance(175, 77, 4, pixelRed, pixelGreen, pixelBlue) == true){
+        this.color = 'oranje!'
+        this.score = 250
+      }
+      if(this.colorDistance(166, 53, 58, pixelRed, pixelGreen, pixelBlue) == true){
+        this.color = 'roze!'
+        this.score = 25
+      }
+    },
+
+    colorDistance(colorRed, colorGreen, colorBlue, pixelRed, pixelGreen, pixelBlue ) {
+      let diffR, diffG, diffB;
+
+      // distance to color
+      diffR = colorRed - pixelRed;
+      diffG = colorGreen - pixelGreen;
+      diffB = colorBlue - pixelBlue;
+
+      let difference = Math.sqrt(diffR * diffR + diffG * diffG + diffB * diffB);
+      console.log(difference)
+      if(difference < 98){
+        return true
+      }
+      else {
+        return false
+      }
     }
   },
   mounted() {
