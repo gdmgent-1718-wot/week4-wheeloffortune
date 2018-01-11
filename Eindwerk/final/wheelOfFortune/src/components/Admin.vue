@@ -62,9 +62,9 @@ import * as firebase from "firebase";
 import { bus } from "../main";
 import VueSocketio from "vue-socket.io";
 
-Vue.use(VueSocketio , "http://localhost:5000/");
+//Vue.use(VueSocketio , "http://localhost:5000/");
 // When online:0
-//Vue.use(VueSocketio, 'https://wheeloffortune1718.herokuapp.com/');
+Vue.use(VueSocketio, 'https://wheeloffortune1718.herokuapp.com/');
 
 
 export default {
